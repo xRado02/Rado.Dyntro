@@ -7,4 +7,8 @@
     <!-- Folder where production build objects will be placed -->
     <BuildOutputFolder>$(MSBuildProjectDirectory)\dist\rado.dyntro.client\browser\</BuildOutputFolder>
   </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="src\app\main\content\images\png\" />
+    <Folder Include="src\app\main\content\images\svg\" />
+  </ItemGroup>
 </Project>

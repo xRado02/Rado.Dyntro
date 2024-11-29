@@ -34,6 +34,16 @@
               {
                 "glob": "**/*",
                 "input": "public"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/app/header/content",
+                "output": "content"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/app/main/content",
+                "output": "content"
               }
             ],
             "styles": [
