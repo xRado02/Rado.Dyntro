@@ -1,1 +1,8 @@
-
+.bg-image {
+  background-image: url('/content/images/png/background-laptop.png');
+  height: 475px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+ 
+}
