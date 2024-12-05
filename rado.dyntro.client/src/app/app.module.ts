@@ -8,6 +8,7 @@ import { NavigationComponent } from './header/navigation/navigation.component'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { WelcomeSectionComponent } from './main/welcome-section/welcome-section.component';
+import { AboutUsSectionComponent } from './main/about-us-section/about-us-section.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { WelcomeSectionComponent } from './main/welcome-section/welcome-section.
     FooterComponent,
     NavigationComponent,
     WelcomeSectionComponent,
+    AboutUsSectionComponent,
 
   ],
   imports: [
