@@ -8,6 +8,7 @@
     <BuildOutputFolder>$(MSBuildProjectDirectory)\dist\rado.dyntro.client\browser\</BuildOutputFolder>
   </PropertyGroup>
   <ItemGroup>
+    <Folder Include="src\app\footer\content\img\svg\" />
     <Folder Include="src\app\main\content\images\avif\" />
     <Folder Include="src\app\main\content\images\png\" />
     <Folder Include="src\app\main\content\images\svg\" />

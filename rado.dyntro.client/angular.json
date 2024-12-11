@@ -44,6 +44,11 @@
                 "glob": "**/*",
                 "input": "src/app/main/content",
                 "output": "content"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/app/footer/content",
+                "output": "content"
               }
             ],
             "styles": [
