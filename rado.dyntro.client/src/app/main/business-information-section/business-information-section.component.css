@@ -1,0 +1,13 @@
+h2.h1 {
+  letter-spacing: 0.375rem;
+}
+
+.logo-item {
+  padding: 15px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+  .logo-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+ }
