@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { WelcomeSectionComponent } from './main/welcome-section/welcome-section.component';
 import { AboutUsSectionComponent } from './main/about-us-section/about-us-section.component';
+import { AppLayoutComponentComponent } from './app-layout-component/app-layout-component.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { AboutUsSectionComponent } from './main/about-us-section/about-us-sectio
     NavigationComponent,
     WelcomeSectionComponent,
     AboutUsSectionComponent,
+    AppLayoutComponentComponent,
 
   ],
   imports: [
