@@ -1,21 +1,21 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HeaderComponent } from './header/header.component'
-import { MainComponent } from './main/main.component'
-import { FooterComponent } from './footer/footer.component'
-import { NavigationComponent } from './header/navigation/navigation.component'
+import { HeaderComponent } from './app-public/header/header.component'
+import { MainComponent } from './app-public/main/main.component'
+import { FooterComponent } from './app-public/footer/footer.component'
+import { NavigationComponent } from './app-public/header/navigation/navigation.component'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { WelcomeSectionComponent } from './main/welcome-section/welcome-section.component';
-import { AppLayoutComponentComponent } from './app-layout-component/app-layout-component.component';
-import { BusinessInformationSectionComponent } from './main/business-information-section/business-information-section.component';
-import { ContactSectionComponent } from './main/contact-section/contact-section.component';
-import { AboutUsSectionComponent } from './main/about-us-section/about-us-section.component';
-import { ColdMailingOfferSectionComponent } from './main/cold-mailing-offer-section/cold-mailing-offer-section.component';
-import { LinkedinAutomatizationOfferSectionComponent } from './main/linkedin-automatization-offer-section/linkedin-automatization-offer-section.component';
-import { LeadGenerationOfferSectionComponent } from './main/lead-generation-offer-section/lead-generation-offer-section.component';
-import { MajorSectionComponent } from './main/major-section/major-section.component';
+import { SectionWelcomeComponent } from './app-public/main/section-welcome/section-welcome.component';
+import { AppPublicComponent } from './app-public/app-public.component';
+import { SectionBusinessInformationComponent } from './app-public/main/section-business-information/section-business-information.component';
+import { SectionContactComponent } from './app-public/main/section-contact/section-contact.component';
+import { SectionAboutUsComponent } from './app-public/main/section-about-us/section-about-us.component';
+import { SectionColdMailingOfferComponent } from './app-public/main/section-cold-mailing-offer/section-cold-mailing-offer.component';
+import { SectionLinkedinAutoOfferComponent } from './app-public/main/section-linkedin-auto-offer/section-linkedin-auto-offer.component';
+import { SectionLeadGenerationOfferComponent } from './app-public/main/section-lead-generation-offer/section-lead-generation-offer.component';
+import { SectionMajorComponent } from './app-public/main/section-major/section-major.component';
 
 @NgModule({
   declarations: [
@@ -24,15 +24,15 @@ import { MajorSectionComponent } from './main/major-section/major-section.compon
     MainComponent,
     FooterComponent,
     NavigationComponent,
-    WelcomeSectionComponent,    
-    AppLayoutComponentComponent,
-    BusinessInformationSectionComponent,
-    ContactSectionComponent,
-    AboutUsSectionComponent,
-    ColdMailingOfferSectionComponent,
-    LinkedinAutomatizationOfferSectionComponent,
-    LeadGenerationOfferSectionComponent,
-    MajorSectionComponent,
+    SectionWelcomeComponent,    
+    AppPublicComponent,
+    SectionBusinessInformationComponent,
+    SectionContactComponent,
+    SectionAboutUsComponent,
+    SectionColdMailingOfferComponent,
+    SectionLinkedinAutoOfferComponent,
+    SectionLeadGenerationOfferComponent,
+    SectionMajorComponent,
 
   ],
   imports: [

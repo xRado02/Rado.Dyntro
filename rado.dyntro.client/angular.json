@@ -37,17 +37,17 @@
               },
               {
                 "glob": "**/*",
-                "input": "src/app/header/content",
+                "input": "src/app/app-public/header/content",
                 "output": "content"
               },
               {
                 "glob": "**/*",
-                "input": "src/app/main/content",
+                "input": "src/app/app-public/main/content",
                 "output": "content"
               },
               {
                 "glob": "**/*",
-                "input": "src/app/footer/content",
+                "input": "src/app/app-public/footer/content",
                 "output": "content"
               }
             ],
