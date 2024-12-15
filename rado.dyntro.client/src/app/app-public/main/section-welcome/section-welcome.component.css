@@ -1,6 +1,7 @@
 .bg-image {
-  background-image: url('/content/images/png/background-laptop.png');
+  background-image: url('/content/images/png/background-uniform.png');
   height: 475px;
+  width: 100%;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
