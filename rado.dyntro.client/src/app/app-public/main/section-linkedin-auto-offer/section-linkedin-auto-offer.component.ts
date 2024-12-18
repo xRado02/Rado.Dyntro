@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-section-linkedin-auto-offer',
@@ -9,4 +10,9 @@ import { Component } from '@angular/core';
 })
 export class SectionLinkedinAutoOfferComponent {
 
+  constructor(private router: Router) { }
+
+  goToContact() {
+    this.router.navigate(['/contact']);
+  }
 }

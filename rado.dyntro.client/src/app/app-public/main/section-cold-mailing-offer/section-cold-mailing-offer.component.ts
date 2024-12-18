@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component } from '@angular/core'; 
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-section-cold-mailing-offer',
@@ -9,4 +10,12 @@ import { Component } from '@angular/core';
 })
 export class SectionColdMailingOfferComponent {
 
+
+  constructor(private router: Router) { }
+
+  goToContact() {
+    this.router.navigate(['/contact']);
+  }
 }
+
+
