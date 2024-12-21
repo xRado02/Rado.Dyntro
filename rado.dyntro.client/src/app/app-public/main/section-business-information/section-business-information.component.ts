@@ -13,11 +13,11 @@ export class SectionBusinessInformationComponent {
 
   goToColdMailing() {
     this.router.navigate(['/cold-mailing']);
-    window.scrollTo({ top: 0, behavior: 'instant' }); // Przenosi na górę komponentu
+    window.scrollTo({ top: 0, behavior: 'instant' }); 
   }
 
   goToLinkedinAutomatization() {
     this.router.navigate(['/linkedin-auto']);
-    window.scrollTo({ top: 0, behavior: 'instant' }); // Przenosi na górę komponentu
+    window.scrollTo({ top: 0, behavior: 'instant' }); 
   }
 }
