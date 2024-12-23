@@ -6,6 +6,7 @@ import { SectionContactComponent } from './app-public/main/section-contact/secti
 import { SectionLeadGenerationOfferComponent } from './app-public/main/section-lead-generation-offer/section-lead-generation-offer.component';
 import { SectionLinkedinAutoOfferComponent } from './app-public/main/section-linkedin-auto-offer/section-linkedin-auto-offer.component';
 import { SectionMajorComponent } from './app-public/main/section-major/section-major.component';  
+import { SectionClientsComponent } from './app-public/main/section-clients/section-clients.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/major', pathMatch: 'full' }, 
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'contact', component: SectionContactComponent },
   { path: 'lead-generation', component: SectionLeadGenerationOfferComponent },
   { path: 'linkedin-auto', component: SectionLinkedinAutoOfferComponent },
+  { path: 'clients', component: SectionClientsComponent },
 ];
 
 @NgModule({
