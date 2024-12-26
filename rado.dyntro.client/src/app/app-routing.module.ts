@@ -18,7 +18,7 @@ const routes: Routes = [
   { path: 'lead-generation', component: SectionLeadGenerationOfferComponent },
   { path: 'linkedin-auto', component: SectionLinkedinAutoOfferComponent },
   { path: 'clients', component: SectionClientsComponent },
-  { path: 'login', component: SectionLoginComponent },
+  { path: 'login', component: SectionLoginComponent},
 ];
 
 @NgModule({
