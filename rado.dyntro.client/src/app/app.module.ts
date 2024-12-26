@@ -17,6 +17,7 @@ import { SectionLinkedinAutoOfferComponent } from './app-public/main/section-lin
 import { SectionLeadGenerationOfferComponent } from './app-public/main/section-lead-generation-offer/section-lead-generation-offer.component';
 import { SectionMajorComponent } from './app-public/main/section-major/section-major.component';
 import { SectionClientsComponent } from './app-public/main/section-clients/section-clients.component';
+import { SectionLoginComponent } from './app-public/main/section-login/section-login.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { SectionClientsComponent } from './app-public/main/section-clients/secti
     SectionLeadGenerationOfferComponent,
     SectionMajorComponent,
     SectionClientsComponent,
+    SectionLoginComponent,
 
   ],
   imports: [

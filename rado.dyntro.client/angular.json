@@ -23,7 +23,8 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/rado.dyntro.client",
+            "outputPath": "dist/rado.dyntro.client/browser",
+            //"outputPath": "dist/rado.dyntro.client",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
