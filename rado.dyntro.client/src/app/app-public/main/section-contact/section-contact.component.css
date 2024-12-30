@@ -1,7 +1,13 @@
 form textarea {
-    height: 200px;
+  height: 200px;
 }
 
-form input{
-    height: 70px;    
+form input {
+  height: 70px;
+}
+
+form .form-check-input {
+  height: 16px;
+  width: 16px;
+  
 }

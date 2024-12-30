@@ -30,8 +30,12 @@
         <div class="form-floating fs-5">
           <textarea id="message" class="form-control fs-4 mb-3" placeholder="Wiadomość"></textarea>
           <label for="message" class="form-label">Wiadomość</label>
-        </div>       
-        <div>
+        </div>
+        <div class="mb-3">
+          <input type="checkbox" id="politicy" class="form-check-input customCheckbox me-2 bg-secondary border-dark shadow-none" required/>
+          <label for="politicy" class="form-check-label">Akceptuję polityę prywatności</label>
+        </div>
+        <div>          
           <button type="submit" class="btn btn-outline-dark" (click)="validForm()"><strong>Wyślij wiadomość</strong></button>
         </div>
       </form>
