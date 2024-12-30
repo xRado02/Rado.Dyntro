@@ -18,6 +18,17 @@ export class SectionBusinessInformationComponent {
 
   goToLinkedinAutomatization() {
     this.router.navigate(['/linkedin-auto']);
-    window.scrollTo({ top: 0, behavior: 'instant' }); 
+    window.scrollTo({ top: 0, behavior: 'instant' });  
   }
+
+
+  goToContact() {
+    this.router.navigate(['/contact']);
+  }
+
+
+
+
+
+
 }
