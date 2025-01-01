@@ -18,6 +18,10 @@ import { SectionLeadGenerationOfferComponent } from './app-public/main/section-l
 import { SectionMajorComponent } from './app-public/main/section-major/section-major.component';
 import { SectionClientsComponent } from './app-public/main/section-clients/section-clients.component';
 import { SectionLoginComponent } from './app-public/main/section-login/section-login.component';
+import { ClientPragmaGoComponent } from './app-public/main/section-specific-client/client-pragma-go/client-pragma-go.component';
+import { ClientPersonnelServiceComponent } from './app-public/main/section-specific-client/client-personnel-service/client-personnel-service.component';
+import { ClientArgentumEventComponent } from './app-public/main/section-specific-client/client-argentum-event/client-argentum-event.component';
+import { ClientVendoriseComponent } from './app-public/main/section-specific-client/client-vendorise/client-vendorise.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +40,11 @@ import { SectionLoginComponent } from './app-public/main/section-login/section-l
     SectionLeadGenerationOfferComponent,
     SectionMajorComponent,
     SectionClientsComponent,
-    SectionLoginComponent,
+    SectionLoginComponent,  
+    ClientPragmaGoComponent,
+    ClientPersonnelServiceComponent,
+    ClientArgentumEventComponent,
+    ClientVendoriseComponent,
 
 
   ],
