@@ -22,6 +22,7 @@ const routes: Routes = [
   { path: 'lead-generation', component: SectionLeadGenerationOfferComponent },
   { path: 'linkedin-auto', component: SectionLinkedinAutoOfferComponent },
   { path: 'clients', component: SectionClientsComponent },
+  {path: 'login', component: SectionLoginComponent},
   { path: 'client-argentum-event', component: ClientArgentumEventComponent },
   { path: 'client-personnel-service', component: ClientPersonnelServiceComponent },
   { path: 'client-pragma-go', component: ClientPragmaGoComponent },
