@@ -1,9 +1,13 @@
 .bg-image {
-  background-image: url('/content/images/png/background-uniform.png');
+  background-image: url('/content/images/png/background-topo.png');
   height: 475px;
   width: 100%;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
- 
+}
+
+
+.btn {
+  width: 400px; 
 }
