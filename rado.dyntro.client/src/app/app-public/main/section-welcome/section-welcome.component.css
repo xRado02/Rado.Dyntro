@@ -1,18 +1,21 @@
 .bg-image {
   background-image: url('/content/images/png/background-topo.png');
-  height: 900px;
+  height: 100vh; 
   width: 100%;
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: cover; 
+  display: flex;
+  align-items: center; 
+  justify-content: center; 
 }
-
 
 .btn {
-  width: 400px;
-
+  max-width: 100%; 
+  width: 400px; 
 }
 
-.dyntro-logo{
-    width: 100%;
+.dyntro-logo {
+  max-width: 60%;
+  height: auto; 
 }
