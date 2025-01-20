@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AppPublicComponent } from '../../app-public/app-public.component';
 import { SectionAboutUsComponent } from '../../app-public/main/section-about-us/section-about-us.component';
 import { SectionColdMailingOfferComponent } from '../..//app-public/main/section-cold-mailing-offer/section-cold-mailing-offer.component';
 import { SectionContactComponent } from '../..//app-public/main/section-contact/section-contact.component';
@@ -13,7 +14,7 @@ import { ClientPragmaGoComponent } from '../..//app-public/main/section-specific
 import { ClientVendoriseComponent } from '../..//app-public/main/section-specific-client/client-vendorise/client-vendorise.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/major', pathMatch: 'full' },
+  { path: '', component: AppPublicComponent },
   { path: 'major', component: SectionMajorComponent },
   { path: 'about-us', component: SectionAboutUsComponent },
   { path: 'cold-mailing', component: SectionColdMailingOfferComponent },

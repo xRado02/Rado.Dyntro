@@ -12,7 +12,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('./modules/app-private/app-private.module').then((m) => m.AppPrivateModule),
   },
-  { path: '**', redirectTo: 'public' }, 
+  { path: '**', redirectTo: 'public' }, // Domyślne przekierowanie na /public
 ];
 
 @NgModule({
