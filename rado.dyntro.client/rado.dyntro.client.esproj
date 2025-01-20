@@ -10,5 +10,6 @@
   <ItemGroup>
     <Folder Include="src\app\app-public\main\content\images\avif\" />
     <Folder Include="src\app\app-public\main\section-specific-client\" />
+    <Folder Include="src\app\modules\" />
   </ItemGroup>
 </Project>
