@@ -11,6 +11,7 @@ import { ClientPersonnelServiceComponent } from './app-public/main/section-speci
 import { ClientArgentumEventComponent } from './app-public/main/section-specific-client/client-argentum-event/client-argentum-event.component';
 import { ClientPragmaGoComponent } from './app-public/main/section-specific-client/client-pragma-go/client-pragma-go.component';
 import { ClientVendoriseComponent } from './app-public/main/section-specific-client/client-vendorise/client-vendorise.component';
+import { AppPrivateComponent } from './app-private/app-private.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/major', pathMatch: 'full' }, 
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: 'client-personnel-service', component: ClientPersonnelServiceComponent },
   { path: 'client-pragma-go', component: ClientPragmaGoComponent },
   { path: 'client-vendorise', component: ClientVendoriseComponent },
+  { path: 'app-priv' , component: AppPrivateComponent}
 ];
 
 @NgModule({
