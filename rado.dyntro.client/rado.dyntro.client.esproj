@@ -8,9 +8,8 @@
     <BuildOutputFolder>$(MSBuildProjectDirectory)\dist\rado.dyntro.client\browser\</BuildOutputFolder>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="src\app\app-private\modules\" />
-    <Folder Include="src\app\app-public\main\content\images\avif\" />
-    <Folder Include="src\app\app-public\main\section-specific-client\" />
-    <Folder Include="src\app\app-public\modules\" />
+    <Folder Include="src\app\dashboard\modules\" />
+    <Folder Include="src\app\commercial\main\content\images\avif\" />
+    <Folder Include="src\app\commercial\modules\" />
   </ItemGroup>
 </Project>

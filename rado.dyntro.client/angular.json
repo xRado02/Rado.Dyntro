@@ -23,8 +23,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/rado.dyntro.client/browser",
-            //"outputPath": "dist/rado.dyntro.client",
+            "outputPath": "dist/rado.dyntro.client/browser",         
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -38,17 +37,17 @@
               },
               {
                 "glob": "**/*",
-                "input": "src/app/app-public/header/content",
+                "input": "src/app/commercial/header/content",
                 "output": "content"
               },
               {
                 "glob": "**/*",
-                "input": "src/app/app-public/main/content",
+                "input": "src/app/commercial/main/content",
                 "output": "content"
               },
               {
                 "glob": "**/*",
-                "input": "src/app/app-public/footer/content",
+                "input": "src/app/commercial/footer/content",
                 "output": "content"
               }
             ],

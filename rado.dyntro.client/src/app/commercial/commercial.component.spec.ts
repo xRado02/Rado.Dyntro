@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AppPublicComponent } from './app-public.component';
+import { CommercialComponent } from './commercial.component';
 
-describe('AppPublicComponent', () => {
-  let component: AppPublicComponent;
-  let fixture: ComponentFixture<AppPublicComponent>;
+describe('CommercialComponent', () => {
+  let component: CommercialComponent;
+  let fixture: ComponentFixture<CommercialComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [AppPublicComponent]
+      declarations: [CommercialComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AppPublicComponent);
+    fixture = TestBed.createComponent(CommercialComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
