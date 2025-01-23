@@ -12,18 +12,18 @@ export class SectionBusinessInformationComponent {
   constructor(private router: Router) { }
 
   goToColdMailing() {
-    this.router.navigate(['/cold-mailing']);
+    this.router.navigate(['/commercial/cold-mailing']);
     window.scrollTo({ top: 0, behavior: 'instant' }); 
   }
 
   goToLinkedinAutomatization() {
-    this.router.navigate(['/linkedin-auto']);
+    this.router.navigate(['/commercial/linkedin-auto']);
     window.scrollTo({ top: 0, behavior: 'instant' });  
   }
 
 
   goToContact() {
-    this.router.navigate(['/contact']);
+    this.router.navigate(['/commercial/contact']);
   }
 
 

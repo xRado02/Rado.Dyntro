@@ -22,19 +22,18 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'main', pathMatch: 'full' },
       { path: 'main', component: MainComponent },
-      { path: 'main', component: MainComponent },
-      { path: 'main', component: MainComponent },
-      { path: 'main', component: MainComponent },
-      { path: 'main', component: MainComponent },
-      { path: 'main', component: MainComponent },
-      { path: 'main', component: MainComponent },
-      { path: 'main', component: MainComponent },
-      { path: 'main', component: MainComponent },
-      { path: 'main', component: MainComponent },
-      { path: 'main', component: MainComponent },
-      { path: 'main', component: MainComponent },
-      { path: 'main', component: MainComponent },
-
+      { path: 'major', component: SectionMajorComponent },
+      { path: 'about-us', component: SectionAboutUsComponent },
+      { path: 'cold-mailing', component: SectionColdMailingOfferComponent },
+      { path: 'contact', component: SectionContactComponent },
+      { path: 'linkedin-auto', component: SectionLinkedinAutoOfferComponent },
+      { path: 'clients', component: SectionClientsComponent },
+      { path: 'login', component: SectionLoginComponent },
+      { path: 'client-argentum-event', component: ClientArgentumEventComponent },
+      { path: 'client-personnel-service', component: ClientPersonnelServiceComponent },
+      { path: 'client-pragma-go', component: ClientPragmaGoComponent },
+      { path: 'client-vendorise', component: ClientVendoriseComponent },
+    
     ]
   }
 
