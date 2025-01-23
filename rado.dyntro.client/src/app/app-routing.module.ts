@@ -13,7 +13,7 @@ import { ClientPragmaGoComponent } from './app-public/main/section-specific-clie
 import { ClientVendoriseComponent } from './app-public/main/section-specific-client/client-vendorise/client-vendorise.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/major', pathMatch: 'full' }, 
+  { path: '', redirectTo: 'major', pathMatch: 'full' }, 
   { path: 'major', component: SectionMajorComponent },  
   { path: 'about-us', component: SectionAboutUsComponent },
   { path: 'cold-mailing', component: SectionColdMailingOfferComponent },

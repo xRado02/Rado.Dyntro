@@ -21,6 +21,7 @@ import { ClientPragmaGoComponent } from './app-public/main/section-specific-clie
 import { ClientPersonnelServiceComponent } from './app-public/main/section-specific-client/client-personnel-service/client-personnel-service.component';
 import { ClientArgentumEventComponent } from './app-public/main/section-specific-client/client-argentum-event/client-argentum-event.component';
 import { ClientVendoriseComponent } from './app-public/main/section-specific-client/client-vendorise/client-vendorise.component';
+import { AppPrivateComponent } from './app-private/app-private.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { ClientVendoriseComponent } from './app-public/main/section-specific-cli
     ClientPersonnelServiceComponent,
     ClientArgentumEventComponent,
     ClientVendoriseComponent,
+    AppPrivateComponent,
 
 
   ],
