@@ -9,9 +9,6 @@ const routes: Routes = [
   { path: 'dashboard', loadChildren: () => import('./dashboard/modules/dashboard/dashboard.module').then(m => m.DashboardModule) },
   { path: '**', component: CommercialComponent}
 
-
-
-
 ];
 
 @NgModule({

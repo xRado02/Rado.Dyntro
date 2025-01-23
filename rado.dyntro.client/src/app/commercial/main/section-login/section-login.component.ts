@@ -12,17 +12,12 @@ export class SectionLoginComponent {
 
   constructor(private router: Router) { }
 
-  goToDashboard() {
-    this.router.navigate(['/dashboard']);
-    window.scrollTo({ top: 0, behavior: 'instant' });
-
-
-
-
-
-
-
-  }
+  
+    goToDashboard() {
+      this.router.navigateByUrl('/dashboard');
+    }
+ 
+  
 }
 
 
