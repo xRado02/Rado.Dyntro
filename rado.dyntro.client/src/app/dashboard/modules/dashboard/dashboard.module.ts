@@ -5,6 +5,8 @@ import { HeaderComponent } from '../../components/header/header.component'
 import { DashboardComponent } from '../../dashboard.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { NavigationComponent } from '../../components/header/navigation/navigation.component';
+import { OrdersComponent } from '../../components/main/orders/orders.component'
+
 
 
 @NgModule({
@@ -12,7 +14,8 @@ import { NavigationComponent } from '../../components/header/navigation/navigati
     DashboardComponent,
     MainComponent,
     HeaderComponent,
-    NavigationComponent
+    NavigationComponent,
+    OrdersComponent
   ],
   imports: [
     CommonModule,
@@ -22,7 +25,8 @@ import { NavigationComponent } from '../../components/header/navigation/navigati
     DashboardComponent,
     MainComponent,
     HeaderComponent,
-    NavigationComponent
+    NavigationComponent,
+    OrdersComponent
   ]
 })
 export class DashboardModule { }

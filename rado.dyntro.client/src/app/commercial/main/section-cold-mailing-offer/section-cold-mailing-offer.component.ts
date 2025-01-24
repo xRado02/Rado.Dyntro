@@ -14,7 +14,7 @@ export class SectionColdMailingOfferComponent {
   constructor(private router: Router) { }
 
   goToContact() {
-    this.router.navigate(['/contact']);
+    this.router.navigate(['/commercial/contact']);
   }
 }
 

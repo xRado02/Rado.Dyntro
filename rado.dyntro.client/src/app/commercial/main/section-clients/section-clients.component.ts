@@ -13,22 +13,22 @@ export class SectionClientsComponent {
   constructor(private router: Router) { }
 
   goToPersonnelService() {
-    this.router.navigate(['/client-personnel-service']);
+    this.router.navigate(['/commercial/client-personnel-service']);
     window.scrollTo({ top: 0, behavior: 'instant' });
   }
 
   goToPragmaGo() {
-    this.router.navigate(['/client-pragma-go']);
+    this.router.navigate(['/commercial/client-pragma-go']);
     window.scrollTo({ top: 0, behavior: 'instant' });
   }
 
   goToArgentumEvent() {
-    this.router.navigate(['/client-argentum-event']);
+    this.router.navigate(['/commercial/client-argentum-event']);
     window.scrollTo({ top: 0, behavior: 'instant' });
   }
 
   goToVendorise() {
-    this.router.navigate(['/client-vendorise']);
+    this.router.navigate(['/commercial/client-vendorise']);
     window.scrollTo({ top: 0, behavior: 'instant' });
   }
 
