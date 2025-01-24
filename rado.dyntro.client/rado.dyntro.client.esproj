@@ -9,6 +9,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="src\app\commercial\main\content\images\avif\" />
-    <Folder Include="src\app\dashboard\components\" />
+    <Folder Include="src\app\dashboard\components\header\content\images\" />
   </ItemGroup>
 </Project>

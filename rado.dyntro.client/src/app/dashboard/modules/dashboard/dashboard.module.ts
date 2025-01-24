@@ -4,13 +4,15 @@ import { MainComponent } from '../../components/main/main.component';
 import { HeaderComponent } from '../../components/header/header.component'
 import { DashboardComponent } from '../../dashboard.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
+import { NavigationComponent } from '../../components/header/navigation/navigation.component';
 
 
 @NgModule({
   declarations: [
     DashboardComponent,
     MainComponent,
-    HeaderComponent
+    HeaderComponent,
+    NavigationComponent
   ],
   imports: [
     CommonModule,
@@ -19,7 +21,8 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
   exports: [
     DashboardComponent,
     MainComponent,
-    HeaderComponent
+    HeaderComponent,
+    NavigationComponent
   ]
 })
 export class DashboardModule { }
