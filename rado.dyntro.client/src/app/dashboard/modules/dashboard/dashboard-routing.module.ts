@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MainComponent } from '../../components/main/main.component';
 import { DashboardComponent } from '../../dashboard.component';
-import { OrdersComponent } from '../../components/main/orders/orders.component'
+import { OrdersFilterComponent } from '../../components/main/orders-filter/orders-filter.component'
 
 const routes: Routes = [
 
@@ -12,7 +12,7 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'main', pathMatch: 'full' },
       { path: 'main', component: MainComponent },
-      { path: 'orders', component: OrdersComponent },
+      { path: 'orders', component: OrdersFilterComponent },
 
     ]
   }

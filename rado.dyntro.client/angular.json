@@ -49,6 +49,17 @@
                 "glob": "**/*",
                 "input": "src/app/commercial/footer/content",
                 "output": "content"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/app/dashboard/components/header/content",
+                "output": "content"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/app/dashboard/components/main/content",
+                "output": "assets/svg"
+            
               }
             ],
             "styles": [

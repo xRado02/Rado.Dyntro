@@ -5,7 +5,8 @@ import { HeaderComponent } from '../../components/header/header.component'
 import { DashboardComponent } from '../../dashboard.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { NavigationComponent } from '../../components/header/navigation/navigation.component';
-import { OrdersComponent } from '../../components/main/orders/orders.component'
+import { OrdersFilterComponent } from '../../components/main/orders-filter/orders-filter.component'
+import { OrdersComponent  } from '../../components/main/orders/orders.component';
 
 
 
@@ -15,6 +16,7 @@ import { OrdersComponent } from '../../components/main/orders/orders.component'
     MainComponent,
     HeaderComponent,
     NavigationComponent,
+    OrdersFilterComponent,
     OrdersComponent
   ],
   imports: [
@@ -26,6 +28,7 @@ import { OrdersComponent } from '../../components/main/orders/orders.component'
     MainComponent,
     HeaderComponent,
     NavigationComponent,
+    OrdersFilterComponent,
     OrdersComponent
   ]
 })
