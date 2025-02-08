@@ -4,8 +4,7 @@ using Rado.Dyntro.Server.Order.ViewModel;
 namespace Rado.Dyntro.Server.Order.Controller
 {
     [ApiController]
-    [Route("[controller]")]
-
+    [Route("[controller]")]   
     public class OrderController : ControllerBase
     {
         private readonly ILogger<OrderController> _logger;
@@ -21,14 +20,14 @@ namespace Rado.Dyntro.Server.Order.Controller
         {
             return Enumerable.Range(1, 10).Select(index => new OrderViewModel
             {
-                ID = index,
+                Id = index,
                 Status = "Active",
                 Topic = "None",
                 FirstName = "Jhon",
                 LastName = "Jhonson",
                 Category = "Test",
                 Priority = "Top",
-                Date = DateOnly.FromDateTime(DateTime.Now)
+                Date = DateTime.Now
 ,
             })
             .ToArray();

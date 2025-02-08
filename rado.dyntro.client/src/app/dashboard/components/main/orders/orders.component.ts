@@ -24,14 +24,32 @@ interface Order {
 })
 export class OrdersComponent implements OnInit {
 
-  public order: Order[] = [];
+  public orders: Order[] = [];
 
   constructor(private http: HttpClient) {
 
   }
 
   ngOnInit() {
-    
+    this.getOrders();
   }
+
+  getOrders() {
+    this.http.get<Order[]>('/order').subscribe({
+      next: (result) => {
+        this.orders = result;
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    });
+
+
+  }
+
+
+
+
+
 
 }

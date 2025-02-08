@@ -1,73 +1,36 @@
 <div class="container-fluid mt-4 px-5">
-  <table class="table table-hover fs-5">
-    <thead class="table-border">
-      <tr>
-        <th class="text-start">
-          <input type="checkbox" class="form-check-input bg-secondary border-dark shadow-none" id="idNumber">
-        </th>
-        <th class="text-start">ID</th>
-        <th class="text-start">Status</th>
-        <th class="text-start ps-5 px-2">Temat</th>
-        <th class="text-start ps-5">Imię</th>
-        <th class="text-start ps-5">Naziwsko</th>
-        <th class="text-start">Kategoria</th>
-        <th class="text-start">Priorytet</th>
-        <th class="text-start text-end">Data aktualizacji</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>
-          <input type="checkbox" class="form-check-input bg-secondary border-dark shadow-none">
-        </td>
-        <td>1</td>
-        <td>Aktywny</td>
-        <td class="ps-5">Zgłoszenie błędu w aplikacji</td>
-        <td class="ps-5">Jan</td>
-        <td class="ps-5">Kowalski</td>
-        <td>IT</td>
-        <td>Wysoki</td>
-        <td class="text-end">2025-01-30</td>
-      </tr>
-      <tr>
-        <td>
-          <input type="checkbox" class="form-check-input bg-secondary border-dark shadow-none">
-        </td>
-        <td>2</td>
-        <td>Nieaktywny</td>
-        <td class="ps-5">Prośba o wsparcie</td>
-        <td class="ps-5">Anna </td>
-        <td class="ps-5">Nowak </td>
-        <td>HR</td>
-        <td>Średni</td>
-        <td class="text-end">2025-01-29</td>
-      </tr>
-      <tr>
-        <td>
-          <input type="checkbox" class="form-check-input bg-secondary border-dark shadow-none">
-        </td>
-        <td>3</td>
-        <td>Aktywny</td>
-        <td class="ps-5">Zapytanie ofertowe</td>
-        <td class="ps-5">Marek</td>
-        <td class="ps-5">Wiśniewski</td>
-        <td>Sprzedaż</td>
-        <td>Niski</td>
-        <td class="text-end">2025-01-28</td>
-      </tr>
-      <tr>
-        <td>
-          <input type="checkbox" class="form-check-input bg-secondary border-dark shadow-none">
-        </td>
-        <td>4</td>
-        <td>W trakcie</td>
-        <td class="ps-5">Problemy z płatnością</td>
-        <td class="ps-5">Katarzyna</td>
-        <td class="ps-5">Zając</td>
-        <td>Finanse</td>
-        <td>Wysoki</td>
-        <td class="text-end">2025-01-27</td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="table-responsive">
+    <table *ngIf="orders" class="table table-hover fs-5">
+      <thead class="table-border">
+        <tr>
+          <th class="text-start">
+            <input type="checkbox" class="form-check-input bg-secondary border-dark shadow-none" id="idNumber">
+          </th>
+          <th class="text-start">ID</th>
+          <th class="text-start">Status</th>
+          <th class="text-start px-5">Temat</th>
+          <th class="text-start px-5">Imię</th>
+          <th class="text-start px-5">Nazwisko</th>
+          <th class="text-start">Kategoria</th>
+          <th class="text-start px-5">Priorytet</th>
+          <th class="text-start ps-5">Data aktualizacji</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of orders">
+          <td>
+            <input type="checkbox" class="form-check-input bg-secondary border-dark shadow-none">
+          </td>
+          <td>{{order.id}}</td>
+          <td>{{order.status}}</td>
+          <td class="text-start px-5">{{order.topic}}</td>
+          <td class="text-start px-5">{{order.firstName}}</td>
+          <td class="text-start px-5">{{order.lastName}}</td>
+          <td>{{order.category}}</td>
+          <td class="text-start px-5">{{order.priority}}</td>
+          <td class="text-start ps-5">{{ order.date | date:'dd-MM-yyyy' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
