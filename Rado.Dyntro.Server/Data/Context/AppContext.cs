@@ -4,12 +4,12 @@ using System.Collections.Generic;
 
 namespace Rado.Dyntro.Server.Data
 {
-    // Usuwamy metodę OnConfiguring
+  
     public class AppDbContext : DbContext
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
-        public DbSet<Entities.Order>? Orders { get; set; }
+        public DbSet<Entities.Order> Orders { get; set; } = null!;
     }
 }
 

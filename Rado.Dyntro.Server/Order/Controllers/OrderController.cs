@@ -1,39 +1,28 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Rado.Dyntro.Server.Order.ViewModel;
+using Rado.Dyntro.Server.Data.Entities;
+using Rado.Dyntro.Server.Data;
 
 namespace Rado.Dyntro.Server.Order.Controller
 {
     [ApiController]
-    [Route("[controller]")]   
+    [Route("api/[controller]")]   
     public class OrderController : ControllerBase
     {
-        private readonly ILogger<OrderController> _logger;
-
-        public OrderController(ILogger<OrderController> logger)
-        {
-            _logger = logger;   
+        private readonly AppDbContext _appDbContext;
+        public OrderController(AppDbContext appDbContext) 
+        { 
+            _appDbContext = appDbContext;
         }
 
-        [HttpGet(Name = "GetOrder")]
 
-        public IEnumerable<OrderViewModel> Get()
+        [HttpGet]
+        public ActionResult<List<Data.Entities.Order>> Get()
         {
-            return Enumerable.Range(1, 10).Select(index => new OrderViewModel
-            {
-                Id = index,
-                Status = "Active",
-                Topic = "None",
-                FirstName = "Jhon",
-                LastName = "Jhonson",
-                Category = "Test",
-                Priority = "Top",
-                Date = DateTime.Now
-,
-            })
-            .ToArray();
+            var orders = _appDbContext.Orders.ToList();
             
+            return Ok(orders);
         }
-
 
 
     }
