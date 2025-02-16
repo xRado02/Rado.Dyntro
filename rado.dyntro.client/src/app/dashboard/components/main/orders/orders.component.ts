@@ -35,7 +35,7 @@ export class OrdersComponent implements OnInit {
   }
 
   getOrders() {
-    this.http.get<Order[]>('/order').subscribe({
+    this.http.get<Order[]>('/api/order').subscribe({
       next: (result) => {
         this.orders = result;
       },
@@ -44,12 +44,6 @@ export class OrdersComponent implements OnInit {
       }
     });
 
-
   }
-
-
-
-
-
 
 }
