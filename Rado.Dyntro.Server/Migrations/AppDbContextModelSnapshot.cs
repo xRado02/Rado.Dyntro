@@ -20,7 +20,7 @@ namespace Rado.Dyntro.Server.Migrations
                 .HasAnnotation("ProductVersion", "9.0.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder); 
 
             modelBuilder.Entity("Rado.Dyntro.Server.Data.Entities.Order", b =>
                 {
