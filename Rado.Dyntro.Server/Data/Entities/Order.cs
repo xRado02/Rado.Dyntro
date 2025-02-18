@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Rado.Dyntro.Server.Enums;
+using System;
 using System.ComponentModel.DataAnnotations;
+
 
 
 namespace Rado.Dyntro.Server.Data.Entities
@@ -10,7 +12,7 @@ namespace Rado.Dyntro.Server.Data.Entities
         public int Id { get; set; }
 
         [Required]
-        public string? Status { get; set; }
+        public OrderStatus Status { get; set; }
 
         [Required]
         public string? Topic { get; set; }
@@ -22,10 +24,10 @@ namespace Rado.Dyntro.Server.Data.Entities
         public string? LastName { get; set; }
 
         [Required]
-        public string? Category { get; set; }
+        public OrderCategory Category { get; set; }
 
         [Required]
-        public string? Priority { get; set; }
+        public OrderPriority Priority { get; set; }
 
         [Required]
         public DateTime Date { get; set; }

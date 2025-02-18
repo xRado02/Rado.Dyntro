@@ -8,19 +8,25 @@
     </div>
     <div class="flex-grow-1">
       <label class="form-label">Filtruj</label>
-      <select name="filter" class="form-select">
-        <option>Wszystko</option>
-      </select>
+      <!--<select name="sort-by-status" #searchStatus class="form-select"--> <!--(change)="onSelectedStatus">-->
+        <!--<option>Wszystko</option>-->
+        <!--<option [value]="statusOff">{{statusOff}}</option>
+        <option [value]="statusOn">{{statusOn}}</option>-->
+      <!--</select>-->
     </div>
     <div class="flex-grow-1">
       <label class="form-label">Sortuj według</label>
       <select name="sort-by-element" class="form-select">
+        <option>ID</option>
+        <option>Priorytet</option>
+        <option>Kategoria</option>
         <option>Data aktualizacji</option>
       </select>
     </div>
     <div class="flex-grow-1">
       <select name="sort-by-direction" class="form-select">
         <option>Malejąco</option>
+        <option>Rosnąco</option>
       </select>
     </div>
     <div class="align-self-end">

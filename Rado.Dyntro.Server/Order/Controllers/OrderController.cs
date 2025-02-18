@@ -34,12 +34,6 @@ namespace Rado.Dyntro.Server.Order.Controller
                 return StatusCode(500, "Wystąpił błąd serwera");
             }
         }
-        //[HttpGet]
-        //public ActionResult<List<OrderViewModel>> Get()
-        //{
-        //    var orders = _appDbContext.Orders.ToList();
-        //    var result = _mapper.Map<List<OrderViewModel>>(orders);
-        //    return Ok(result);
-        //}
+     
     }
 }

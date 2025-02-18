@@ -1,18 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
+import { OrderStatus, OrderPriority, OrderCategory, OrderStatusNames, OrderCategoryNames, OrderPriorityNames } from '../../../Enums/OrderEnums'; 
 
 
 interface Order {
-
   id: number;
-  status: string;
+  status: OrderStatus;
   topic: string;
   firstName: string;
   lastName: string;
-  category: string;
-  priority: string;
+  category: OrderCategory;
+  priority: OrderPriority;
   date: Date;
 }
+
+
 
 
 @Component({
@@ -25,7 +27,9 @@ interface Order {
 export class OrdersComponent implements OnInit {
 
   public orders: Order[] = [];
-
+  public OrderStatusNames = OrderStatusNames;
+  public OrderCategoryNames = OrderCategoryNames;
+  public OrderPriorityNames = OrderPriorityNames;
   constructor(private http: HttpClient) {
 
   }

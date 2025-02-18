@@ -1,15 +1,18 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
+using Rado.Dyntro.Server.Data.Entities;
+using Rado.Dyntro.Server.Enums;
 
-
-namespace Rado.Dyntro.Server.Data
+public class AppDbContext : DbContext
 {
-  
-    public class AppDbContext : DbContext
-    {
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+    public DbSet<Order>? Orders { get; set; } = null;
 
-        public DbSet<Entities.Order> Orders { get; set; } = null!;
+    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+    {
+    }
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Order>().Property(o => o.Status).HasConversion<string>();
+        modelBuilder.Entity<Order>().Property(o => o.Priority).HasConversion<string>();
+        modelBuilder.Entity<Order>().Property(o => o.Category).HasConversion<string>(); 
     }
 }
-

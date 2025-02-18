@@ -1,5 +1,6 @@
 ﻿using Rado.Dyntro.Server.Data.Entities;
 using Rado.Dyntro.Server.Data;
+using Rado.Dyntro.Server.Enums;
 
 namespace Rado.Dyntro.Server.Data.Seeder.OrderSeeder
 
@@ -17,7 +18,7 @@ namespace Rado.Dyntro.Server.Data.Seeder.OrderSeeder
         {
             if(_appDbContext.Database.CanConnect())
             {
-                if(!_appDbContext.Orders.Any())
+                if (_appDbContext.Orders != null && !_appDbContext.Orders.Any())
                 {
                     InsertSampleData();
                 }
@@ -30,52 +31,52 @@ namespace Rado.Dyntro.Server.Data.Seeder.OrderSeeder
           {
             new Entities.Order
             {
-                Status = "W realizacji",
+                Status = OrderStatus.InProgress,
                 Topic = "Nowa kampania newsletterowa",
                 FirstName = "Anna",
                 LastName = "Kowalska",
-                Category = "Kampania e-mail",
-                Priority = "Wysoki",
+                Category = OrderCategory.LinkedinCampaing,
+                Priority = OrderPriority.High,
                 Date = DateTime.UtcNow.AddDays(-3)
             },
             new Entities.Order
             {
-                 Status = "Zamknięte",
+                 Status = OrderStatus.Completed,
                 Topic = "Reklama na LinkedIn",
                 FirstName = "Michał",
                 LastName = "Nowak",
-                Category = "Kampania Linkedin",
-                Priority = "Niski",
+                Category = OrderCategory.LinkedinAutomatization,
+                Priority = OrderPriority.Low,
                 Date = DateTime.UtcNow.AddDays(-10)
             },
             new Entities.Order
             {
-                Status = "W realizacji",
+                Status = OrderStatus.InProgress,
                 Topic = "Segmentacja odbiorców",
                 FirstName = "Katarzyna",
                 LastName = "Wiśniewska",
-                Category = "Kampania e-mail",
-                Priority = "Wysoki",
+                Category = OrderCategory.Other,
+                Priority = OrderPriority.Medium,
                 Date = DateTime.UtcNow.AddDays(-1)
             },
             new Entities.Order
             {
-                Status = "Zamknięte",
+                Status = OrderStatus.Completed,
                 Topic = "Testy A/B reklam",
                 FirstName = "Tomasz",
                 LastName = "Dąbrowski",
-                Category = "Kampania Linkedin",
-                Priority = "Wysoki",
+                Category = OrderCategory.LinkedinCampaing,
+                Priority = OrderPriority.High,
                 Date = DateTime.UtcNow.AddDays(-7)
             },
             new Entities.Order
             {
-                Status = "W realizacji",
+                Status = OrderStatus.InProgress,
                 Topic = "Analiza wyników kampanii",
                 FirstName = "Ewa",
                 LastName = "Lis",
-                Category = "Inny",
-                Priority = "Niski",
+                Category = OrderCategory.Other,
+                Priority = OrderPriority.Medium,
                 Date = DateTime.UtcNow.AddDays(-5)
             }
           };

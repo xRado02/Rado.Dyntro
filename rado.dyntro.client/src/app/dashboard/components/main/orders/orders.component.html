@@ -22,12 +22,13 @@
             <input type="checkbox" class="form-check-input bg-secondary border-dark shadow-none">
           </td>
           <td>{{order.id}}</td>
-          <td>{{order.status}}</td>
+          <td>{{ OrderStatusNames[order.status] }}</td>
+
           <td class="text-start px-5">{{order.topic}}</td>
           <td class="text-start px-5">{{order.firstName}}</td>
           <td class="text-start px-5">{{order.lastName}}</td>
-          <td>{{order.category}}</td>
-          <td class="text-start px-5">{{order.priority}}</td>
+          <td>{{OrderCategoryNames[order.category]}}</td>
+          <td class="text-start px-5">{{OrderPriorityNames[order.priority]}}</td>
           <td class="text-start ps-5">{{ order.date | date:'dd-MM-yyyy' }}</td>
         </tr>
       </tbody>
