@@ -1,19 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
-import { OrderStatus, OrderPriority, OrderCategory, OrderStatusNames, OrderCategoryNames, OrderPriorityNames } from '../../../Enums/OrderEnums'; 
-
-
-interface Order {
-  id: number;
-  status: OrderStatus;
-  topic: string;
-  firstName: string;
-  lastName: string;
-  category: OrderCategory;
-  priority: OrderPriority;
-  date: Date;
-}
-
+import {  OrderStatusNames, OrderCategoryNames, OrderPriorityNames } from '../../../enums/OrderEnums'; 
+import { OrderService } from '../../../Services/order.service';
+import { ApiHandlerService, Order } from '../../../Services/api-handler.service';
 
 
 
@@ -30,24 +19,21 @@ export class OrdersComponent implements OnInit {
   public OrderStatusNames = OrderStatusNames;
   public OrderCategoryNames = OrderCategoryNames;
   public OrderPriorityNames = OrderPriorityNames;
-  constructor(private http: HttpClient) {
 
-  }
+  constructor(private apiHandlerService: ApiHandlerService, private orderService: OrderService) { }
 
   ngOnInit() {
-    this.getOrders();
+    this.loadOrders();
   }
 
-  getOrders() {
-    this.http.get<Order[]>('/api/order').subscribe({
-      next: (result) => {
-        this.orders = result;
+  loadOrders(): void {
+    this.apiHandlerService.getOrders().subscribe({
+      next: (orders) => {
+        this.orders = orders;
       },
       error: (error) => {
         console.error(error);
       }
     });
-
   }
-
 }

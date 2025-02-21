@@ -4,23 +4,35 @@
       <span class="input-group-text bg-white" id="search-icon">
         <img src="content/images/svg/search.svg" width="20" height="20" />
       </span>
-      <input type="text" class="form-control" placeholder="Szukaj" aria-describedby="search-icon" />
+      <input type="text" class="form-control" placeholder="Wyszuaj użytkownika" aria-describedby="search-icon" />
     </div>
     <div class="flex-grow-1">
       <label class="form-label">Filtruj</label>
-      <!--<select name="sort-by-status" #searchStatus class="form-select"--> <!--(change)="onSelectedStatus">-->
-        <!--<option>Wszystko</option>-->
-        <!--<option [value]="statusOff">{{statusOff}}</option>
-        <option [value]="statusOn">{{statusOn}}</option>-->
-      <!--</select>-->
+      <select class="form-select" (change)="onSelectedStatus()" #searchStatus >
+        <optgroup label="Status">
+          <option>Domyślnie</option>
+          <option *ngFor="let status of orderStatuses" [value]="status" data-group="status" >
+            {{ status }}
+          </option>
+        </optgroup>
+        <optgroup label="Kategoria">
+          <option *ngFor="let category of orderKategories" [value]="category" data-group="kategory">
+            {{ category }}
+          </option>
+        </optgroup>
+        <optgroup label="Priorytet">
+          <option *ngFor="let priority of orderPriorities" [value]="priority" data-group="priority">
+            {{ priority }}
+          </option>
+        </optgroup>
+      </select>
+
     </div>
     <div class="flex-grow-1">
       <label class="form-label">Sortuj według</label>
       <select name="sort-by-element" class="form-select">
         <option>ID</option>
-        <option>Priorytet</option>
-        <option>Kategoria</option>
-        <option>Data aktualizacji</option>
+        <option>Data</option>
       </select>
     </div>
     <div class="flex-grow-1">

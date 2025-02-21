@@ -1,3 +1,4 @@
+
 <div class="container-fluid mt-4 px-5">
   <div class="table-responsive">
     <table *ngIf="orders" class="table table-hover fs-5">
@@ -17,7 +18,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let order of orders">
+        <tr *ngFor="let order of filteredOrders">
           <td>
             <input type="checkbox" class="form-check-input bg-secondary border-dark shadow-none">
           </td>
