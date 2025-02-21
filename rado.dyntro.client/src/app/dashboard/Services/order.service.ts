@@ -26,6 +26,7 @@ export class OrderService {
 
   list(): Order[] {
     return this.orders;
+
   }
 
   searchByStatus(status: string): Order[] {  
