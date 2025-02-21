@@ -1,25 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http'
 import {  OrderStatusNames, OrderCategoryNames, OrderPriorityNames } from '../../../enums/OrderEnums'; 
 import { OrderService } from '../../../Services/order.service';
 import { ApiHandlerService, Order } from '../../../Services/api-handler.service';
 
-
-
 @Component({
   selector: 'app-orders',
-  standalone: false,
-  
+  standalone: false,  
   templateUrl: './orders.component.html',
   styleUrl: './orders.component.css'
 })
 export class OrdersComponent implements OnInit {
-
   public orders: Order[] = [];
   public OrderStatusNames = OrderStatusNames;
   public OrderCategoryNames = OrderCategoryNames;
   public OrderPriorityNames = OrderPriorityNames;
-
   constructor(private apiHandlerService: ApiHandlerService, private orderService: OrderService) { }
 
   ngOnInit() {

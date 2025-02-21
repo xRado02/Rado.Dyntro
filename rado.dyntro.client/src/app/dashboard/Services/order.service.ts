@@ -30,9 +30,9 @@ export class OrderService {
 
   searchByStatus(status: string): Order[] {  
 
-    return this.list().filter(order => {     
-      return order.status === OrderStatus.Completed;
-    });
+    return this.list().filter(   
+       order => OrderStatusNames[order.status] === status
+    );
   }
 
 

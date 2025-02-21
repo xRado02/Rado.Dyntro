@@ -18,13 +18,12 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let order of filteredOrders">
+        <tr *ngFor="let order of orders">
           <td>
             <input type="checkbox" class="form-check-input bg-secondary border-dark shadow-none">
           </td>
           <td>{{order.id}}</td>
           <td>{{ OrderStatusNames[order.status] }}</td>
-
           <td class="text-start px-5">{{order.topic}}</td>
           <td class="text-start px-5">{{order.firstName}}</td>
           <td class="text-start px-5">{{order.lastName}}</td>
