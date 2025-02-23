@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ApiHandlerService, Order } from '../Services/api-handler.service';
 import { OrderStatusNames, OrderCategoryNames, OrderPriorityNames, OrderStatus, OrderPriority, OrderCategory } from '../enums/OrderEnums';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class OrderService {
   orderStatuses = Object.values(OrderStatusNames);
   orderKategories = Object.values(OrderCategoryNames);
   orderPriorities = Object.values(OrderPriorityNames);
-   
+
   loadOrders(): void {
     this.apiHandlerService.getOrders().subscribe({
       next: (orders) => {
@@ -24,18 +25,12 @@ export class OrderService {
     });
   }
 
-  list(): Order[] {
-    return this.orders;
-
-  }
-
-  searchByStatus(status: string): Order[] {  
-
-    return this.list().filter(   
-       order => OrderStatusNames[order.status] === status
+  loadOrdersByStatus(status: string): Observable<Order[]> {
+    const enumKey = Object.keys(OrderStatusNames).find(
+      key => OrderStatusNames[key as unknown as OrderStatus] === status
     );
+    const orderStatusEnum = Number(enumKey) as OrderStatus;
+    return this.apiHandlerService.getOrdersByStatus(orderStatusEnum);
   }
-
-
 
 }

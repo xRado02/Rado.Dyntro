@@ -22,5 +22,12 @@ export class ApiHandlerService {
   getOrders(): Observable<Order[]> {
     return this.http.get<Order[]>('/api/order');
   }
+
+  getOrdersByStatus(orderStatus: OrderStatus): Observable<Order[]> {
+    return this.http.get<Order[]>(`/api/Order/orderFilteredBy/${orderStatus}`);
+    
+  }
+
+
 }
 

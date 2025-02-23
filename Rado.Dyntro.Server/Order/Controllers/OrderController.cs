@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Rado.Dyntro.Server.Data;
 using Rado.Dyntro.Server.Order.ViewModel;
+using Rado.Dyntro.Server.Enums;
 
 namespace Rado.Dyntro.Server.Order.Controller
 {
@@ -24,7 +25,7 @@ namespace Rado.Dyntro.Server.Order.Controller
         {
             try
             {
-                var orders = _appDbContext.Orders.ToList();
+                var orders = _appDbContext.Orders.OrderByDescending(o => o.Date).Take(5).ToList();
                 var result = _mapper.Map<List<OrderViewModel>>(orders);
                 return Ok(result);
             }
@@ -34,6 +35,17 @@ namespace Rado.Dyntro.Server.Order.Controller
                 return StatusCode(500, "Wystąpił błąd serwera");
             }
         }
-     
+
+        [HttpGet("orderFilteredBy/{orderStatus}")]
+        public ActionResult<List<OrderViewModel>> GetFilteredBy(OrderStatus orderStatus)
+        {
+            var ordersByStatus = _appDbContext.Orders
+                .Where(o => o.Status == orderStatus) 
+                .ToList();
+            var result = _mapper.Map<List<OrderViewModel>>(ordersByStatus);
+            return Ok(result);
+        }
+
+
     }
 }
