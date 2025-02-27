@@ -1,42 +1,47 @@
-
 <div class="container-fluid mt-5 px-5">
   <div class="d-flex gap-2 align-items-end">
     <div class="input-group">
       <span class="input-group-text bg-white" id="search-icon">
         <img src="content/images/svg/search.svg" width="20" height="20" />
       </span>
-      <input type="text" class="form-control" placeholder="Wyszuaj użytkownika" aria-describedby="search-icon" />
+      <input type="text" class="form-control" placeholder="Wyszukaj użytkownika" aria-describedby="search-icon" />
     </div>
-    <div class="flex-grow-1">
-      <label class="form-label">Filtruj</label>
-      <select class="form-select" (change)="onSelectedStatus()" #searchStatus >
-        <optgroup label="Status">
-          <option>Domyślnie</option>
-          <option *ngFor="let status of orderStatuses" [value]="status" data-group="status" >
-            {{ status }}
-          </option>
-        </optgroup>
-        <optgroup label="Kategoria">
-          <option *ngFor="let category of orderKategories" [value]="category" data-group="kategory">
-            {{ category }}
-          </option>
-        </optgroup>
-        <optgroup label="Priorytet">
-          <option *ngFor="let priority of orderPriorities" [value]="priority" data-group="priority">
-            {{ priority }}
-          </option>
-        </optgroup>
+    <div class="flex-grow-1 d-flex flex-column">
+      <label class="form-label">Status</label>
+      <select class="form-select" (change)="onSelectedStatus()" #searchStatus>
+        <option>Domyślnie</option>
+        <option *ngFor="let status of orderStatuses" [value]="status">
+          {{ status }}
+        </option>
       </select>
-
     </div>
-    <div class="flex-grow-1">
+    <div class="flex-grow-1 d-flex flex-column">
+      <label class="form-label">Kategoria</label>
+      <select class="form-select" #searchCategory>
+        <option>Domyślne</option>
+        <option *ngFor="let category of orderKategories" [value]="category">
+          {{ category }}
+        </option>
+      </select>
+    </div>
+    <div class="flex-grow-1 d-flex flex-column">
+      <label class="form-label">Priorytet</label>
+      <select class="form-select searchPriority">
+        <option>Domyślnie</option>
+        <option *ngFor="let priority of orderPriorities" [value]="priority">
+          {{ priority }}
+        </option>
+      </select>
+    </div>
+    <div class="flex-grow-1 d-flex flex-column">
       <label class="form-label">Sortuj według</label>
       <select name="sort-by-element" class="form-select">
         <option>ID</option>
         <option>Data</option>
       </select>
     </div>
-    <div class="flex-grow-1">
+    <div class="flex-grow-1 d-flex flex-column">
+      <label class="form-label">Kierunek sortowania</label>
       <select name="sort-by-direction" class="form-select">
         <option>Malejąco</option>
         <option>Rosnąco</option>
@@ -47,4 +52,3 @@
     </div>
   </div>
 </div>
-
