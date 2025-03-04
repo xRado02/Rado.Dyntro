@@ -21,6 +21,8 @@ export class OrdersFilterComponent {
   @ViewChild('searchCategory') searchCategory!: ElementRef;
   @ViewChild('searchPriority') searchPriority!: ElementRef;
   @ViewChild('searchByUser') searchByUser!: ElementRef;
+  @ViewChild('sortByDirection') sortByDirection!: ElementRef;
+  @ViewChild('sortByElement') sortByElement!: ElementRef;
 
   orderStatuses = Object.values(OrderStatusNames);
   orderCategories = Object.values(OrderCategoryNames);
@@ -43,9 +45,11 @@ export class OrdersFilterComponent {
   onSelectedParams(): void {
     const selectedStatus = this.searchStatus.nativeElement.value;
     const selectedCategory = this.searchCategory.nativeElement.value;
-    const selectedPriority = this.searchPriority.nativeElement.value;   
+    const selectedPriority = this.searchPriority.nativeElement.value;
+    const sortByElement = this.sortByElement.nativeElement.value;
+    const sortByDirection = this.sortByDirection.nativeElement.value;
 
-    this.selectedParams.emit([selectedStatus, selectedCategory, selectedPriority]);
+    this.selectedParams.emit([selectedStatus, selectedCategory, selectedPriority, sortByElement, sortByDirection]);
   }
 
   onSearchedUser(): void {

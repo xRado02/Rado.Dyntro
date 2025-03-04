@@ -23,7 +23,7 @@ export class ApiHandlerService {
     return this.http.get<Order[]>('/api/order');
   }
 
-  getOrdersByParams(orderStatus?: number, searchByCategory?: number, searchByPriority?: number, searchByUser?: string): Observable<Order[]> {
+  getOrdersByParams(orderStatus?: number, searchByCategory?: number, searchByPriority?: number, searchByUser?: string, sortByElement?: number, sortByDirection?: number): Observable<Order[]> {
 
     let params: any = {};
 
@@ -38,6 +38,12 @@ export class ApiHandlerService {
     }
     if (searchByUser != null) {
       params.searchByUser = searchByUser;
+    }
+    if (sortByElement != null) {
+      params.sortByElement = sortByElement
+    }
+    if (sortByDirection != null) {
+      params.sortByDirection = sortByDirection
     }
 
     return this.http.get<Order[]>('/api/Order/orderFilteredBy', { params });

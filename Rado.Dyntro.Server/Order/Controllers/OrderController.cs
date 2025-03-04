@@ -25,7 +25,7 @@ namespace Rado.Dyntro.Server.Order.Controller
         {
             try
             {
-                var orders = _appDbContext.Orders.OrderByDescending(o => o.Date).Take(5).ToList();
+                var orders = _appDbContext.Orders.OrderByDescending(o => o.Id).ToList();
                 var result = _mapper.Map<List<OrderViewModel>>(orders);
                 return Ok(result);
             }
@@ -40,6 +40,8 @@ namespace Rado.Dyntro.Server.Order.Controller
         public ActionResult<List<OrderViewModel>> GetFilteredBy([FromQuery] OrderQueryParams queryParams)
         {
             var query = _appDbContext.Orders.AsQueryable();
+
+            //Filter
 
             if (queryParams.searchByStatus.HasValue)
             {
@@ -56,10 +58,22 @@ namespace Rado.Dyntro.Server.Order.Controller
                 query = query.Where(o => o.Priority == queryParams.searchByPriority);
             }
 
+            //Search
+
             if (!string.IsNullOrEmpty(queryParams.searchByUser))
             {
                 query = query.Where(o => o.FirstName.Contains(queryParams.searchByUser) || o.LastName.Contains(queryParams.searchByUser));
             }
+
+            //Sort
+            if (queryParams.sortByElement.HasValue && queryParams.sortByDirection.HasValue)
+            {
+                query = queryParams.sortByElement == SortByElement.Data
+                    ? (queryParams.sortByDirection == SortByDirection.Ascending ? query.OrderBy(o => o.Date) : query.OrderByDescending(o => o.Date))
+                    : (queryParams.sortByDirection == SortByDirection.Ascending ? query.OrderBy(o => o.Id) : query.OrderByDescending(o => o.Id));
+            }
+
+
 
             var orders = query.ToList();
             var result = _mapper.Map<List<OrderViewModel>>(orders);
@@ -67,7 +81,7 @@ namespace Rado.Dyntro.Server.Order.Controller
         }
 
 
-      
+       
 
 
     }

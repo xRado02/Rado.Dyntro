@@ -20,4 +20,16 @@
         LinkedinAutomatization,
         Other,
     }
+
+    public enum SortByDirection
+    {
+        Ascending,  
+        Descending  
+    }
+    public enum SortByElement
+    {
+        ID,
+        Data
+    }
 }
+

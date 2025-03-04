@@ -35,14 +35,14 @@
     </div>
     <div class="flex-grow-1 d-flex flex-column">
       <label class="form-label">Sortuj według</label>
-      <select name="sort-by-element" class="form-select">
+      <select name="sort-by-element" class="form-select" #sortByElement>
         <option>ID</option>
         <option>Data</option>
       </select>
     </div>
     <div class="flex-grow-1 d-flex flex-column">
       <label class="form-label">Kierunek sortowania</label>
-      <select name="sort-by-direction" class="form-select">
+      <select name="sort-by-direction" class="form-select" #sortByDirection>
         <option>Malejąco</option>
         <option>Rosnąco</option>
       </select>

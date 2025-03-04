@@ -16,6 +16,17 @@ export enum OrderCategory {
   Other,
 }
 
+export enum SortByDirection {
+  Ascending,
+  Descending
+}
+
+export enum SortByElement {
+  Id,
+  Date
+ 
+}
+
 export const OrderStatusNames: { [key in OrderStatus]: string } = {
   [OrderStatus.InProgress]: 'W realizacji',
   [OrderStatus.Completed]: 'Zakończone',

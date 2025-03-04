@@ -40,14 +40,21 @@ export class OrdersComponent implements OnInit {
     this.selectedStatus = event[0] || '';
     this.selectedCategory = event[1] || '';
     this.selectedPriority = event[2] || '';
+    const sortByElement = event[3];
+    const sortByDirection = event[4] === 'Rosnąco' ? 0 : 1;
+  
+    console.log('Wybrane sortowanie (kierunek):', sortByDirection);
+    console.log('Wybrane sortowanie (element):', sortByElement);
 
-    console.log('Wybrany status:', this.selectedStatus);
-    console.log('Wybrana kategoria:', this.selectedCategory);
-    console.log('Wybrany priorytet:', this.selectedPriority);
-    console.log('Wpisany uzytkownik', this.searchedByUser);
 
-
-    this.orderService.loadOrdersByParams(this.selectedStatus, this.selectedCategory, this.selectedPriority, this.searchedByUser).subscribe({
+    this.orderService.loadOrdersByParams(
+      this.selectedStatus,
+      this.selectedCategory,
+      this.selectedPriority,
+      this.searchedByUser,
+      sortByElement === 'Data' ? 1 : 0,
+      sortByDirection
+      ).subscribe({
       next: (orders) => {
         this.filteredOrders = orders;
         console.log('Zamówienia po filtrowaniu:', this.filteredOrders);
@@ -63,7 +70,7 @@ export class OrdersComponent implements OnInit {
 
     console.log('Wpisany uzytkownik', this.searchedByUser);
 
-    this.orderService.loadOrdersByParams(undefined, undefined, undefined, this.searchedByUser).subscribe({
+    this.orderService.loadOrdersByParams(undefined, undefined, undefined, this.searchedByUser, undefined, undefined).subscribe({
       next: (orders) => {
         this.filteredOrders = orders;
         console.log('Zamówienia po filtrowaniu:', this.filteredOrders);
