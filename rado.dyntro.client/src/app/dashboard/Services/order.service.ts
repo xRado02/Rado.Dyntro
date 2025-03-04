@@ -11,7 +11,7 @@ export class OrderService {
   constructor(private apiHandlerService: ApiHandlerService) { }
 
   orderStatuses = Object.values(OrderStatusNames);
-  orderKategories = Object.values(OrderCategoryNames);
+  orderCategories = Object.values(OrderCategoryNames);
   orderPriorities = Object.values(OrderPriorityNames);
 
   loadOrders(): void {
@@ -25,12 +25,24 @@ export class OrderService {
     });
   }
 
-  loadOrdersByStatus(status: string): Observable<Order[]> {
-    const enumKey = Object.keys(OrderStatusNames).find(
+  loadOrdersByParams(status?: string, category?: string, priority?: string, user?: string): Observable<Order[]> {
+    const enumStatusKey = Object.keys(OrderStatusNames).find(
       key => OrderStatusNames[key as unknown as OrderStatus] === status
     );
-    const orderStatusEnum = Number(enumKey) as OrderStatus;
-    return this.apiHandlerService.getOrdersByStatus(orderStatusEnum);
+    const orderStatusEnum = enumStatusKey ? Number(enumStatusKey) as OrderStatus : undefined;
+
+    const enumCategoryKey = Object.keys(OrderCategoryNames).find(
+      key => OrderCategoryNames[key as unknown as OrderCategory] === category
+    );
+    const orderCategoryEnum = enumCategoryKey ? Number(enumCategoryKey) as OrderCategory : undefined;
+
+    const enumPriorityKey = Object.keys(OrderPriorityNames).find(
+      key => OrderPriorityNames[key as unknown as OrderPriority] === priority
+    );
+    const orderPriorityEnum = enumPriorityKey ? Number(enumPriorityKey) as OrderPriority : undefined;
+
+    return this.apiHandlerService.getOrdersByParams(orderStatusEnum, orderCategoryEnum, orderPriorityEnum, user);
   }
+
 
 }

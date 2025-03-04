@@ -36,15 +36,38 @@ namespace Rado.Dyntro.Server.Order.Controller
             }
         }
 
-        [HttpGet("orderFilteredBy/{orderStatus}")]
-        public ActionResult<List<OrderViewModel>> GetFilteredBy(OrderStatus orderStatus)
+        [HttpGet("orderFilteredBy")]
+        public ActionResult<List<OrderViewModel>> GetFilteredBy([FromQuery] OrderQueryParams queryParams)
         {
-            var ordersByStatus = _appDbContext.Orders
-                .Where(o => o.Status == orderStatus) 
-                .ToList();
-            var result = _mapper.Map<List<OrderViewModel>>(ordersByStatus);
+            var query = _appDbContext.Orders.AsQueryable();
+
+            if (queryParams.searchByStatus.HasValue)
+            {
+                query = query.Where(o => o.Status == queryParams.searchByStatus);
+            }
+
+            if (queryParams.searchByCategory.HasValue)
+            {
+                query = query.Where(o => o.Category == queryParams.searchByCategory);
+            }
+
+            if (queryParams.searchByPriority.HasValue)
+            {
+                query = query.Where(o => o.Priority == queryParams.searchByPriority);
+            }
+
+            if (!string.IsNullOrEmpty(queryParams.searchByUser))
+            {
+                query = query.Where(o => o.FirstName.Contains(queryParams.searchByUser) || o.LastName.Contains(queryParams.searchByUser));
+            }
+
+            var orders = query.ToList();
+            var result = _mapper.Map<List<OrderViewModel>>(orders);
             return Ok(result);
         }
+
+
+      
 
 
     }

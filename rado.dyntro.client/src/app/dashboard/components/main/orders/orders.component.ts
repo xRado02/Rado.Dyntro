@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { OrderStatusNames, OrderCategoryNames, OrderPriorityNames } from '../../../enums/OrderEnums'; 
+import { OrderStatusNames, OrderCategoryNames, OrderPriorityNames } from '../../../enums/OrderEnums';
 import { OrderService } from '../../../Services/order.service';
 import { ApiHandlerService, Order } from '../../../Services/api-handler.service';
 
@@ -15,7 +15,10 @@ export class OrdersComponent implements OnInit {
   public OrderStatusNames = OrderStatusNames;
   public OrderCategoryNames = OrderCategoryNames;
   public OrderPriorityNames = OrderPriorityNames;
-  public selectedStatus: string = '';
+  selectedStatus = '';
+  selectedCategory = '';
+  selectedPriority = '';
+  searchedByUser = '';
   constructor(private apiHandlerService: ApiHandlerService, private orderService: OrderService) { }
 
   ngOnInit() {
@@ -33,13 +36,20 @@ export class OrdersComponent implements OnInit {
     });
   }
 
-  onStatusChange(event: string): void {
-    this.selectedStatus = event;
+  onFiltersChange(event: string[]): void {
+    this.selectedStatus = event[0] || '';
+    this.selectedCategory = event[1] || '';
+    this.selectedPriority = event[2] || '';
+
     console.log('Wybrany status:', this.selectedStatus);
-    console.log('Dostępne zamówienia przed filtrowaniem:', this.orderService.orders);
-    this.orderService.loadOrdersByStatus(this.selectedStatus).subscribe({
+    console.log('Wybrana kategoria:', this.selectedCategory);
+    console.log('Wybrany priorytet:', this.selectedPriority);
+    console.log('Wpisany uzytkownik', this.searchedByUser);
+
+
+    this.orderService.loadOrdersByParams(this.selectedStatus, this.selectedCategory, this.selectedPriority, this.searchedByUser).subscribe({
       next: (orders) => {
-        this.filteredOrders = orders;  
+        this.filteredOrders = orders;
         console.log('Zamówienia po filtrowaniu:', this.filteredOrders);
       },
       error: (error) => {
@@ -47,5 +57,23 @@ export class OrdersComponent implements OnInit {
       }
     });
   }
+
+  onUserSearched(user: string): void {
+    this.searchedByUser = user || '';
+
+    console.log('Wpisany uzytkownik', this.searchedByUser);
+
+    this.orderService.loadOrdersByParams(undefined, undefined, undefined, this.searchedByUser).subscribe({
+      next: (orders) => {
+        this.filteredOrders = orders;
+        console.log('Zamówienia po filtrowaniu:', this.filteredOrders);
+      },
+      error: (error) => {
+        console.error('Błąd podczas ładowania zamówień:', error);
+      }
+    });
+
+  }
+
 
 }

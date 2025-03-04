@@ -13,24 +13,47 @@ export class OrdersFilterComponent {
   constructor(private orderService: OrderService, private apiHandlerService: ApiHandlerService) {
 
   }
-  @Output() statusSelected: EventEmitter<string> = new EventEmitter<string>();
+
+  @Output() selectedParams: EventEmitter<string[]> = new EventEmitter<string[]>();
+  @Output() userSearched: EventEmitter<string> = new EventEmitter<string>();
+
   @ViewChild('searchStatus') searchStatus!: ElementRef;
+  @ViewChild('searchCategory') searchCategory!: ElementRef;
+  @ViewChild('searchPriority') searchPriority!: ElementRef;
+  @ViewChild('searchByUser') searchByUser!: ElementRef;
 
   orderStatuses = Object.values(OrderStatusNames);
-  orderKategories = Object.values(OrderCategoryNames);
+  orderCategories = Object.values(OrderCategoryNames);
   orderPriorities = Object.values(OrderPriorityNames);
+
   selectedStatus = '';
-  orders: Order[] = [];
+  selectedCategory = '';
+  selectedPriority = '';
+  searchedUser = '';
+
+
+  
+  orders: Order[] = [];  
   filteredOrders: Order[] = [];
 
   ngOnInit() {
     this.orderService.loadOrders();
   }
 
-  onSelectedStatus(): void {
-    this.selectedStatus = this.searchStatus.nativeElement.value;
-    this.statusSelected.emit(this.selectedStatus);
+  onSelectedParams(): void {
+    const selectedStatus = this.searchStatus.nativeElement.value;
+    const selectedCategory = this.searchCategory.nativeElement.value;
+    const selectedPriority = this.searchPriority.nativeElement.value;   
+
+    this.selectedParams.emit([selectedStatus, selectedCategory, selectedPriority]);
   }
+
+  onSearchedUser(): void {
+    const searchedUser = this.searchByUser.nativeElement.value;
+    this.userSearched.emit(searchedUser);
+
+  }
+
 
 
 

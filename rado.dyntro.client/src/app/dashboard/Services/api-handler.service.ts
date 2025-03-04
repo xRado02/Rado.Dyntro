@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { OrderStatus, OrderPriority, OrderCategory, OrderStatusNames, OrderCategoryNames, OrderPriorityNames } from '../enums/OrderEnums';
+import { OrderStatus, OrderPriority, OrderCategory} from '../enums/OrderEnums';
 import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs';
 export interface Order {
@@ -23,10 +23,26 @@ export class ApiHandlerService {
     return this.http.get<Order[]>('/api/order');
   }
 
-  getOrdersByStatus(orderStatus: OrderStatus): Observable<Order[]> {
-    return this.http.get<Order[]>(`/api/Order/orderFilteredBy/${orderStatus}`);
-    
+  getOrdersByParams(orderStatus?: number, searchByCategory?: number, searchByPriority?: number, searchByUser?: string): Observable<Order[]> {
+
+    let params: any = {};
+
+    if (orderStatus != null) {
+      params.searchByStatus = orderStatus;
+    }
+    if (searchByCategory != null) {
+      params.searchByCategory = searchByCategory;
+    }
+    if (searchByPriority != null) {
+      params.searchByPriority = searchByPriority;
+    }
+    if (searchByUser != null) {
+      params.searchByUser = searchByUser;
+    }
+
+    return this.http.get<Order[]>('/api/Order/orderFilteredBy', { params });
   }
+
 
 
 }
