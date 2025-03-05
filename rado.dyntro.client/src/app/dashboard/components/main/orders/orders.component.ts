@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { OrderStatusNames, OrderCategoryNames, OrderPriorityNames } from '../../../enums/OrderEnums';
 import { OrderService } from '../../../Services/order.service';
 import { ApiHandlerService, Order } from '../../../Services/api-handler.service';
+import { OrderFilter } from '../../../models/order/order-filter-model'
 
 @Component({
   selector: 'app-orders',
@@ -12,6 +13,7 @@ import { ApiHandlerService, Order } from '../../../Services/api-handler.service'
 export class OrdersComponent implements OnInit {
   public orders: Order[] = [];
   public filteredOrders: Order[] = [];
+  
   public OrderStatusNames = OrderStatusNames;
   public OrderCategoryNames = OrderCategoryNames;
   public OrderPriorityNames = OrderPriorityNames;
@@ -37,25 +39,24 @@ export class OrdersComponent implements OnInit {
   }
 
   onFiltersChange(event: string[]): void {
-    this.selectedStatus = event[0] || '';
-    this.selectedCategory = event[1] || '';
-    this.selectedPriority = event[2] || '';
-    this.searchedByUser = event[3] || '';
-    const sortByElement = event[4];
-    const sortByDirection = event[5];
-  
-    console.log('Wybrane sortowanie (kierunek):', sortByDirection);
-    console.log('Wybrane sortowanie (element):', sortByElement);
 
+    const [status, category, priority, user, sortByElement, sortByDirection] = event;
 
-    this.orderService.loadOrdersByParams(
-      this.selectedStatus,
-      this.selectedCategory,
-      this.selectedPriority,
-      this.searchedByUser,
+    this.selectedStatus = status;
+    this.selectedCategory = category;
+    this.selectedPriority = priority;
+    this.searchedByUser = user;
+
+    const filter: OrderFilter = {
+      status,
+      category,
+      priority,
+      user,
       sortByElement,
       sortByDirection
-      ).subscribe({
+    };
+
+    this.orderService.loadOrdersByParams(filter).subscribe({
       next: (orders) => {
         this.filteredOrders = orders;
         console.log('Zamówienia po filtrowaniu:', this.filteredOrders);

@@ -10,6 +10,7 @@ import { OrdersFilterComponent } from '../../components/main/orders-filter/order
 import { OrdersComponent } from '../../components/main/orders/orders.component';
 import { ApiHandlerService } from '../../Services/api-handler.service';
 import { OrderService } from '../../Services/order.service';
+import { OrderFormComponent } from '../../components/main/order-form/order-form.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { OrderService } from '../../Services/order.service';
     HeaderComponent,
     NavigationComponent,
     OrdersFilterComponent,
-    OrdersComponent
+    OrdersComponent,
+    OrderFormComponent
   ],
   imports: [
     CommonModule,
@@ -32,7 +34,10 @@ import { OrderService } from '../../Services/order.service';
     HeaderComponent,
     NavigationComponent,
     OrdersFilterComponent,
-    OrdersComponent
+    OrdersComponent,
+    OrderFormComponent
+   
+
   ]
 })
 export class DashboardModule { }

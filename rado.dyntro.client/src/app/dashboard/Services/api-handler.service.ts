@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { OrderStatus, OrderPriority, OrderCategory} from '../enums/OrderEnums';
 import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs';
+import { OrderFilter } from '../models/order/order-filter-model'
 export interface Order {
   id: number;
   status: OrderStatus;
@@ -23,27 +24,27 @@ export class ApiHandlerService {
     return this.http.get<Order[]>('/api/order');
   }
 
-  getOrdersByParams(orderStatus?: number, searchByCategory?: number, searchByPriority?: number, searchByUser?: string, sortByElement?: string, sortByDirection?: string): Observable<Order[]> {
+  getOrdersByParams(preparedFilter: OrderFilter): Observable<Order[]> {
 
-    let params: any = {};
+    let params: any = {};    
 
-    if (orderStatus != null) {
-      params.searchByStatus = orderStatus;
+    if (preparedFilter.status != null) {
+      params.searchByStatus = preparedFilter.status;
     }
-    if (searchByCategory != null) {
-      params.searchByCategory = searchByCategory;
+    if (preparedFilter.category != null) {
+      params.searchByCategory = preparedFilter.category;
     }
-    if (searchByPriority != null) {
-      params.searchByPriority = searchByPriority;
+    if (preparedFilter.priority != null) {
+      params.searchByPriority = preparedFilter.priority;
     }
-    if (searchByUser != null) {
-      params.searchByUser = searchByUser;
+    if (preparedFilter.user != null) {
+      params.searchByUser = preparedFilter.user;
     }
-    if (sortByElement != null) {
-      params.sortByElement = sortByElement
+    if (preparedFilter.sortByElement != null) {
+      params.sortByElement = preparedFilter.sortByElement
     }
-    if (sortByDirection != null) {
-      params.sortByDirection = sortByDirection
+    if (preparedFilter.sortByDirection != null) {
+      params.sortByDirection = preparedFilter.sortByDirection
     }
 
     return this.http.get<Order[]>('/api/Order/orderFilteredBy', { params });
