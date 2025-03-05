@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApiHandlerService, Order } from '../Services/api-handler.service';
-import { OrderStatusNames, OrderCategoryNames, OrderPriorityNames, OrderStatus, OrderPriority, OrderCategory } from '../enums/OrderEnums';
+import { OrderStatusNames, OrderCategoryNames, OrderPriorityNames, OrderStatus, OrderPriority, OrderCategory, SortByDirectionNames, SortByElementNames, SortByDirection, SortByElement } from '../enums/OrderEnums';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -25,7 +25,7 @@ export class OrderService {
     });
   }
 
-  loadOrdersByParams(status?: string, category?: string, priority?: string, user?: string, sortByElement?: number, sortByDirection?: number): Observable<Order[]> {
+  loadOrdersByParams(status?: string, category?: string, priority?: string, user?: string, sortByElement?: string, sortByDirection?: string): Observable<Order[]> {
     const enumStatusKey = Object.keys(OrderStatusNames).find(
       key => OrderStatusNames[key as unknown as OrderStatus] === status
     );
@@ -38,10 +38,18 @@ export class OrderService {
 
     const enumPriorityKey = Object.keys(OrderPriorityNames).find(
       key => OrderPriorityNames[key as unknown as OrderPriority] === priority
+    );   
+
+    const enumSortElementKey = Object.keys(SortByElementNames).find(
+      key => SortByElementNames[key as unknown as SortByElement] === sortByElement
+    );
+
+    const enumSortDirectionsKey = Object.keys(SortByDirectionNames).find(
+      key => SortByDirectionNames[key as unknown as SortByDirection] === sortByDirection
     );
     const orderPriorityEnum = enumPriorityKey ? Number(enumPriorityKey) as OrderPriority : undefined;
 
-    return this.apiHandlerService.getOrdersByParams(orderStatusEnum, orderCategoryEnum, orderPriorityEnum, user, sortByElement, sortByDirection)
+    return this.apiHandlerService.getOrdersByParams(orderStatusEnum, orderCategoryEnum, orderPriorityEnum, user, enumSortElementKey, enumSortDirectionsKey)
   }
 
 

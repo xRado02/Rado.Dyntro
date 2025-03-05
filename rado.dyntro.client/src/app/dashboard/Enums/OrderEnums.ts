@@ -45,3 +45,13 @@ export const OrderCategoryNames: { [key in OrderCategory]: string } = {
   [OrderCategory.EmailCampaing]: "Kampania e-mail",
   [OrderCategory.Other]: "Inne",  
 }
+
+export const SortByDirectionNames: { [key in SortByDirection]: string } = {
+  [SortByDirection.Ascending]: 'Rosnąco',
+  [SortByDirection.Descending]: 'Malejąco',
+}
+
+export const SortByElementNames: { [key in SortByElement]: string } = {
+  [SortByElement.Date]: 'Data',
+  [SortByElement.Id]: 'ID',
+}

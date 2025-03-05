@@ -23,7 +23,7 @@ export class ApiHandlerService {
     return this.http.get<Order[]>('/api/order');
   }
 
-  getOrdersByParams(orderStatus?: number, searchByCategory?: number, searchByPriority?: number, searchByUser?: string, sortByElement?: number, sortByDirection?: number): Observable<Order[]> {
+  getOrdersByParams(orderStatus?: number, searchByCategory?: number, searchByPriority?: number, searchByUser?: string, sortByElement?: string, sortByDirection?: string): Observable<Order[]> {
 
     let params: any = {};
 

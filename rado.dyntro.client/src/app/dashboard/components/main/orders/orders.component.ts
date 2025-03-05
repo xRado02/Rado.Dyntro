@@ -40,8 +40,9 @@ export class OrdersComponent implements OnInit {
     this.selectedStatus = event[0] || '';
     this.selectedCategory = event[1] || '';
     this.selectedPriority = event[2] || '';
-    const sortByElement = event[3];
-    const sortByDirection = event[4] === 'Rosnąco' ? 0 : 1;
+    this.searchedByUser = event[3] || '';
+    const sortByElement = event[4];
+    const sortByDirection = event[5];
   
     console.log('Wybrane sortowanie (kierunek):', sortByDirection);
     console.log('Wybrane sortowanie (element):', sortByElement);
@@ -52,7 +53,7 @@ export class OrdersComponent implements OnInit {
       this.selectedCategory,
       this.selectedPriority,
       this.searchedByUser,
-      sortByElement === 'Data' ? 1 : 0,
+      sortByElement,
       sortByDirection
       ).subscribe({
       next: (orders) => {
@@ -65,22 +66,9 @@ export class OrdersComponent implements OnInit {
     });
   }
 
-  onUserSearched(user: string): void {
-    this.searchedByUser = user || '';
-
-    console.log('Wpisany uzytkownik', this.searchedByUser);
-
-    this.orderService.loadOrdersByParams(undefined, undefined, undefined, this.searchedByUser, undefined, undefined).subscribe({
-      next: (orders) => {
-        this.filteredOrders = orders;
-        console.log('Zamówienia po filtrowaniu:', this.filteredOrders);
-      },
-      error: (error) => {
-        console.error('Błąd podczas ładowania zamówień:', error);
-      }
-    });
+ 
 
   }
 
 
-}
+

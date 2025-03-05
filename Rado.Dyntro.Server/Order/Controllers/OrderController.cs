@@ -62,7 +62,7 @@ namespace Rado.Dyntro.Server.Order.Controller
 
             if (!string.IsNullOrEmpty(queryParams.searchByUser))
             {
-                query = query.Where(o => o.FirstName.Contains(queryParams.searchByUser) || o.LastName.Contains(queryParams.searchByUser));
+                query = query.Where(o => o.FirstName.StartsWith(queryParams.searchByUser) || o.LastName.StartsWith(queryParams.searchByUser));
             }
 
             //Sort

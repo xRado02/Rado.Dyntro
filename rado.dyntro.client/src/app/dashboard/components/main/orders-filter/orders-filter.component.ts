@@ -48,15 +48,12 @@ export class OrdersFilterComponent {
     const selectedPriority = this.searchPriority.nativeElement.value;
     const sortByElement = this.sortByElement.nativeElement.value;
     const sortByDirection = this.sortByDirection.nativeElement.value;
-
-    this.selectedParams.emit([selectedStatus, selectedCategory, selectedPriority, sortByElement, sortByDirection]);
-  }
-
-  onSearchedUser(): void {
     const searchedUser = this.searchByUser.nativeElement.value;
-    this.userSearched.emit(searchedUser);
 
+    this.selectedParams.emit([selectedStatus, selectedCategory, selectedPriority, searchedUser, sortByElement, sortByDirection, ]);
   }
+
+ 
 
 
 
