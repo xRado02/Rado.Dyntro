@@ -1,1 +1,56 @@
-<p>order-form works!</p>
+<div class="container-flex p-5">
+  <div class="form-background p-5">
+    <form>
+      <div class="pb-4">
+        <label class="form-label fs-4"><strong>Klient</strong><span class="text-danger"> *</span></label>
+        <p>Wybierz klienta, dla którego chcesz utworzyć zlecenie.</p>
+        <select class="form-select"  required >
+          <option value="">Wybierz klienta</option>
+          <option value="client1">Klient 1</option>
+          <option value="client2">Klient 2</option>
+          <option value="client3">Klient 3</option>
+        </select>
+      </div>
+      <div class="pb-3">
+        <label class="form-label fs-4"><strong>Temat</strong><span class="text-danger"> *</span></label>
+        <p>Napisz, krótki opis zlecenia.</p>
+        <input type="text" class="form-control" required />
+      </div>
+      <div class="pb-3">
+        <label class="form-label fs-4"><strong>Opis</strong></label>
+        <p>Napisz szczegółowy, opis zlecenia.</p>
+        <textarea class="form-control "></textarea>
+      </div>
+      <div class="pb-3">
+        <label class="form-label fs-4"><strong>Status</strong><span class="text-danger"> *</span></label>
+        <p>Wybierz status.</p>
+        <select class="form-select" required>
+          <option *ngFor="let status of orderStatuses" [value]="status">
+            {{ status }}
+          </option>
+        </select>
+      </div>
+      <div class="pb-3">
+        <label class="form-label fs-4"><strong>Kategoria</strong><span class="text-danger"> *</span></label>
+        <p>Wybierz kategorię.</p>
+        <select class="form-select" required>
+          <option *ngFor="let category of orderCategories" [value]="category">
+            {{ category }}
+          </option>
+        </select>
+      </div>
+      <div class="pb-4">
+        <label class="form-label fs-4"><strong>Priorytet</strong><span class="text-danger"> *</span></label>
+        <p>Wybierz priorytet.</p>
+        <select class="form-select" required>
+          <option *ngFor="let priority of orderPriorities" [value]="priority">
+            {{priority}}
+          </option>
+        </select>
+      </div>
+      <div>
+        <button class="btn btn-dark">Utwórz zgłoszenie</button>
+      </div>
+    </form>
+  </div>
+</div>

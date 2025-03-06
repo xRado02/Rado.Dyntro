@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { OrderStatusNames, OrderCategoryNames, OrderPriorityNames } from '../../../enums/OrderEnums';
 
 @Component({
   selector: 'app-order-form',
@@ -9,4 +10,8 @@ import { Component } from '@angular/core';
 })
 export class OrderFormComponent {
 
+
+  orderStatuses = Object.values(OrderStatusNames);
+  orderCategories = Object.values(OrderCategoryNames);
+  orderPriorities = Object.values(OrderPriorityNames);
 }
