@@ -26,7 +26,7 @@ export class OrdersFilterComponent {
 
   orderStatuses = Object.values(OrderStatusNames);
   orderCategories = Object.values(OrderCategoryNames);
-  orderPriorities = Object.values(OrderPriorityNames);
+  orderPriorities = Object.values(OrderPriorityNames); 
 
   selectedStatus = '';
   selectedCategory = '';

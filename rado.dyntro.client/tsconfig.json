@@ -17,7 +17,7 @@
     "module": "ES2022",
     "baseUrl": "src", // Dodaj to, aby ustawić bazowy katalog dla aliasów
     "paths": {
-      "@enums/*": [ "app/dashboard/enums/*" ] // Dodaj alias dla folderu enums
+      "@enums/*": [ "app/dashboard/Enums/*" ] // Dodaj alias dla folderu enums
     }
   },
   "angularCompilerOptions": {
