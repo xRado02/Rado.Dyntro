@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { OrderStatus, OrderPriority, OrderCategory} from '../enums/OrderEnums';
+import { OrderStatus, OrderPriority, OrderCategory} from '@enums/OrderEnums';
 import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs';
 import { OrderFilter } from '../models/order/order-filter-model'

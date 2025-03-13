@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApiHandlerService, Order } from '../Services/api-handler.service';
-import { OrderStatusNames, OrderCategoryNames, OrderPriorityNames, OrderStatus, OrderPriority, OrderCategory, SortByDirectionNames, SortByElementNames, SortByDirection, SortByElement } from '../enums/OrderEnums';
+import { OrderStatusNames, OrderCategoryNames, OrderPriorityNames, OrderStatus, OrderPriority, OrderCategory, SortByDirectionNames, SortByElementNames, SortByDirection, SortByElement } from '@enums/OrderEnums';
 import { Observable } from 'rxjs';
 import { OrderFilter } from '../models/order/order-filter-model'
 
