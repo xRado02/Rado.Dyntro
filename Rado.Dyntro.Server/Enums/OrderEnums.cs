@@ -1,4 +1,4 @@
-﻿namespace Rado.Dyntro.Server.Enums
+﻿namespace Rado.Dyntro.Server.enums
 {
     public enum OrderStatus
     {

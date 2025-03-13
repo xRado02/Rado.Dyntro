@@ -1,6 +1,6 @@
 ﻿using Rado.Dyntro.Server.Data.Entities;
 using Rado.Dyntro.Server.Data;
-using Rado.Dyntro.Server.Enums;
+using Rado.Dyntro.Server.enums;
 
 namespace Rado.Dyntro.Server.Data.Seeder.OrderSeeder
 

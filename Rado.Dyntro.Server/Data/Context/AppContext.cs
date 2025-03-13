@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Rado.Dyntro.Server.Data.Entities;
-using Rado.Dyntro.Server.Enums;
+using Rado.Dyntro.Server.enums;
 
 public class AppDbContext : DbContext
 {

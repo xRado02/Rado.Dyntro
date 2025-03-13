@@ -1,4 +1,4 @@
-﻿using Rado.Dyntro.Server.Enums;
+﻿using Rado.Dyntro.Server.enums;
 
 namespace Rado.Dyntro.Server.Order
 {

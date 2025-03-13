@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Rado.Dyntro.Server.Data;
 using Rado.Dyntro.Server.Order.ViewModel;
-using Rado.Dyntro.Server.Enums;
+using Rado.Dyntro.Server.enums;
 
 namespace Rado.Dyntro.Server.Order.Controller
 {
@@ -18,7 +18,7 @@ namespace Rado.Dyntro.Server.Order.Controller
             _appDbContext = appDbContext;
             _mapper = mapper;
         }
-
+         
 
         [HttpGet]
         public ActionResult<List<OrderViewModel>> Get()
