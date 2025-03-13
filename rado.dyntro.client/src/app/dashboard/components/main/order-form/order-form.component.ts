@@ -13,21 +13,21 @@ import { Observable } from 'rxjs';
 export class OrderFormComponent {
 
 
-  orderStatuses = Object.values(OrderStatusNames);
-  orderCategories = Object.values(OrderCategoryNames);
-  orderPriorities = Object.values(OrderPriorityNames);
+  //orderStatuses = Object.values(OrderStatusNames);
+  //orderCategories = Object.values(OrderCategoryNames);
+  //orderPriorities = Object.values(OrderPriorityNames);
 
 
-  selectedStatus = '';
-  selectedCategory = '';
-  selectedPriority = '';
+  //selectedStatus = '';
+  //selectedCategory = '';
+  //selectedPriority = '';
 
 
-  @ViewChild('selectClientName') clientName!: ElementRef;
-  @ViewChild('topic') inputTopic!: ElementRef;  
-  @ViewChild('selectStatus') searchStatus!: ElementRef;
-  @ViewChild('selectCategory') searchCategory!: ElementRef;
-  @ViewChild('selectPriority') searchPriority!: ElementRef;
+  //@ViewChild('selectClientName') clientName!: ElementRef;
+  //@ViewChild('topic') inputTopic!: ElementRef;  
+  //@ViewChild('selectStatus') searchStatus!: ElementRef;
+  //@ViewChild('selectCategory') searchCategory!: ElementRef;
+  //@ViewChild('selectPriority') searchPriority!: ElementRef;
 
 
   //createNewTicket(): void{
