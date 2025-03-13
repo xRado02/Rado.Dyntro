@@ -19,7 +19,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//test
+//test eaea
 //builder.Services.AddCors(options =>
 //{
 //    options.AddPolicy("AllowSpecificOrigin", policy =>
