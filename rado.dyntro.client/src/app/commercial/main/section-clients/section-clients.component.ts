@@ -31,9 +31,20 @@ export class SectionClientsComponent {
     this.router.navigate(['/commercial/client-vendorise']);
     window.scrollTo({ top: 0, behavior: 'instant' });
   }
+  goToMojoHr() {
+    this.router.navigate(['/commercial/client-mojo-hr']);
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }
 
- 
+  goToEwl() {
+    this.router.navigate(['/commercial/client-ewl']);
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }
 
+  goToInnBenefits() {
+    this.router.navigate(['/commercial/client-inn-benefits']);
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }
 
   
 

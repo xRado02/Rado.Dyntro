@@ -20,6 +20,11 @@ import { ClientPersonnelServiceComponent } from '../../main/section-specific-cli
 import { ClientArgentumEventComponent } from '../../main/section-specific-client/client-argentum-event/client-argentum-event.component';
 import { ClientVendoriseComponent } from '../../main/section-specific-client/client-vendorise/client-vendorise.component';
 import { SectionClientsRollbarComponent } from '../../main/section-clients-rollbar/section-clients-rollbar.component';
+import { PolityComponent } from '../../main/section-privacy-cookies/polity/polity.component';
+import { CookiesComponent } from '../../main/section-privacy-cookies/cookies/cookies.component';
+import { ClientMojoHrComponent } from '../../main/section-specific-client/client-mojo-hr/client-mojo-hr.component';
+import { ClientEwlComponent } from '../../main/section-specific-client/client-ewl/client-ewl.component';
+import { ClientInnBenefitsComponent } from '../../main/section-specific-client/client-inn-benefits/client-inn-benefits.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +46,14 @@ import { SectionClientsRollbarComponent } from '../../main/section-clients-rollb
     ClientPersonnelServiceComponent,
     ClientArgentumEventComponent,
     ClientVendoriseComponent,
-    SectionClientsRollbarComponent
+    SectionClientsRollbarComponent,
+    PolityComponent,
+    CookiesComponent,
+    ClientMojoHrComponent,
+    ClientEwlComponent,
+    ClientInnBenefitsComponent,
+ 
+
   ],
   imports: [
     CommonModule,
@@ -66,7 +78,13 @@ import { SectionClientsRollbarComponent } from '../../main/section-clients-rollb
     ClientPersonnelServiceComponent,
     ClientArgentumEventComponent,
     ClientVendoriseComponent,
-    SectionClientsRollbarComponent
+    SectionClientsRollbarComponent,
+    PolityComponent,
+    CookiesComponent,
+    ClientMojoHrComponent,
+    ClientEwlComponent,
+    ClientInnBenefitsComponent,
+  
   ]
 
 })

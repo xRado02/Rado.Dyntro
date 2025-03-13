@@ -9,6 +9,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="src\app\commercial\main\content\images\avif\" />
+    <Folder Include="src\app\commercial\main\section-privacy-cookies\" />
     <Folder Include="src\app\dashboard\components\header\content\images\" />
     <Folder Include="src\app\dashboard\components\main\content\NewFolder\" />
   </ItemGroup>

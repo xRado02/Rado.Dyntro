@@ -1,40 +1,112 @@
 <!--Clients-->
-
+<!-- Clients Flip Cards -->
 <section class="pb-5 py-5">
   <div class="container">
-    <h1 class="text-lg-center pb-5">Poznaj naszych klientów</h1>
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 rounded p-4 bg-white ">
-      <div class="col d-flex align-items-center justify-content-center ">
-        <div class="border shadow-sm text-center p-3 h-100">
-          <img src="content/images/png/pragmago-logo.png" alt="Pragma GO" loading="lazy" class="img-fluid my-5 py-5" />
-          <p class="text-start">PragmaGO to polski fintech oferujący faktoring online, finansowanie zakupów firmowych oraz usługi embedded finance dla biznesu.</p>
-          <button type="button" (click)="goToPragmaGo()" class="btn btn-outline-dark mt-4"><strong>Dowiedz się więcej</strong></button>
+    <h1 class="text-center pb-5">Poznaj naszych klientów</h1>
+    <div class="flip-container">
+
+      <!-- Firma 1 -->
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <img src="content/images/png/pragmago-logo.png" alt="Pragma GO" />
+          </div>
+          <div class="flip-card-back">
+            <h3>Pragma GO</h3>
+            <p>Oferuje faktoring online, finansowanie zakupów firmowych oraz usługi embedded finance.</p>
+            <button class="btn btn-outline-light" (click)="goToPragmaGo()"><strong>Więcej</strong></button>
+          </div>
         </div>
       </div>
-      <div class="col d-flex align-items-center justify-content-center mt-4 mt-md-0">
-        <div class="border shadow-sm text-center p-3 h-100 ">
-          <img src="content/images/png/argentumevent.png" alt="Argentum Event" loading="lazy" class="img-fluid" />
-          <p class="text-start">Argentum Event organizuje eventy firmowe, wyjazdy integracyjne i wydarzenia online, oferując kompleksowe wsparcie na terenie całej Polski.</p>
-          <button type="button"  (click)="goToArgentumEvent()" class="btn btn-outline-dark mt-4"><strong>Dowiedz się więcej</strong></button>
+
+      <!-- Firma 2 -->
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <img src="content/images/png/argentumevent.png" alt="Argentum Event" />
+          </div>
+          <div class="flip-card-back">
+            <h3>Argentum Event</h3>
+            <p>Organizuje eventy firmowe, wyjazdy integracyjne i wydarzenia online.</p>
+            <button class="btn btn-outline-light" (click)="goToArgentumEvent()"><strong>Więcej</strong></button>
+          </div>
         </div>
       </div>
-      <div class="col d-flex align-items-center justify-content-center mt-4 mt-md-0">
-        <div class="border shadow-sm text-center p-3 h-100">
-          <img src="content/images/png/vendorise.png" alt="Vendorise" loading="lazy" class="img-fluid mb-3 py-3" />
-          <p class="text-start">Vendorise to firma specjalizująca się w audytach agencji pracy tymczasowej, zarządzaniu dostawcami usług personalnych oraz doradztwie biznesowym.</p>
-          <button type="button" (click)="goToVendorise()" class="btn btn-outline-dark mt-4"><strong>Dowiedz się więcej</strong></button>
+
+      <!-- Firma 3 -->
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <img src="content/images/png/vendorise.png" alt="Vendorise" />
+          </div>
+          <div class="flip-card-back">
+            <h3>Vendorise</h3>
+            <p>Specjalizuje się w audytach agencji pracy tymczasowej i zarządzaniu dostawcami.</p>
+            <button class="btn btn-outline-light" (click)="goToVendorise()"><strong>Więcej</strong></button>
+          </div>
         </div>
       </div>
-      <div class="col d-flex align-items-center justify-content-center mt-4 mt-md-0">
-        <div class="border shadow-sm text-center p-3 h-100">
-          <img src="content/images/png/personalservice.png" alt="Personal Service" loading="lazy" class="img-fluid py-5" />
-          <p class="text-start">Personal Service zajmuje się rekrutacją outsourcingiem pracowników, wspierając firmy w różnych sektorach rynku pracy w Polsce.</p>
-          <button type="button" (click)="goToPersonnelService()" class="btn btn-outline-dark mt-4"><strong>Dowiedz się więcej</strong></button>
+
+      <!-- Firma 4 -->
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <img src="content/images/png/personalservice.png" alt="Personal Service" />
+          </div>
+          <div class="flip-card-back">
+            <h3>Personal Service</h3>
+            <p>Zajmuje się rekrutacją i outsourcingiem pracowników w różnych sektorach.</p>
+            <button class="btn btn-outline-light" (click)="goToPersonnelService()"><strong>Więcej</strong></button>
+          </div>
         </div>
       </div>
+
+      <!-- Firma 5 -->
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <img src="../content/images/png/mojohr.png" alt="Mojo HR" />
+          </div>
+          <div class="flip-card-back">
+            <h3>Mojo HR</h3>
+            <p>Specjalizuje się w rekrutacji i doradztwie HR, pomagając firmom znaleźć najlepszych pracowników.</p>
+            <button class="btn btn-outline-light" (click)="goToMojoHr()"><strong>Więcej</strong></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Firma 6 -->
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <img src="../content/images/svg/LogoEwl-2.svg" alt="EWL" />
+          </div>
+          <div class="flip-card-back">
+            <h3>EWL</h3>
+            <p> Lider w zatrudnianiu międzynarodowych pracowników, zapewniający kompleksowe rozwiązania HR dla firm.</p>
+            <button class="btn btn-outline-light"  (click)="goToEwl()"><strong>Więcej</strong></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Firma 7 -->
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <img src="../content/images/png/logo_innbenefits.png" alt="INN Benefits" />
+          </div>
+          <div class="flip-card-back">
+            <h3>INN Benefits</h3>
+            <p> Oferuje innowacyjne rozwiązania benefitowe, wspierając firmy w motywowaniu i angażowaniu pracowników.</p>
+            <button class="btn btn-outline-light" (click)="goToInnBenefits()"><strong>Więcej</strong></button>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
+
 
 
 

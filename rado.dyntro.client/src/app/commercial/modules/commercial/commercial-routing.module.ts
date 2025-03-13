@@ -13,6 +13,11 @@ import { ClientPersonnelServiceComponent } from '../../main/section-specific-cli
 import { ClientArgentumEventComponent } from '../../main/section-specific-client/client-argentum-event/client-argentum-event.component';
 import { ClientPragmaGoComponent } from '../../main/section-specific-client/client-pragma-go/client-pragma-go.component';
 import { ClientVendoriseComponent } from '../../main/section-specific-client/client-vendorise/client-vendorise.component';
+import { CookiesComponent } from '../../main/section-privacy-cookies/cookies/cookies.component';
+import { PolityComponent } from '../../main/section-privacy-cookies/polity/polity.component';
+import { ClientMojoHrComponent } from '../../main/section-specific-client/client-mojo-hr/client-mojo-hr.component';
+import { ClientEwlComponent } from '../../main/section-specific-client/client-ewl/client-ewl.component';
+import { ClientInnBenefitsComponent } from '../../main/section-specific-client/client-inn-benefits/client-inn-benefits.component';
 
 const routes: Routes = [
 
@@ -33,6 +38,11 @@ const routes: Routes = [
       { path: 'client-personnel-service', component: ClientPersonnelServiceComponent },
       { path: 'client-pragma-go', component: ClientPragmaGoComponent },
       { path: 'client-vendorise', component: ClientVendoriseComponent },
+      { path: 'cookies', component: CookiesComponent },
+      { path: 'polity', component: PolityComponent },
+      { path: 'client-ewl', component: ClientEwlComponent },
+      { path: 'client-inn-benefits', component: ClientInnBenefitsComponent },
+      { path: 'client-mojo-hr', component: ClientMojoHrComponent }
     
     ]
   }
