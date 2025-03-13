@@ -16,3 +16,4 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<Order>().Property(o => o.Category).HasConversion<string>(); 
     }
 }
+ 
