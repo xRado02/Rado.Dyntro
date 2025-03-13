@@ -19,7 +19,7 @@ import { ClientPragmaGoComponent } from '../../main/section-specific-client/clie
 import { ClientPersonnelServiceComponent } from '../../main/section-specific-client/client-personnel-service/client-personnel-service.component';
 import { ClientArgentumEventComponent } from '../../main/section-specific-client/client-argentum-event/client-argentum-event.component';
 import { ClientVendoriseComponent } from '../../main/section-specific-client/client-vendorise/client-vendorise.component';
-
+import { SectionClientsRollbarComponent } from '../../main/section-clients-rollbar/section-clients-rollbar.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +40,8 @@ import { ClientVendoriseComponent } from '../../main/section-specific-client/cli
     ClientPragmaGoComponent,
     ClientPersonnelServiceComponent,
     ClientArgentumEventComponent,
-    ClientVendoriseComponent
+    ClientVendoriseComponent,
+    SectionClientsRollbarComponent
   ],
   imports: [
     CommonModule,
@@ -64,7 +65,8 @@ import { ClientVendoriseComponent } from '../../main/section-specific-client/cli
     ClientPragmaGoComponent,
     ClientPersonnelServiceComponent,
     ClientArgentumEventComponent,
-    ClientVendoriseComponent
+    ClientVendoriseComponent,
+    SectionClientsRollbarComponent
   ]
 
 })

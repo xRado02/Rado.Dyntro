@@ -50,7 +50,9 @@ export class ApiHandlerService {
     return this.http.get<Order[]>('/api/Order/orderFilteredBy', { params });
   }
 
-
+  addNewOrder(newOrder: Order): Observable<Order> {
+    return this.http.post<Order>('api/order', newOrder)
+  }
 
 }
 

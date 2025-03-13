@@ -63,5 +63,11 @@ export class OrderService {
     return this.apiHandlerService.getOrdersByParams(preparedFiltrer)
   }
 
+  //createNewOrder(newOrder: Order): Observable<Order> {
+
+  //  return this.apiHandlerService.addNewOrder(newOrder);
+
+  //}
+
 
 }

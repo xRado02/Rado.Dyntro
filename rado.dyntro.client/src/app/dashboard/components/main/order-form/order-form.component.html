@@ -4,27 +4,24 @@
       <div class="pb-4">
         <label class="form-label fs-4"><strong>Klient</strong><span class="text-danger"> *</span></label>
         <p>Wybierz klienta, dla którego chcesz utworzyć zlecenie.</p>
-        <select class="form-select"  required >
+        <select class="form-select"  required #selectClientName>
           <option value="">Wybierz klienta</option>
-          <option value="client1">Klient 1</option>
-          <option value="client2">Klient 2</option>
-          <option value="client3">Klient 3</option>
+          <option>Jan</option>
         </select>
+        <div class="pt-2">
+          <button class="btn btn-outline-dark">Dodaj klienta</button>
+        </div>
       </div>
       <div class="pb-3">
         <label class="form-label fs-4"><strong>Temat</strong><span class="text-danger"> *</span></label>
         <p>Napisz, krótki opis zlecenia.</p>
-        <input type="text" class="form-control" required />
+        <input type="text" class="form-control" required #topic/>
       </div>
-      <div class="pb-3">
-        <label class="form-label fs-4"><strong>Opis</strong></label>
-        <p>Napisz szczegółowy, opis zlecenia.</p>
-        <textarea class="form-control "></textarea>
-      </div>
+      
       <div class="pb-3">
         <label class="form-label fs-4"><strong>Status</strong><span class="text-danger"> *</span></label>
         <p>Wybierz status.</p>
-        <select class="form-select" required>
+        <select class="form-select" required #selectStatus>
           <option *ngFor="let status of orderStatuses" [value]="status">
             {{ status }}
           </option>
@@ -33,23 +30,23 @@
       <div class="pb-3">
         <label class="form-label fs-4"><strong>Kategoria</strong><span class="text-danger"> *</span></label>
         <p>Wybierz kategorię.</p>
-        <select class="form-select" required>
+        <select class="form-select" required #selectCategory>
           <option *ngFor="let category of orderCategories" [value]="category">
             {{ category }}
           </option>
         </select>
       </div>
-      <div class="pb-4">
+      <div class="pb-2">
         <label class="form-label fs-4"><strong>Priorytet</strong><span class="text-danger"> *</span></label>
         <p>Wybierz priorytet.</p>
-        <select class="form-select" required>
+        <select class="form-select" required #selectPriority>
           <option *ngFor="let priority of orderPriorities" [value]="priority">
             {{priority}}
           </option>
         </select>
       </div>
       <div>
-        <button class="btn btn-dark">Utwórz zgłoszenie</button>
+        <button class="btn btn-outline-dark ">Utwórz zgłoszenie</button>
       </div>
     </form>
   </div>

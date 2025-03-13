@@ -17,6 +17,13 @@ namespace Rado.Dyntro.Server.Order.Mapping
                 .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.Category))
                 .ForMember(dest => dest.Priority, opt => opt.MapFrom(src => src.Priority))
                 .ForMember(dest => dest.Date, opt => opt.MapFrom(src => src.Date));
+
+
+            CreateMap<OrderViewModel, Data.Entities.Order>();
+
         }
+
+
+        
     }
 }

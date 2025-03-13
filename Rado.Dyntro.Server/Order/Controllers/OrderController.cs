@@ -81,7 +81,15 @@ namespace Rado.Dyntro.Server.Order.Controller
         }
 
 
-       
+        [HttpPost]
+        public ActionResult Post([FromBody]OrderViewModel model)
+        {
+            var order = _mapper.Map<Data.Entities.Order>(model);
+            _appDbContext.Orders.Add(order);
+            _appDbContext.SaveChanges();
+            var key = order.Id;
+            return Created("api/order/" + key, null);
+        }
 
 
     }
