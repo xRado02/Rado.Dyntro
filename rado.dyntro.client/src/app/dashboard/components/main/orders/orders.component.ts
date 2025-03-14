@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { OrderStatusNames, OrderCategoryNames, OrderPriorityNames } from '../../../enums/OrderEnums';
+import { OrderStatusNames, OrderCategoryNames, OrderPriorityNames } from '../../../Enums/OrderEnums';
 import { OrderService } from '../../../Services/order.service';
 import { ApiHandlerService, Order } from '../../../Services/api-handler.service';
 import { OrderFilter } from '../../../models/order/order-filter-model'
