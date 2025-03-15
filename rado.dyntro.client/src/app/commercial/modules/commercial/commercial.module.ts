@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms'; // <-- Dodaj ten import
 import { CommercialRoutingModule } from './commercial-routing.module';
 import { CommercialComponent } from '../../commercial.component';
-import { HeaderComponent } from '../../header/header.component'
-import { MainComponent } from '../../main/main.component'
-import { FooterComponent } from '../../footer/footer.component'
-import { NavigationComponent } from '../../header/navigation/navigation.component'
+import { HeaderComponent } from '../../header/header.component';
+import { MainComponent } from '../../main/main.component';
+import { FooterComponent } from '../../footer/footer.component';
+import { NavigationComponent } from '../../header/navigation/navigation.component';
 import { SectionWelcomeComponent } from '../../main/section-welcome/section-welcome.component';
 import { SectionBusinessInformationComponent } from '../../main/section-business-information/section-business-information.component';
 import { SectionContactComponent } from '../../main/section-contact/section-contact.component';
@@ -52,12 +53,11 @@ import { ClientInnBenefitsComponent } from '../../main/section-specific-client/c
     ClientMojoHrComponent,
     ClientEwlComponent,
     ClientInnBenefitsComponent,
- 
-
   ],
   imports: [
     CommonModule,
-    CommercialRoutingModule
+    CommercialRoutingModule,
+    ReactiveFormsModule // <-- Dodaj ReactiveFormsModule tutaj
   ],
   exports: [
     CommercialComponent,
@@ -84,8 +84,6 @@ import { ClientInnBenefitsComponent } from '../../main/section-specific-client/c
     ClientMojoHrComponent,
     ClientEwlComponent,
     ClientInnBenefitsComponent,
-  
   ]
-
 })
 export class CommercialModule { }
