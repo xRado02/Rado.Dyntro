@@ -4,6 +4,8 @@ import { MainComponent } from '../../components/main/main.component';
 import { DashboardComponent } from '../../dashboard.component';
 import { OrdersFilterComponent } from '../../components/main/orders-filter/orders-filter.component'
 import { OrderFormComponent } from '../../components/main/order-form/order-form.component';
+import { AdminPanelComponent } from '../../components/main/admin-panel/admin-panel.component';
+
 
 const routes: Routes = [
 
@@ -14,7 +16,8 @@ const routes: Routes = [
       { path: '', redirectTo: 'main', pathMatch: 'full' },
       { path: 'main', component: MainComponent },
       { path: 'orders', component: OrdersFilterComponent },
-      { path: 'orderForm', component: OrderFormComponent}
+      { path: 'orderForm', component: OrderFormComponent },
+      { path: 'admin-panel', component: AdminPanelComponent }
 
     ]
   }

@@ -1,18 +1,9 @@
 import { Injectable } from '@angular/core';
-import { OrderStatus, OrderPriority, OrderCategory } from '../Enums/OrderEnums';
 import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs';
 import { OrderFilter } from '../models/order/order-filter-model'
-export interface Order {
-  id: number;
-  status: OrderStatus;
-  topic: string;
-  firstName: string;
-  lastName: string;
-  category: OrderCategory;
-  priority: OrderPriority;
-  date: Date;
-}
+import { Order } from '../models/order/order-model';
+import { User } from '../models/user/user-model';
 
 @Injectable({
   providedIn: 'root'
@@ -20,9 +11,11 @@ export interface Order {
 export class ApiHandlerService {
   constructor(private http: HttpClient) { }
 
+  //Orders
+
   getOrders(): Observable<Order[]> {
     return this.http.get<Order[]>('/api/order');
-  }
+  }  
 
   getOrdersByParams(preparedFilter: OrderFilter): Observable<Order[]> {
 
@@ -54,5 +47,14 @@ export class ApiHandlerService {
     return this.http.post<Order>('api/order', newOrder)
   }
 
+  //Users
+
+  getUsers(): Observable<User[]> {
+    return this.http.get<User[]>('/api/user');
+  }
+
+  addNewUser(newUser: User): Observable<User> {
+    return this.http.post<User>('api/user', newUser)
+  }
 }
 

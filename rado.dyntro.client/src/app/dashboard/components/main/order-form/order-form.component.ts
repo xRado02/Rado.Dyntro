@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { OrderStatusNames, OrderCategoryNames, OrderPriorityNames } from '../../../Enums/OrderEnums';
-import { Order } from '../../../Services/api-handler.service';
+
 import { Observable } from 'rxjs';
 
 @Component({

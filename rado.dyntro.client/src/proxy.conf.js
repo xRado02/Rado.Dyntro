@@ -7,7 +7,8 @@ const PROXY_CONFIG = [
   {
     context: [
       "/api/order",
-      "/api/Order/orderFilteredBy"
+      "/api/Order/orderFilteredBy",
+      "/api/user"
     ],
     target: target, 
     secure: false,

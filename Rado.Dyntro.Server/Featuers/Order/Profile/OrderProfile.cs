@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using Rado.Dyntro.Server.Data.Entities;
-using Rado.Dyntro.Server.Order.ViewModel;
+using Rado.Dyntro.Server.Featuers.Order.ViewModel;
 
-namespace Rado.Dyntro.Server.Order.Mapping
+namespace Rado.Dyntro.Server.Featuers.Order.Profile
 {
-    public class OrderProfile : Profile
+    public class OrderProfile : AutoMapper.Profile 
     {
         public OrderProfile()
         {
@@ -18,12 +18,7 @@ namespace Rado.Dyntro.Server.Order.Mapping
                 .ForMember(dest => dest.Priority, opt => opt.MapFrom(src => src.Priority))
                 .ForMember(dest => dest.Date, opt => opt.MapFrom(src => src.Date));
 
-
             CreateMap<OrderViewModel, Data.Entities.Order>();
-
         }
-
-
-        
     }
 }

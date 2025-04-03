@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Rado.Dyntro.Server.Data;
+using Rado.Dyntro.Server.Data.Seeder.UserSeeder;
 using Rado.Dyntro.Server.Data.Seeder.OrderSeeder;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +12,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 );
 
 builder.Services.AddScoped<OrderSeeder>();
+builder.Services.AddScoped<UserSeeder>();
 
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
@@ -40,7 +43,11 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var orderSeeder = scope.ServiceProvider.GetRequiredService<OrderSeeder>();
-    orderSeeder.Seed();  }
+    orderSeeder.Seed();
+    var userSeeder = scope.ServiceProvider.GetRequiredService<UserSeeder>();
+    userSeeder.Seed();
+
+}
 
 
 app.UseDefaultFiles();

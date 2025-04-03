@@ -1,0 +1,74 @@
+<div class="container-fluid mt-4 px-5">
+  <div class="d-flex justify-content-end pb-5">
+    <button class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#addUserModal">Dodaj użytkownika</button>
+    <button class="btn btn-outline-dark mx-2">Usuń użytkownika</button>
+    <button class="btn btn-outline-dark">Edytuj użytkownika</button>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-hover fs-5">
+      <thead class="table-border">
+        <tr>
+          <th class="text-start">
+            <input type="checkbox" class="form-check-input bg-secondary border-dark shadow-none" id="idNumber">
+          </th>
+          <th class="text-start">ID</th>
+          <th class="text-start">Imię</th>
+          <th class="text-start">Nazwisko</th>
+          <th class="text-start">Email</th>
+          <th class="text-start">Uprawnienia</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>
+            <input type="checkbox" class="form-check-input bg-secondary border-dark shadow-none">
+          </td>
+          <td class="text-start">{{user.id}}</td>
+          <td class="text-start">{{user.firstName}}</td>
+          <td class="text-start">{{user.lastName}}</td>
+          <td class="text-start">{{user.email}}</td>
+          <td class="text-start">{{RoleNames[user.role]}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!--Modal window-->
+  <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addUserModalCenter">Dodaj użytkownika</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">      
+          <form [formGroup]="newUser">
+            <div class="mb-3">
+              <label for="firstName" class="form-label">Imię</label>
+              <input type="text" class="form-control" formControlName="firstName">
+            </div>
+            <div class="mb-3">
+              <label for="lastName" class="form-label">Nazwisko</label>
+              <input type="text" class="form-control" formControlName="lastName" />
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control" formControlName="email">
+            </div>
+            <div class="mb-3">
+              <label for="role" class="form-label">Uprawnienia   </label>
+              <select class="form-select" formControlName="role">
+                <option value="client">Klient</option>
+                <option value="admin">Admin</option>
+              </select>
+2             </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-dark" (click)="addUser()">Zapisz</button>
+          <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Zamknij</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

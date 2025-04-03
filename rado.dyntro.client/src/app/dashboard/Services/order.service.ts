@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { ApiHandlerService, Order } from '../Services/api-handler.service';
+import { ApiHandlerService} from '../Services/api-handler.service';
 import { OrderStatusNames, OrderCategoryNames, OrderPriorityNames, OrderStatus, OrderPriority, OrderCategory, SortByDirectionNames, SortByElementNames, SortByDirection, SortByElement } from '../Enums/OrderEnums';
 import { Observable } from 'rxjs';
 import { OrderFilter } from '../models/order/order-filter-model'
+import { Order } from '../models/order/order-model';
 
 @Injectable({
   providedIn: 'root'

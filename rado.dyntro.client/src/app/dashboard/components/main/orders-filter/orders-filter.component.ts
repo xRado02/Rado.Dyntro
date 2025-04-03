@@ -1,7 +1,8 @@
 import { Component, ViewChild, ElementRef, EventEmitter, Output } from '@angular/core';
 import { OrderStatusNames, OrderCategoryNames, OrderPriorityNames } from '../../../Enums/OrderEnums';
 import { OrderService } from '../../../Services/order.service';
-import { ApiHandlerService, Order } from '../../../Services/api-handler.service';
+import { ApiHandlerService } from '../../../Services/api-handler.service';
+import { Order } from '../../../models/order/order-model';
 
 @Component({
   selector: 'app-orders-filter',
@@ -32,8 +33,6 @@ export class OrdersFilterComponent {
   selectedCategory = '';
   selectedPriority = '';
   searchedUser = '';
-
-
   
   orders: Order[] = [];  
   filteredOrders: Order[] = [];

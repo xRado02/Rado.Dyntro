@@ -1,32 +1,21 @@
 ﻿using Rado.Dyntro.Server.Enums;
-using System.ComponentModel.DataAnnotations;
+using Rado.Dyntro.Server.Featuers.Message.ViewModel;
 
-namespace Rado.Dyntro.Server.Data.Entities
+namespace Rado.Dyntro.Server.Featuers.Order.ViewModel
 {
-    public class Order
+    public class OrderViewModel
     {
-        [Key]
         public int Id { get; set; }
-
-        [Required]
         public OrderStatus Status { get; set; }
-
-        [Required]
         public string? Topic { get; set; }
-
-        [Required]
         public string? FirstName { get; set; }
-
-        [Required]
         public string? LastName { get; set; }
-
-        [Required]
         public OrderCategory Category { get; set; }
-
-        [Required]
         public OrderPriority Priority { get; set; }
+        public DateTime Date { get; set; }       
 
-        [Required]
-        public DateTime Date { get; set; }
+        //public UserViewModel User { get; set; }
+
+
     }
 }

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderStatusNames, OrderCategoryNames, OrderPriorityNames } from '../../../Enums/OrderEnums';
 import { OrderService } from '../../../Services/order.service';
-import { ApiHandlerService, Order } from '../../../Services/api-handler.service';
+import { ApiHandlerService } from '../../../Services/api-handler.service';
 import { OrderFilter } from '../../../models/order/order-filter-model'
+import { Order } from '../../../models/order/order-model';
 
 @Component({
   selector: 'app-orders',
@@ -37,7 +38,7 @@ export class OrdersComponent implements OnInit {
       }
     });
   }
-
+  // tutaj jest dublowanie się bo mam zarówno w components jak i serwis loadOrdsers
   onFiltersChange(event: string[]): void {
 
     const [status, category, priority, user, sortByElement, sortByDirection] = event;

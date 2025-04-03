@@ -1,10 +1,11 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Rado.Dyntro.Server.Data;
-using Rado.Dyntro.Server.Order.ViewModel;
 using Rado.Dyntro.Server.Enums;
+using Rado.Dyntro.Server.Featuers.Order;
+using Rado.Dyntro.Server.Featuers.Order.ViewModel;
 
-namespace Rado.Dyntro.Server.Order.Controller
+namespace Rado.Dyntro.Server.Featuers.Order.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
@@ -69,8 +70,8 @@ namespace Rado.Dyntro.Server.Order.Controller
             if (queryParams.sortByElement.HasValue && queryParams.sortByDirection.HasValue)
             {
                 query = queryParams.sortByElement == SortByElement.Data
-                    ? (queryParams.sortByDirection == SortByDirection.Ascending ? query.OrderBy(o => o.Date) : query.OrderByDescending(o => o.Date))
-                    : (queryParams.sortByDirection == SortByDirection.Ascending ? query.OrderBy(o => o.Id) : query.OrderByDescending(o => o.Id));
+                    ? queryParams.sortByDirection == SortByDirection.Ascending ? query.OrderBy(o => o.Date) : query.OrderByDescending(o => o.Date)
+                    : queryParams.sortByDirection == SortByDirection.Ascending ? query.OrderBy(o => o.Id) : query.OrderByDescending(o => o.Id);
             }
 
 
@@ -82,7 +83,7 @@ namespace Rado.Dyntro.Server.Order.Controller
 
 
         [HttpPost]
-        public ActionResult Post([FromBody]OrderViewModel model)
+        public ActionResult Post([FromBody] OrderViewModel model)
         {
             var order = _mapper.Map<Data.Entities.Order>(model);
             _appDbContext.Orders.Add(order);

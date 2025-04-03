@@ -11,6 +11,9 @@ import { OrdersComponent } from '../../components/main/orders/orders.component';
 import { ApiHandlerService } from '../../Services/api-handler.service';
 import { OrderService } from '../../Services/order.service';
 import { OrderFormComponent } from '../../components/main/order-form/order-form.component';
+import { AdminPanelComponent } from '../../components/main/admin-panel/admin-panel.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { UserService } from '../../Services/user.service';
 
 @NgModule({
   declarations: [
@@ -20,14 +23,16 @@ import { OrderFormComponent } from '../../components/main/order-form/order-form.
     NavigationComponent,
     OrdersFilterComponent,
     OrdersComponent,
-    OrderFormComponent
+    OrderFormComponent,
+    AdminPanelComponent
   ],
   imports: [
     CommonModule,
     DashboardRoutingModule,
-    HttpClientModule,  
+    HttpClientModule,
+    ReactiveFormsModule
   ],
-  providers: [ApiHandlerService, OrderService],
+  providers: [ApiHandlerService, OrderService, UserService],
   exports: [
     DashboardComponent,
     MainComponent,
@@ -35,7 +40,8 @@ import { OrderFormComponent } from '../../components/main/order-form/order-form.
     NavigationComponent,
     OrdersFilterComponent,
     OrdersComponent,
-    OrderFormComponent
+    OrderFormComponent,
+    AdminPanelComponent
    
 
   ]

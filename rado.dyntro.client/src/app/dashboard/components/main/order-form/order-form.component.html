@@ -1,52 +1,66 @@
 <div class="container-flex p-5">
-  <div class="form-background p-5">
+  <div class="form-background p-5 rounded shadow">
     <form>
-      <div class="pb-4">
-        <label class="form-label fs-4"><strong>Klient</strong><span class="text-danger"> *</span></label>
-        <p>Wybierz klienta, dla którego chcesz utworzyć zlecenie.</p>
-        <select class="form-select"  required #selectClientName>
-          <option value="">Wybierz klienta</option>
-          <option>Jan</option>
-        </select>
-        <div class="pt-2">
-          <button class="btn btn-outline-dark">Dodaj klienta</button>
+      <div class="card mb-4">
+        <div class="card-body">
+          <h5 class="card-title">Klient</h5>
+          <p class="card-text text-muted">Wybierz klienta, dla którego chcesz utworzyć zlecenie.</p>
+          <div class="input-group">
+            <select class="form-select" required #selectClientName>
+              <option value="">Wybierz klienta</option>
+              <option>Jan</option>
+            </select>
+            <button class="btn btn-outline-dark ms-2" type="button">Dodaj klienta</button>
+          </div>
         </div>
       </div>
-      <div class="pb-3">
-        <label class="form-label fs-4"><strong>Temat</strong><span class="text-danger"> *</span></label>
-        <p>Napisz, krótki opis zlecenia.</p>
-        <input type="text" class="form-control" required #topic/>
+
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Temat</h5>
+          <p class="card-text text-muted">Napisz krótki opis zlecenia.</p>
+          <input type="text" class="form-control" required #topic />
+        </div>
       </div>
-      
-      <div class="pb-3">
-        <label class="form-label fs-4"><strong>Status</strong><span class="text-danger"> *</span></label>
-        <p>Wybierz status.</p>
-        <select class="form-select" required #selectStatus>
-          <option *ngFor="let status of orderStatuses" [value]="status">
-            {{ status }}
-          </option>
-        </select>
+
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Status</h5>
+          <p class="card-text text-muted">Wybierz status.</p>
+          <select class="form-select" required #selectStatus>
+            <option *ngFor="let status of orderStatuses" [value]="status">
+              {{ status }}
+            </option>
+          </select>
+        </div>
       </div>
-      <div class="pb-3">
-        <label class="form-label fs-4"><strong>Kategoria</strong><span class="text-danger"> *</span></label>
-        <p>Wybierz kategorię.</p>
-        <select class="form-select" required #selectCategory>
-          <option *ngFor="let category of orderCategories" [value]="category">
-            {{ category }}
-          </option>
-        </select>
+
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Kategoria</h5>
+          <p class="card-text text-muted">Wybierz kategorię.</p>
+          <select class="form-select" required #selectCategory>
+            <option *ngFor="let category of orderCategories" [value]="category">
+              {{ category }}
+            </option>
+          </select>
+        </div>
       </div>
-      <div class="pb-2">
-        <label class="form-label fs-4"><strong>Priorytet</strong><span class="text-danger"> *</span></label>
-        <p>Wybierz priorytet.</p>
-        <select class="form-select" required #selectPriority>
-          <option *ngFor="let priority of orderPriorities" [value]="priority">
-            {{priority}}
-          </option>
-        </select>
+
+      <div class="card mb-2">
+        <div class="card-body">
+          <h5 class="card-title">Priorytet</h5>
+          <p class="card-text text-muted">Wybierz priorytet.</p>
+          <select class="form-select" required #selectPriority>
+            <option *ngFor="let priority of orderPriorities" [value]="priority">
+              {{ priority }}
+            </option>
+          </select>
+        </div>
       </div>
-      <div>
-        <button class="btn btn-outline-dark ">Utwórz zgłoszenie</button>
+
+      <div class="mt-4">
+        <button class="btn btn-dark" >Utwórz zgłoszenie</button>
       </div>
     </form>
   </div>
