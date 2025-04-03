@@ -1,6 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { ApiHandlerService } from '../../../Services/api-handler.service';
 import { UserService } from '../../../Services/user.service';
 import { UserRoleNames } from '../../../Enums/UserEnums';
 import { User } from '../../../models/user/user-model';
@@ -24,7 +23,7 @@ export class AdminPanelComponent implements OnInit{
   public RoleNames = UserRoleNames;
 
   public users: User[] = [];
-  constructor(private apiHandlerService: ApiHandlerService, private userService: UserService) { }
+  constructor(private userService: UserService) { }
 
  
   ngOnInit() {
@@ -32,7 +31,7 @@ export class AdminPanelComponent implements OnInit{
   }
 
   loadUsers(): void {
-    this.apiHandlerService.getUsers().subscribe({
+    this.userService.getUsers().subscribe({
       next: (users) => {
         this.users = users;
       },

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderStatusNames, OrderCategoryNames, OrderPriorityNames } from '../../../Enums/OrderEnums';
 import { OrderService } from '../../../Services/order.service';
-import { ApiHandlerService } from '../../../Services/api-handler.service';
 import { OrderFilter } from '../../../models/order/order-filter-model'
 import { Order } from '../../../models/order/order-model';
 
@@ -12,6 +11,7 @@ import { Order } from '../../../models/order/order-model';
   styleUrl: './orders.component.css'
 })
 export class OrdersComponent implements OnInit {
+
   public orders: Order[] = [];
   public filteredOrders: Order[] = [];
   
@@ -22,14 +22,14 @@ export class OrdersComponent implements OnInit {
   selectedCategory = '';
   selectedPriority = '';
   searchedByUser = '';
-  constructor(private apiHandlerService: ApiHandlerService, private orderService: OrderService) { }
+  constructor(private orderService: OrderService) { }
 
   ngOnInit() {
     this.loadOrders();
   }
 
   loadOrders(): void {
-    this.apiHandlerService.getOrders().subscribe({
+    this.orderService.getOrders().subscribe({
       next: (orders) => {
         this.filteredOrders = orders;
       },
@@ -38,9 +38,8 @@ export class OrdersComponent implements OnInit {
       }
     });
   }
-  // tutaj jest dublowanie się bo mam zarówno w components jak i serwis loadOrdsers
-  onFiltersChange(event: string[]): void {
 
+  onFiltersChange(event: string[]): void {
     const [status, category, priority, user, sortByElement, sortByDirection] = event;
 
     this.selectedStatus = status;

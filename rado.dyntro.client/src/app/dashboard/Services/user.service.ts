@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { ApiHandlerService } from './api-handler.service';
 import { User } from '../models/user/user-model';
 import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -9,10 +9,25 @@ import { Observable } from 'rxjs';
 export class UserService {
 
   public users: User[] = [];
-  constructor(private apiHandlerService: ApiHandlerService) { }
+  constructor(private http: HttpClient) { }
+
+  //GET
+
+  getUsers(): Observable<User[]> {
+    return this.http.get<User[]>('/api/user');
+  } 
+  
+  // POST 
+
+  addNewUser(newUser: User): Observable<User> {
+    return this.http.post<User>('api/user', newUser)
+  }
+
+  
+  //Loading users and save them in "this.users"
 
   loadUsers(): void {
-    this.apiHandlerService.getUsers().subscribe({
+    this.getUsers().subscribe({
       next: (users) => {
         this.users = users;
       },
@@ -21,9 +36,10 @@ export class UserService {
       }
     });
   }
-
+  
   createNewUser(newUser: User): Observable<User> {
-    return this.apiHandlerService.addNewUser(newUser);
+    return this.addNewUser(newUser);
   }
 
+  
 }

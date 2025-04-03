@@ -1,7 +1,6 @@
 import { Component, ViewChild, ElementRef, EventEmitter, Output } from '@angular/core';
 import { OrderStatusNames, OrderCategoryNames, OrderPriorityNames } from '../../../Enums/OrderEnums';
 import { OrderService } from '../../../Services/order.service';
-import { ApiHandlerService } from '../../../Services/api-handler.service';
 import { Order } from '../../../models/order/order-model';
 
 @Component({
@@ -11,9 +10,7 @@ import { Order } from '../../../models/order/order-model';
   styleUrl: './orders-filter.component.css'
 })
 export class OrdersFilterComponent {
-  constructor(private orderService: OrderService, private apiHandlerService: ApiHandlerService) {
-
-  }
+  constructor(private orderService: OrderService) {  }
 
   @Output() selectedParams: EventEmitter<string[]> = new EventEmitter<string[]>();
   @Output() userSearched: EventEmitter<string> = new EventEmitter<string>();

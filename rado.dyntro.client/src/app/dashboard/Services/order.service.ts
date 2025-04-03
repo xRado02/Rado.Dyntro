@@ -1,23 +1,62 @@
 import { Injectable } from '@angular/core';
-import { ApiHandlerService} from '../Services/api-handler.service';
 import { OrderStatusNames, OrderCategoryNames, OrderPriorityNames, OrderStatus, OrderPriority, OrderCategory, SortByDirectionNames, SortByElementNames, SortByDirection, SortByElement } from '../Enums/OrderEnums';
 import { Observable } from 'rxjs';
 import { OrderFilter } from '../models/order/order-filter-model'
 import { Order } from '../models/order/order-model';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
-export class OrderService {
+export class OrderService { 
+
   public orders: Order[] = [];
-  constructor(private apiHandlerService: ApiHandlerService) { }
 
   orderStatuses = Object.values(OrderStatusNames);
   orderCategories = Object.values(OrderCategoryNames);
-  orderPriorities = Object.values(OrderPriorityNames);
+  orderPriorities = Object.values(OrderPriorityNames); 
+  constructor(private http: HttpClient) { } 
+
+  //POST
+
+  addNewOrder(newOrder: Order): Observable<Order> {
+    return this.http.post<Order>('api/order', newOrder)
+  }
+
+  //GET
+
+  getOrders(): Observable<Order[]> {
+    return this.http.get<Order[]>('/api/order');
+  }
+
+  getOrdersByParams(preparedFilter: OrderFilter): Observable<Order[]> {
+
+    let params: any = {};
+
+    if (preparedFilter.status != null) {
+      params.searchByStatus = preparedFilter.status;
+    }
+    if (preparedFilter.category != null) {
+      params.searchByCategory = preparedFilter.category;
+    }
+    if (preparedFilter.priority != null) {
+      params.searchByPriority = preparedFilter.priority;
+    }
+    if (preparedFilter.user != null) {
+      params.searchByUser = preparedFilter.user;
+    }
+    if (preparedFilter.sortByElement != null) {
+      params.sortByElement = preparedFilter.sortByElement
+    }
+    if (preparedFilter.sortByDirection != null) {
+      params.sortByDirection = preparedFilter.sortByDirection
+    }
+
+    return this.http.get<Order[]>('/api/Order/orderFilteredBy', { params });
+  }
 
   loadOrders(): void {
-    this.apiHandlerService.getOrders().subscribe({
+    this.getOrders().subscribe({
       next: (orders) => {
         this.orders = orders;
       },
@@ -61,7 +100,7 @@ export class OrderService {
       sortByElement: enumSortElementKey,
     }
 
-    return this.apiHandlerService.getOrdersByParams(preparedFiltrer)
+    return this.getOrdersByParams(preparedFiltrer)
   }
 
   //createNewOrder(newOrder: Order): Observable<Order> {
@@ -69,6 +108,5 @@ export class OrderService {
   //  return this.apiHandlerService.addNewOrder(newOrder);
 
   //}
-
 
 }
