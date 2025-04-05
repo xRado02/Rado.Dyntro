@@ -27,7 +27,7 @@
           <td class="text-start">{{user.firstName}}</td>
           <td class="text-start">{{user.lastName}}</td>
           <td class="text-start">{{user.email}}</td>
-          <td class="text-start">{{RoleNames[user.role]}}</td>
+          <td class="text-start">  {{ user.role !== null ? RoleNames[user.role] : 'Brak roli' }}</td>
         </tr>
       </tbody>
     </table>
@@ -58,14 +58,15 @@
             <div class="mb-3">
               <label for="role" class="form-label">Uprawnienia   </label>
               <select class="form-select" formControlName="role">
-                <option value="client">Klient</option>
-                <option value="admin">Admin</option>
+                <option *ngFor="let role of [Role.Admin, Role.Client]" [value]="role">
+                  {{ RoleNames[role] }}
+                </option>
               </select>
-2             </div>
+             </div>
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-outline-dark">Zapisz</button>
+          <button type="button" class="btn btn-outline-dark" (click)="createNewUser()">Zapisz</button>
           <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Zamknij</button>
         </div>
       </div>

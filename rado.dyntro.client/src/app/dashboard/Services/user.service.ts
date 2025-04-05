@@ -19,8 +19,8 @@ export class UserService {
   
   // POST 
 
-  addNewUser(newUser: User): Observable<User> {
-    return this.http.post<User>('api/user', newUser)
+  addNewUser(newUser: Partial<User>): Observable<User> {
+    return this.http.post<User>('/api/user', newUser)
   }
 
   
@@ -35,10 +35,6 @@ export class UserService {
         console.error(error);
       }
     });
-  }
-  
-  createNewUser(newUser: User): Observable<User> {
-    return this.addNewUser(newUser);
   }
 
   

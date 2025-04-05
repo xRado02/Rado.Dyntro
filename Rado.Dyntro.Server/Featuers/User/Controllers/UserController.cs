@@ -47,5 +47,7 @@ namespace Rado.Dyntro.Server.Featuers.User.Controllers
 
             return Created("api/user/" + key, null);
         }
+
+        
     }
 }

@@ -1,31 +1,32 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UserService } from '../../../Services/user.service';
-import { UserRoleNames } from '../../../Enums/UserEnums';
+import { Role, UserRoleNames } from '../../../Enums/UserEnums';
 import { User } from '../../../models/user/user-model';
 
 @Component({
   selector: 'admin-panel',
   standalone: false,
-  
   templateUrl: './admin-panel.component.html',
   styleUrl: './admin-panel.component.css'
 })
-export class AdminPanelComponent implements OnInit{
+export class AdminPanelComponent implements OnInit {
 
-  newUser = new FormGroup({    
-    firstName: new FormControl(''),
-    lastName: new FormControl(''),
-    email: new FormControl(''),
-    role: new FormControl('client')
+  @ViewChild('addUserModal') addUserModal!: ElementRef; 
+
+  newUser = new FormGroup({
+    firstName: new FormControl('', Validators.required),
+    lastName: new FormControl('', Validators.required),
+    email: new FormControl('', Validators.required),
+    role: new FormControl(Role.Client, Validators.required)
   });
 
+  public Role = Role;
   public RoleNames = UserRoleNames;
-
   public users: User[] = [];
+
   constructor(private userService: UserService) { }
 
- 
   ngOnInit() {
     this.loadUsers();
   }
@@ -41,18 +42,26 @@ export class AdminPanelComponent implements OnInit{
     });
   }
 
-  //addUser() {
- 
-  //  const newUser: User = this.newUser.value;    
-  //  this.userService.createNewUser(newUser).subscribe({
-  //    next: (user) => {       
-  //      this.users.push(user);  
-  //      console.log('Dodano nowego użytkownika:', user);
-  //    },
-  //    error: (err) => {
-  //      console.error('Błąd przy dodawaniu użytkownika:', err);
-  //    }
-  //  });
-  //}
-
+  createNewUser(): void {
+    if (this.newUser.valid) {     
+      const createdUser: Partial<User> = {
+        firstName: this.newUser.value.firstName,
+        lastName: this.newUser.value.lastName,
+        email: this.newUser.value.email,
+        role: this.newUser.value.role
+      };
+      createdUser.role = Number(createdUser.role);
+       this.userService.addNewUser(createdUser).subscribe({
+        next: (response) => {        
+          this.loadUsers();         
+         
+        },
+        error: (error) => {
+          console.error("Błąd dodawania użytkownika", error);
+        }
+      });
+    } else {
+      console.log("Formularz jest niepoprawny!");
+    }
+  }
 }
