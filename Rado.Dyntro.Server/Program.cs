@@ -13,6 +13,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 builder.Services.AddScoped<OrderSeeder>();
 builder.Services.AddScoped<UserSeeder>();
+builder.Services.AddScoped<UserService>();
 
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

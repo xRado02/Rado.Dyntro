@@ -1,15 +1,19 @@
 <div class="container-fluid mt-4 px-5">
   <div class="d-flex justify-content-end pb-5">
     <button class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#addUserModal">Dodaj użytkownika</button>
-    <button class="btn btn-outline-dark mx-2">Usuń użytkownika</button>
-    <button class="btn btn-outline-dark">Edytuj użytkownika</button>
+    <button class="btn btn-outline-dark mx-2" (click)="deleteUsers()" [disabled]="selectedUserIds.length === 0">Usuń użytkownika</button>
   </div>
   <div class="table-responsive">
     <table class="table table-hover fs-5">
       <thead class="table-border">
         <tr>
           <th class="text-start">
-            <input type="checkbox" class="form-check-input bg-secondary border-dark shadow-none" id="idNumber">
+            <input type="checkbox"
+                   class="form-check-input bg-secondary border-dark shadow-none"
+                   id="selectAll"
+                   [ngModel]="selectAllCheckbox"
+                   (ngModelChange)="toogleSelectionAll()"
+                   [checked]="selectAllCheckbox">
           </th>
           <th class="text-start">ID</th>
           <th class="text-start">Imię</th>
@@ -21,7 +25,10 @@
       <tbody>
         <tr *ngFor="let user of users">
           <td>
-            <input type="checkbox" class="form-check-input bg-secondary border-dark shadow-none">
+            <input type="checkbox"
+                   class="form-check-input bg-secondary border-dark shadow-none"
+                   [checked]="user.id !== undefined && isSelected(user.id)"
+                   (change)="toogleSelection(user.id!, getCheckboxChecked($event))" />
           </td>
           <td class="text-start">{{user.id}}</td>
           <td class="text-start">{{user.firstName}}</td>
@@ -33,7 +40,6 @@
     </table>
   </div>
 
-  <!--Modal window-->
   <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -41,7 +47,7 @@
           <h5 class="modal-title" id="addUserModalCenter">Dodaj użytkownika</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">      
+        <div class="modal-body">
           <form [formGroup]="newUser">
             <div class="mb-3">
               <label for="firstName" class="form-label">Imię</label>
@@ -56,17 +62,17 @@
               <input type="email" class="form-control" formControlName="email">
             </div>
             <div class="mb-3">
-              <label for="role" class="form-label">Uprawnienia   </label>
+              <label for="role" class="form-label">Uprawnienia    </label>
               <select class="form-select" formControlName="role">
                 <option *ngFor="let role of [Role.Admin, Role.Client]" [value]="role">
                   {{ RoleNames[role] }}
                 </option>
               </select>
-             </div>
+            </div>
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-outline-dark" (click)="createNewUser()">Zapisz</button>
+          <button type="button" class="btn btn-outline-dark" (click)="createNewUser()" data-bs-dismiss="modal">Zapisz</button>
           <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Zamknij</button>
         </div>
       </div>

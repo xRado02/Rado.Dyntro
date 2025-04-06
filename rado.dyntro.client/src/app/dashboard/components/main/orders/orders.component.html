@@ -1,3 +1,10 @@
+<div class="container-fluid mt-4 px-5">
+  <div class="d-flex justify-content-end pb-3">
+    <button class="btn btn-outline-dark mx-2" data-bs-toggle="modal" data-bs-target="#addOrderModal">Dodaj zlecenie</button>
+    <button class="btn btn-outline-dark me-2" (click)="deleteOrders()">Usuń zlecenie</button>
+    <button class="btn btn-outline-dark">Edytuj zlecenie</button>
+  </div>
+</div>
 <app-orders-filter (selectedParams)="onFiltersChange($event)"></app-orders-filter>
 <div class="container-fluid mt-4 px-5">
   <div class="table-responsive">
@@ -5,14 +12,19 @@
       <thead class="table-border">
         <tr>
           <th class="text-start">
-            <input type="checkbox" class="form-check-input bg-secondary border-dark shadow-none" id="idNumber">
+            <input type="checkbox"
+                   class="form-check-input bg-secondary border-dark shadow-none"
+                   id="selectAll"
+                   [ngModel]="selectAllCheckbox"
+                   (ngModelChange)="toogleSelectionAll()"
+                   [checked]="selectAllCheckbox">
           </th>
           <th class="text-start">ID</th>
           <th class="text-start">Status</th>
           <th class="text-start px-5">Temat</th>
           <th class="text-start px-5">Imię</th>
           <th class="text-start px-5">Nazwisko</th>
-          <th class="text-start">Kategoria</th>
+          <th class="text-start px-5">Kategoria</th>
           <th class="text-start px-5">Priorytet</th>
           <th class="text-start ps-5">Data aktualizacji</th>
         </tr>
@@ -20,19 +32,78 @@
       <tbody>
         <tr *ngFor="let order of filteredOrders">
           <td>
-            <input type="checkbox" class="form-check-input bg-secondary border-dark shadow-none">
+            <input type="checkbox"
+                   class="form-check-input bg-secondary border-dark shadow-none"
+                   [checked]="order.id != null && isSelected(order.id)"
+                   (change)="toogleSelection(order.id!, getCheckboxChecked($event))" />
           </td>
           <td>{{order.id}}</td>
-          <td>{{ OrderStatusNames[order.status] }}</td>
+          <td >{{ order.status != null ? OrderStatusNames[order.status] : 'Nieznany' }}</td>
           <td class="text-start px-5">{{order.topic}}</td>
           <td class="text-start px-5">{{order.firstName}}</td>
           <td class="text-start px-5">{{order.lastName}}</td>
-          <td>{{OrderCategoryNames[order.category]}}</td>
-          <td class="text-start px-5">{{OrderPriorityNames[order.priority]}}</td>
+          <td class="text-start px-5">{{ order.category !== null && order.category !== undefined ? OrderCategoryNames[order.category] : 'Nieznana' }}</td>
+          <td class="text-start px-5">{{ order.priority !== null && order.priority !== undefined ? OrderPriorityNames[order.priority] : 'Nieznany' }}</td>
           <td class="text-start ps-5">{{ order.date | date:'dd-MM-yyyy' }}</td>
         </tr>
       </tbody>
     </table>
+  </div>
+</div>
+
+
+<div class="modal fade" id="addOrderModal" tabindex="-1" aria-labelledby="addOrderModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addOrderModalCenter">Dodaj zlecenie</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="newOrder">
+          <div class="mb-3">
+            <label for="firstName" class="form-label">Imię</label>
+            <input type="text" class="form-control" formControlName="firstName">
+          </div>
+          <div class="mb-3">
+            <label for="lastName" class="form-label">Nazwisko</label>
+            <input type="text" class="form-control" formControlName="lastName" />
+          </div>
+          <div class="mb-3">
+            <label for="topic" class="form-label">Temat</label>
+            <input type="text" class="form-control" formControlName="topic" />
+          </div>
+          <div class="mb-3">
+            <label for="status" class="form-label">Status</label>
+            <select class="form-select" formControlName="status">
+              <option *ngFor="let status of [Status.InProgress, Status.Completed, Status.Canceled]" [value]="status">
+                {{ OrderStatusNames[status] }}
+              </option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="category" class="form-label">Kategoria</label>
+            <select class="form-select" formControlName="category">
+              <option *ngFor="let category of [Category.LinkedinAutomatization, Category.EmailCampaing, Category.Other]" [value]="category">
+                {{ OrderCategoryNames[category] }}
+              </option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="priority" class="form-label">Priorytet</label>
+            <select class="form-select" formControlName="priority">
+              <option *ngFor="let priority of [Priority.Low, Priority.Medium, Priority.High]" [value]="priority">
+                {{ OrderPriorityNames[priority] }}
+              </option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal" (click)="createNewOrder()">Zapisz</button>
+        <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Zamknij</button>
+      </div>
+    </div>
   </div>
 </div>
 

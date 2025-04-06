@@ -12,8 +12,6 @@ import { User } from '../../../models/user/user-model';
 })
 export class AdminPanelComponent implements OnInit {
 
-  @ViewChild('addUserModal') addUserModal!: ElementRef; 
-
   newUser = new FormGroup({
     firstName: new FormControl('', Validators.required),
     lastName: new FormControl('', Validators.required),
@@ -24,6 +22,8 @@ export class AdminPanelComponent implements OnInit {
   public Role = Role;
   public RoleNames = UserRoleNames;
   public users: User[] = [];
+  selectedUserIds: number[] = [];
+  selectAllCheckbox: boolean = false;
 
   constructor(private userService: UserService) { }
 
@@ -35,6 +35,7 @@ export class AdminPanelComponent implements OnInit {
     this.userService.getUsers().subscribe({
       next: (users) => {
         this.users = users;
+        
       },
       error: (error) => {
         console.error(error);
@@ -43,18 +44,17 @@ export class AdminPanelComponent implements OnInit {
   }
 
   createNewUser(): void {
-    if (this.newUser.valid) {     
+    if (this.newUser.valid) {
       const createdUser: Partial<User> = {
         firstName: this.newUser.value.firstName,
         lastName: this.newUser.value.lastName,
         email: this.newUser.value.email,
-        role: this.newUser.value.role
+        role: Number(this.newUser.value.role)
       };
-      createdUser.role = Number(createdUser.role);
-       this.userService.addNewUser(createdUser).subscribe({
-        next: (response) => {        
-          this.loadUsers();         
-         
+      this.userService.addNewUser(createdUser).subscribe({
+        next: (response) => {
+          this.loadUsers();
+          console.log("Załadowano użytkowników:", this.users);
         },
         error: (error) => {
           console.error("Błąd dodawania użytkownika", error);
@@ -63,5 +63,47 @@ export class AdminPanelComponent implements OnInit {
     } else {
       console.log("Formularz jest niepoprawny!");
     }
+  }
+
+  deleteUsers(): void {
+    this.userService.deleteUsers(this.selectedUserIds).subscribe({
+      next: (response) => {
+        console.log("Wybrani użytkownicy zostali usunięci");
+        this.loadUsers();
+      },
+      error: (error) => {
+        console.error("Błąd podczas usuwania użytkowników", error);
+      }
+    });
+  }
+
+  toogleSelection(userId: number, checked: boolean): void {
+    if (checked) {
+      this.selectedUserIds.push(userId);
+    } else {
+      this.selectedUserIds = this.selectedUserIds.filter(id => id !== userId);
+    }
+    this.updateSelectAllCheckboxState();
+  }
+
+  toogleSelectionAll(): void {
+    this.selectAllCheckbox = !this.selectAllCheckbox;
+    if (this.selectAllCheckbox) {
+      this.selectedUserIds = this.users.map(user => user.id!).filter(id => id !== undefined) as number[];
+    } else {
+      this.selectedUserIds = [];
+    }
+  }
+
+  isSelected(userId: number): boolean {
+    return this.selectedUserIds.includes(userId);
+  }
+
+  getCheckboxChecked(event: Event): boolean {
+    return (event.target as HTMLInputElement).checked;
+  }
+
+  updateSelectAllCheckboxState(): void {
+    this.selectAllCheckbox = this.users.length > 0 && this.users.every(user => user.id !== undefined && this.selectedUserIds.includes(user.id));
   }
 }

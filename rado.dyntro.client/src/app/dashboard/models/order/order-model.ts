@@ -1,12 +1,12 @@
 import { OrderStatus, OrderPriority, OrderCategory } from '../../Enums/OrderEnums';
 
 export interface Order {
-  id: number;
-  status: OrderStatus;
-  topic: string;
-  firstName: string;
-  lastName: string;
-  category: OrderCategory;
-  priority: OrderPriority;
-  date: Date;
+  id?: number | null; 
+  topic: string | null;
+  firstName: string | null;
+  lastName: string | null;
+  status: OrderStatus | null;
+  category: OrderCategory | null;
+  priority: OrderPriority | null;
+  date?: Date;
 }

@@ -8,7 +8,9 @@ const PROXY_CONFIG = [
     context: [
       "/api/order",
       "/api/Order/orderFilteredBy",
-      "/api/user"
+      "/api/order/delete",
+      "/api/user",
+      "/api/user/delete-multiple"      
     ],
     target: target, 
     secure: false,

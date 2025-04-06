@@ -8,6 +8,7 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { NavigationComponent } from '../../components/header/navigation/navigation.component';
 import { OrdersFilterComponent } from '../../components/main/orders-filter/orders-filter.component';
 import { OrdersComponent } from '../../components/main/orders/orders.component';
+import { FormsModule } from '@angular/forms'; 
 
 import { OrderService } from '../../Services/order.service';
 import { OrderFormComponent } from '../../components/main/order-form/order-form.component';
@@ -30,7 +31,8 @@ import { UserService } from '../../Services/user.service';
     CommonModule,
     DashboardRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [OrderService, UserService],
   exports: [

@@ -19,8 +19,8 @@ export class OrderService {
 
   //POST
 
-  addNewOrder(newOrder: Order): Observable<Order> {
-    return this.http.post<Order>('api/order', newOrder)
+  addNewOrder(newOrder: Partial<Order>): Observable<Order> {
+    return this.http.post<Order>('/api/order', newOrder)
   }
 
   //GET
@@ -28,6 +28,13 @@ export class OrderService {
   getOrders(): Observable<Order[]> {
     return this.http.get<Order[]>('/api/order');
   }
+
+  //DELETE
+
+  deleteOrders(delereOrdersIds: number[]): Observable<any> {
+    return this.http.delete(`/api/order/delete`, { body: delereOrdersIds })
+  }
+
 
   getOrdersByParams(preparedFilter: OrderFilter): Observable<Order[]> {
 
@@ -103,10 +110,7 @@ export class OrderService {
     return this.getOrdersByParams(preparedFiltrer)
   }
 
-  //createNewOrder(newOrder: Order): Observable<Order> {
 
-  //  return this.apiHandlerService.addNewOrder(newOrder);
-
-  //}
+  
 
 }

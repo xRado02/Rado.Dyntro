@@ -11,7 +11,7 @@ export class UserService {
   public users: User[] = [];
   constructor(private http: HttpClient) { }
 
-  //GET
+  // GET
 
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>('/api/user');
@@ -23,8 +23,15 @@ export class UserService {
     return this.http.post<User>('/api/user', newUser)
   }
 
+  // DELETE
+
+  deleteUsers(deleteUserIds: number[]): Observable<any> {
+    return this.http.delete(`/api/user/delete-multiple`, { body: deleteUserIds });
+  }
+
+
   
-  //Loading users and save them in "this.users"
+  // Loading users and save them in "this.users"
 
   loadUsers(): void {
     this.getUsers().subscribe({

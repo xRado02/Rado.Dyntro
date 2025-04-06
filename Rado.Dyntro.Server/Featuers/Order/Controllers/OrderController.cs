@@ -86,12 +86,27 @@ namespace Rado.Dyntro.Server.Featuers.Order.Controllers
         public ActionResult Post([FromBody] OrderViewModel model)
         {
             var order = _mapper.Map<Data.Entities.Order>(model);
+            order.Date = DateTime.Now;
             _appDbContext.Orders.Add(order);
             _appDbContext.SaveChanges();
             var key = order.Id;
             return Created("api/order/" + key, null);
         }
 
+
+        [HttpDelete("delete")]
+
+        public ActionResult Delete([FromBody] List<int> ids)
+        {
+            var ordersToDelete = _appDbContext.Orders.Where(u => ids.Contains(u.Id)).ToList();
+            if (ordersToDelete.Count == 0)
+            {
+                return NotFound();
+            }
+            _appDbContext.Orders.RemoveRange(ordersToDelete);
+            _appDbContext.SaveChanges();
+            return NoContent();
+        }
 
     }
 }
