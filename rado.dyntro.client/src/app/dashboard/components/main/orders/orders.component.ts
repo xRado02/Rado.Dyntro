@@ -112,6 +112,8 @@ export class OrdersComponent implements OnInit {
   deleteOrders(): void {
     this.orderService.deleteOrders(this.selectedOrdersIds).subscribe({
       next: (response) => {
+        this.selectedOrdersIds = [];
+        this.selectAllCheckbox = false;
         this.loadOrders();
       },
       error: (error) => {

@@ -15,7 +15,16 @@ export class UserService {
 
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>('/api/user');
-  } 
+  }
+
+  getUserByParams(user: string): Observable<User[]> {
+    let params: any = {};
+    if (user != null) {
+      params.searchByUser = user;
+    }
+    return this.http.get<User[]>('/api/user/userFilterBy', {params});
+  }
+
   
   // POST 
 
@@ -45,4 +54,5 @@ export class UserService {
   }
 
   
+
 }

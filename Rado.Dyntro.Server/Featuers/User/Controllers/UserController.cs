@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
+using Rado.Dyntro.Server.Featuers.Order;
 using Rado.Dyntro.Server.Featuers.Order.ViewModel;
 using Rado.Dyntro.Server.Featuers.User.ViewModel;
 
@@ -36,6 +37,19 @@ namespace Rado.Dyntro.Server.Featuers.User.Controllers
                 Console.WriteLine($"Błąd: {ex.Message}");
                 return StatusCode(500, "Wystąpił błąd serwera");
             }
+        }
+
+        [HttpGet("userFilterBy")]
+        public ActionResult<List<UserViewModel>> Get([FromQuery] UserQueryParams queryParams)
+        {
+            var query = _appDbContext.Users.AsQueryable();
+            if (!string.IsNullOrEmpty(queryParams.searchByUser))
+            {
+                query = query.Where(u => u.FirstName.StartsWith(queryParams.searchByUser) || u.LastName.StartsWith(queryParams.searchByUser));
+            }
+            var users = query.ToList();
+            var result = _mapper.Map<List<UserViewModel>>(users);
+            return Ok(result);
         }
 
         [HttpPost]

@@ -12,6 +12,8 @@ import { User } from '../../../models/user/user-model';
 })
 export class AdminPanelComponent implements OnInit {
 
+  @ViewChild('searchByUser') searchByUser!: ElementRef;
+
   newUser = new FormGroup({
     firstName: new FormControl('', Validators.required),
     lastName: new FormControl('', Validators.required),
@@ -22,8 +24,10 @@ export class AdminPanelComponent implements OnInit {
   public Role = Role;
   public RoleNames = UserRoleNames;
   public users: User[] = [];
+  public filteredUsers: User[] = [];
   selectedUserIds: number[] = [];
   selectAllCheckbox: boolean = false;
+  searchedUser = '';
 
   constructor(private userService: UserService) { }
 
@@ -33,14 +37,29 @@ export class AdminPanelComponent implements OnInit {
 
   loadUsers(): void {
     this.userService.getUsers().subscribe({
-      next: (users) => {
-        this.users = users;
+      next: (users) => {       
+        this.filteredUsers = users;
         
       },
       error: (error) => {
-        console.error(error);
-      }
+        console.error(error);      }
     });
+  }
+
+  loadUsersByParams(name: string): void {
+    this.userService.getUserByParams(name).subscribe({
+      next: (users) => {
+        this.filteredUsers = users;    
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    })
+  }
+
+  onSearchedUser(): void {
+    this.searchedUser = this.searchByUser.nativeElement.value;
+    this.loadUsersByParams(this.searchedUser);   
   }
 
   createNewUser(): void {
@@ -69,6 +88,8 @@ export class AdminPanelComponent implements OnInit {
     this.userService.deleteUsers(this.selectedUserIds).subscribe({
       next: (response) => {
         console.log("Wybrani użytkownicy zostali usunięci");
+        this.selectedUserIds = [];
+        this.selectAllCheckbox = false;
         this.loadUsers();
       },
       error: (error) => {
