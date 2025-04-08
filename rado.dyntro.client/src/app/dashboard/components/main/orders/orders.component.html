@@ -18,7 +18,7 @@
                    (ngModelChange)="toogleSelectionAll()"
                    [checked]="selectAllCheckbox">
           </th>
-          <th class="text-start">ID</th>
+          <!--<th class="text-start">ID</th>-->
           <th class="text-start">Status</th>
           <th class="text-start px-5">Temat</th>
           <th class="text-start px-5">Imię</th>
@@ -29,14 +29,13 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let order of filteredOrders; let i = index">
+        <tr *ngFor="let order of filteredOrders; ">
           <td>
             <input type="checkbox"
                    class="form-check-input bg-secondary border-dark shadow-none"
                    [checked]="order.id != null && isSelected(order.id)"
                    (change)="toogleSelection(order.id!, getCheckboxChecked($event))" />
-          </td>
-          <td >{{i + 1}}</td>
+          </td>          
           <td >{{ order.status != null ? OrderStatusNames[order.status] : 'Nieznany' }}</td>
           <td class="text-start px-5">{{order.topic}}</td>
           <td class="text-start px-5">{{order.firstName}}</td>

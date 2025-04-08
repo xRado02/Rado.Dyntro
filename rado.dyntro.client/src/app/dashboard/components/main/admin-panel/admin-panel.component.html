@@ -27,8 +27,7 @@
                    [ngModel]="selectAllCheckbox"
                    (ngModelChange)="toogleSelectionAll()"
                    [checked]="selectAllCheckbox">
-          </th>
-          <th class="text-start">ID</th>
+          </th>      
           <th class="text-start">Imię</th>
           <th class="text-start">Nazwisko</th>
           <th class="text-start">Email</th>
@@ -42,8 +41,7 @@
                    class="form-check-input bg-secondary border-dark shadow-none"
                    [checked]="user.id !== undefined && isSelected(user.id)"
                    (change)="toogleSelection(user.id!, getCheckboxChecked($event))" />
-          </td>
-          <td class="text-start">{{ i + 1 }}</td>
+          </td>         
           <td class="text-start">{{user.firstName}}</td>
           <td class="text-start">{{user.lastName}}</td>
           <td class="text-start">{{user.email}}</td>
