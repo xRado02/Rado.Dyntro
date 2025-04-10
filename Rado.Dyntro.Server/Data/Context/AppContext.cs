@@ -6,6 +6,7 @@ public class AppDbContext : DbContext
 {
     public DbSet<Order>? Orders { get; set; } = null;
     public DbSet<User>? Users { get; set; } = null;
+    public DbSet<UserAuth> UsersAuth { get; set; }
 
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
     {

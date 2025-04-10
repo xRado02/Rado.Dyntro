@@ -9,12 +9,6 @@ public class UserService
         _context = context;
     }
 
-    public int GetNextUserId()
-    {
-        var maxId = _context.Users.Max(u => (int?)u.Id) ?? 0; 
-        return maxId + 1;
-    }
-
     public void CreateUser(User user)
     {
         //user.Id = GetNextUserId();
