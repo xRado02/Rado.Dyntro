@@ -11,7 +11,6 @@ import { OrdersComponent } from '../../components/main/orders/orders.component';
 import { FormsModule } from '@angular/forms'; 
 
 import { OrderService } from '../../Services/order.service';
-import { OrderFormComponent } from '../../components/main/order-form/order-form.component';
 import { AdminPanelComponent } from '../../components/main/admin-panel/admin-panel.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UserService } from '../../Services/user.service';
@@ -23,8 +22,7 @@ import { UserService } from '../../Services/user.service';
     HeaderComponent,
     NavigationComponent,
     OrdersFilterComponent,
-    OrdersComponent,
-    OrderFormComponent,
+    OrdersComponent,   
     AdminPanelComponent
   ],
   imports: [
@@ -42,7 +40,6 @@ import { UserService } from '../../Services/user.service';
     NavigationComponent,
     OrdersFilterComponent,
     OrdersComponent,
-    OrderFormComponent,
     AdminPanelComponent
    
 

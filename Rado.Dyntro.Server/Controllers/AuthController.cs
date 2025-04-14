@@ -11,12 +11,10 @@ using System.Text;
 
 namespace Rado.Dyntro.Server.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]")] 
     [ApiController]
     public class AuthController(IAuthService authService) : ControllerBase
-    {
-        public static UserAuth user = new();
-        
+    {   
             
         [HttpPost("register")]
         public async Task<ActionResult<UserAuth>> Register(UserAuthViewModel request)

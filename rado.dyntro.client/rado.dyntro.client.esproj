@@ -8,8 +8,8 @@
     <BuildOutputFolder>$(MSBuildProjectDirectory)\dist\rado.dyntro.client\browser\</BuildOutputFolder>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="src\app\commercial\main\content\images\avif\" />
-    <Folder Include="src\app\commercial\main\section-privacy-cookies\" />
+    <Folder Include="src\app\commercial\components\main\content\images\avif\" />
+    <Folder Include="src\app\core\services\" />
     <Folder Include="src\app\dashboard\components\header\content\images\" />
     <Folder Include="src\app\dashboard\components\main\content\NewFolder\" />
   </ItemGroup>

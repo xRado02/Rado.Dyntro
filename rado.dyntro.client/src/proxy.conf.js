@@ -10,7 +10,10 @@ const PROXY_CONFIG = [
       "/api/Order/orderFilteredBy",
       "/api/order/delete",
       "/api/user",
-      "/api/user/delete-multiple"      
+      "/api/user/delete-multiple",
+      "/api/Auth/login",
+      "/api/Auth/register",
+      "/api/Auth/refresh-token"
     ],
     target: target, 
     secure: false,

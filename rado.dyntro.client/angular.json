@@ -37,17 +37,17 @@
               },
               {
                 "glob": "**/*",
-                "input": "src/app/commercial/header/content",
+                "input": "src/app/commercial/components/header/content",
                 "output": "content"
               },
               {
                 "glob": "**/*",
-                "input": "src/app/commercial/main/content",
+                "input": "src/app/commercial/components/main/content",
                 "output": "content"
               },
               {
                 "glob": "**/*",
-                "input": "src/app/commercial/footer/content",
+                "input": "src/app/commercial/components/footer/content",
                 "output": "content"
               },
               {
