@@ -1,4 +1,4 @@
-﻿namespace Rado.Dyntro.Server.Featuers.Attachment.ViewModel
+﻿namespace Rado.Dyntro.Server.Models
 {
     public class AttachmentViewModel
     {

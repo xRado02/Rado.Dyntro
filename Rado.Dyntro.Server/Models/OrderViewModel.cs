@@ -1,7 +1,7 @@
 ﻿using Rado.Dyntro.Server.Enums;
-using Rado.Dyntro.Server.Featuers.Message.ViewModel;
+using Rado.Dyntro.Server.Models;
 
-namespace Rado.Dyntro.Server.Featuers.Order.ViewModel
+namespace Rado.Dyntro.Server.Models
 {
     public class OrderViewModel
     {
@@ -12,7 +12,7 @@ namespace Rado.Dyntro.Server.Featuers.Order.ViewModel
         public string? LastName { get; set; }
         public OrderCategory Category { get; set; }
         public OrderPriority Priority { get; set; }
-        public DateTime Date { get; set; }       
+        public DateTime Date { get; set; }
 
         //public UserViewModel User { get; set; }
 

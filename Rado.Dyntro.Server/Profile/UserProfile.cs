@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Rado.Dyntro.Server.Data.Entities;
-using Rado.Dyntro.Server.Featuers.User.ViewModel;
+using Rado.Dyntro.Server.Models;
 
 public class UserProfile : Profile
 {

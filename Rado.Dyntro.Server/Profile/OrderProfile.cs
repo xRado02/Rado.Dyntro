@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using Rado.Dyntro.Server.Data.Entities;
-using Rado.Dyntro.Server.Featuers.Order.ViewModel;
+using Rado.Dyntro.Server.Models;
 
-namespace Rado.Dyntro.Server.Featuers.Order.Profile
+namespace Rado.Dyntro.Server.Profile
 {
     public class OrderProfile : AutoMapper.Profile 
     {

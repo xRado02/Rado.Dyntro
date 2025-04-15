@@ -1,6 +1,6 @@
 ﻿using Rado.Dyntro.Server.Enums;
 
-namespace Rado.Dyntro.Server.Featuers.Order
+namespace Rado.Dyntro.Server.Models
 {
     public class OrderQueryParams
     {

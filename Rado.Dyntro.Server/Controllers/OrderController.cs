@@ -2,10 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Rado.Dyntro.Server.Data;
 using Rado.Dyntro.Server.Enums;
-using Rado.Dyntro.Server.Featuers.Order;
-using Rado.Dyntro.Server.Featuers.Order.ViewModel;
+using Rado.Dyntro.Server.Models;
 
-namespace Rado.Dyntro.Server.Featuers.Order.Controllers
+namespace Rado.Dyntro.Server.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]

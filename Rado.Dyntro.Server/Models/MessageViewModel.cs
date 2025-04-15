@@ -1,7 +1,6 @@
-﻿using Rado.Dyntro.Server.Featuers.Attachment.ViewModel;
-using Rado.Dyntro.Server.Featuers.User.ViewModel;
+﻿using Rado.Dyntro.Server.Models;
 
-namespace Rado.Dyntro.Server.Featuers.Message.ViewModel
+namespace Rado.Dyntro.Server.Models
 {
     public class MessageViewModel
     {

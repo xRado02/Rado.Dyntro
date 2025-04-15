@@ -1,4 +1,4 @@
-﻿namespace Rado.Dyntro.Server.Featuers.User
+﻿namespace Rado.Dyntro.Server.Models
 {
     public class UserQueryParams
     {

@@ -1,11 +1,9 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Conventions;
-using Rado.Dyntro.Server.Featuers.Order;
-using Rado.Dyntro.Server.Featuers.Order.ViewModel;
-using Rado.Dyntro.Server.Featuers.User.ViewModel;
+using Rado.Dyntro.Server.Models;
 
-namespace Rado.Dyntro.Server.Featuers.User.Controllers
+
+namespace Rado.Dyntro.Server.Controllers
 {
 
     [ApiController]

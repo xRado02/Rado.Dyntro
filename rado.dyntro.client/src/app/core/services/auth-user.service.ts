@@ -21,4 +21,23 @@ export class AuthUserService {
     sessionStorage.removeItem('refreshToken');
   }
 
+  getUserRole(): string | null {
+    const token = sessionStorage.getItem('accessToken')
+    if (!token) {
+      return null;
+    }
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    return payload['role'] || null;
+  }
+
+  getUserId(): string | null {
+    const token = sessionStorage.getItem('accessToken')
+    if (!token) {
+      return null
+    }
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    return payload['id'] || null;
+
+  }
+
 }

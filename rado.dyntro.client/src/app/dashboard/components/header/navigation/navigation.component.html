@@ -8,18 +8,19 @@
     </button>
 
     <div id="menu" class="collapse navbar-collapse ">
-      <ul class="navbar-nav ms-auto text-uppercase fs-6 fw-bold ">
+      <ul class="navbar-nav ms-auto text-uppercase fs-6  ">
         <li class="nav-item  py-1">
-          <a routerLink="/dashboard/main" class="nav-link ">Zlecenia</a>
+          <a routerLink="/dashboard/main" class="nav-link ">zlecenia</a>
         </li>
         <li class="nav-item dropdown  py-1">
+          <!--*ngIf="isAdmin"-->
           <a routerLink="/dashboard/admin-panel" class="nav-link ">Admin</a>
+        </li>
+        <li class="nav-item  py-1">
+          <button (click)="logout()" class="btn btn-link text-danger  text-decoration: none; text-uppercase">Wyloguj</button>
         </li>
         <li class="nav-item  py-0">
           <a routerLink="/commercial/contact" class="nav-link"><img src="../content/images/svg/person-fill.svg" alt="Proile" width="24" height="24" /></a>
-        </li>
-        <li class="nav-item  py-2">
-          <button (click)="logout()" class="btn btn-sm btn-danger">Wyloguj</button>
         </li>
         <!--<li class="nav-item dropdown ">
     <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false"><img src="/content/images/svg/poland-flag.svg" alt="PL flag" width="24" height="24" /></a>

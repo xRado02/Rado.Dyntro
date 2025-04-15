@@ -54,6 +54,13 @@ namespace Rado.Dyntro.Server.Controllers
             return Ok("You are an Admin!");
         }
 
+        [Authorize(Roles = "Client")]
+        [HttpGet("client-only")]
+        public IActionResult ClientOnlyEndpoint()
+        {
+            return Ok("You are a Client!");
+        }
+
         [HttpPost("refresh-token")]
         public async Task<ActionResult<TokenResponseViewModel>> RefreshToken(RefreshTokenRequestViewModel request)
         {

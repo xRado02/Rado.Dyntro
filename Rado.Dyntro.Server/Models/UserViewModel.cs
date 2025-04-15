@@ -1,7 +1,6 @@
 ﻿using Rado.Dyntro.Server.enums;
-using Rado.Dyntro.Server.Featuers.Order.ViewModel;
 
-namespace Rado.Dyntro.Server.Featuers.User.ViewModel
+namespace Rado.Dyntro.Server.Models
 {
     public class UserViewModel
     {
