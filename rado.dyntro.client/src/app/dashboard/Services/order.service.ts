@@ -3,6 +3,7 @@ import { OrderStatusNames, OrderCategoryNames, OrderPriorityNames, OrderStatus, 
 import { Observable } from 'rxjs';
 import { OrderFilter } from '../models/order/order-filter-model'
 import { Order } from '../models/order/order-model';
+import { PagedResult } from '../models/page/page-result-model';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -29,6 +30,10 @@ export class OrderService {
     return this.http.get<Order[]>('/api/order');
   }
 
+    getOrdersByPage(pageNumber: number = 1): Observable<PagedResult<Order>> {
+      return this.http.get<PagedResult<Order>>(`/api/order/page?pageNumber=${pageNumber}`);
+  }
+
   //DELETE
 
   deleteOrders(delereOrdersIds: string[]): Observable<any> {
@@ -36,10 +41,10 @@ export class OrderService {
   }
 
 
-  getOrdersByParams(preparedFilter: OrderFilter): Observable<Order[]> {
+  getOrdersByParams(preparedFilter: OrderFilter, pageNumber: number = 1): Observable<PagedResult<Order>> {
 
     let params: any = {};
-
+   
     if (preparedFilter.status != null) {
       params.searchByStatus = preparedFilter.status;
     }
@@ -53,13 +58,13 @@ export class OrderService {
       params.searchByUser = preparedFilter.user;
     }
     if (preparedFilter.sortByElement != null) {
-      params.sortByElement = preparedFilter.sortByElement
+      params.sortByElement = preparedFilter.sortByElement;
     }
     if (preparedFilter.sortByDirection != null) {
-      params.sortByDirection = preparedFilter.sortByDirection
+      params.sortByDirection = preparedFilter.sortByDirection;
     }
-
-    return this.http.get<Order[]>('/api/Order/orderFilteredBy', { params });
+    params.pageNumber = pageNumber.toString();    
+    return this.http.get<PagedResult<Order>>('/api/Order/orderFilteredBy', { params });
   }
 
   loadOrders(): void {
@@ -73,7 +78,7 @@ export class OrderService {
     });
   }
 
-  loadOrdersByParams(filter: OrderFilter): Observable<Order[]> {
+  loadOrdersByParams(filter: OrderFilter, pageNumber: number = 1): Observable<PagedResult<Order>> {
     const enumStatusKey = Object.keys(OrderStatusNames).find(
       key => OrderStatusNames[key as unknown as OrderStatus] === filter.status
     );
@@ -107,7 +112,7 @@ export class OrderService {
       sortByElement: enumSortElementKey,
     }
 
-    return this.getOrdersByParams(preparedFiltrer)
+    return this.getOrdersByParams(preparedFiltrer, pageNumber)
   }
 
 

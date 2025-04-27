@@ -11,7 +11,7 @@ namespace Rado.Dyntro.Server.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    //[Authorize]
+    [Authorize]
     public class OrderController : ControllerBase
     {
         private readonly AppDbContext _appDbContext;
@@ -73,35 +73,28 @@ namespace Rado.Dyntro.Server.Controllers
 
 
         [HttpGet("orderFilteredBy")]
-        public ActionResult<List<OrderViewModel>> GetFilteredBy([FromQuery] OrderQueryParams queryParams)
+        public ActionResult<PagedResult<OrderViewModel>> GetFilteredBy([FromQuery] OrderQueryParams queryParams, [FromQuery] int pageNumber = 1)
         {
-            var query = _appDbContext.Orders.AsQueryable();
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+            var userId = Guid.Parse(userIdClaim.Value);
 
-            //Filter
+            var pageSize = 5;
+            var query = _appDbContext.Orders.Where(o => o.UserId == userId);
 
+          
             if (queryParams.searchByStatus.HasValue)
-            {
                 query = query.Where(o => o.Status == queryParams.searchByStatus);
-            }
 
             if (queryParams.searchByCategory.HasValue)
-            {
                 query = query.Where(o => o.Category == queryParams.searchByCategory);
-            }
 
             if (queryParams.searchByPriority.HasValue)
-            {
                 query = query.Where(o => o.Priority == queryParams.searchByPriority);
-            }
-
-            //Search
 
             if (!string.IsNullOrEmpty(queryParams.searchByUser))
-            {
                 query = query.Where(o => o.FirstName.StartsWith(queryParams.searchByUser) || o.LastName.StartsWith(queryParams.searchByUser));
-            }
 
-            //Sort
+            
             if (queryParams.sortByElement.HasValue && queryParams.sortByDirection.HasValue)
             {
                 query = queryParams.sortByElement == SortByElement.Data
@@ -109,8 +102,23 @@ namespace Rado.Dyntro.Server.Controllers
                     : queryParams.sortByDirection == SortByDirection.Ascending ? query.OrderBy(o => o.Id) : query.OrderByDescending(o => o.Id);
             }
 
-            var orders = query.ToList();
-            var result = _mapper.Map<List<OrderViewModel>>(orders);
+            var totalCount = query.Count();
+            var totalPages = (int)Math.Ceiling(totalCount / (double)pageSize);
+
+            var orders = query
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            var result = new PagedResult<OrderViewModel>
+            {
+                Items = _mapper.Map<List<OrderViewModel>>(orders),
+                TotalCount = totalCount,
+                PageSize = pageSize,
+                CurrentPage = pageNumber,
+                TotalPages = totalPages
+            };
+
             return Ok(result);
         }
 

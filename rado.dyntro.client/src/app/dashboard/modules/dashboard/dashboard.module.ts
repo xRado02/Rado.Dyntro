@@ -14,6 +14,7 @@ import { OrderService } from '../../Services/order.service';
 import { AdminPanelComponent } from '../../components/main/admin-panel/admin-panel.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UserService } from '../../Services/user.service';
+import { OrderDetailsComponent } from '../../components/main/order-details/order-details.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { UserService } from '../../Services/user.service';
     OrdersFilterComponent,
     OrdersComponent,   
     AdminPanelComponent,
-    ProfileDetailsComponent
+    ProfileDetailsComponent,
+    OrderDetailsComponent
   ],
   imports: [
     CommonModule,
@@ -42,7 +44,8 @@ import { UserService } from '../../Services/user.service';
     OrdersFilterComponent,
     OrdersComponent,
     AdminPanelComponent,
-    ProfileDetailsComponent
+    ProfileDetailsComponent,
+    OrderDetailsComponent
    
 
   ]

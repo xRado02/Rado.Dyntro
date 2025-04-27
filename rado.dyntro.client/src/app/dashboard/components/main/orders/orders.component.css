@@ -1,0 +1,4 @@
+
+.pagination .page-item.active .page-link {
+  border-color: black;
+}

@@ -9,6 +9,7 @@ const PROXY_CONFIG = [
       "/api/order",
       "/api/Order/orderFilteredBy",
       "/api/order/delete",
+      "/api/order/page",
       "/api/user",
       "/api/user/delete-multiple",
       "/api/Auth/login",
@@ -16,6 +17,7 @@ const PROXY_CONFIG = [
       "/api/Auth/refresh-token",
       "/api/emailsender/invite",
       "/api/accountdetails",
+      
 
       
     ],

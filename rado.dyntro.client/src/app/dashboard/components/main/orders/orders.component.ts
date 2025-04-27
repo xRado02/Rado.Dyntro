@@ -16,13 +16,13 @@ export class OrdersComponent implements OnInit {
 
   public orders: Order[] = [];
   public filteredOrders: Order[] = [];
+  currentFilter: OrderFilter = {};
+
   public OrderStatusNames = OrderStatusNames;
   public OrderCategoryNames = OrderCategoryNames;
   public OrderPriorityNames = OrderPriorityNames;
-  selectedStatus = '';
-  selectedCategory = '';
-  selectedPriority = '';
-  searchedByUser = '';
+
+
   selectedOrdersIds: string[] = [];
   selectAllCheckbox: boolean = false;
 
@@ -42,30 +42,20 @@ export class OrdersComponent implements OnInit {
   orderStatuses = Object.values(OrderStatusNames);
   orderCategories = Object.values(OrderCategoryNames);
   orderPriorities = Object.values(OrderPriorityNames);
+
+  totalPages: number = 0;
+  currentPage: number = 1;
   constructor(private orderService: OrderService) { }
 
   ngOnInit() {
-    this.loadOrders();
+   
+    this.loadOrdersByPage(1);
   }
 
-  loadOrders(): void {
-    this.orderService.getOrders().subscribe({
-      next: (orders) => {
-        this.filteredOrders = orders;
-      },
-      error: (error) => {
-        console.error(error);
-      }
-    });
-  }
+
 
   onFiltersChange(event: string[]): void {
-    const [status, category, priority, user, sortByElement, sortByDirection] = event;
-
-    this.selectedStatus = status;
-    this.selectedCategory = category;
-    this.selectedPriority = priority;
-    this.searchedByUser = user;
+    const [status, category, priority, user, sortByElement, sortByDirection] = event;    
 
     const filter: OrderFilter = {
       status,
@@ -76,15 +66,9 @@ export class OrdersComponent implements OnInit {
       sortByDirection
     };
 
-    this.orderService.loadOrdersByParams(filter).subscribe({
-      next: (orders) => {
-        this.filteredOrders = orders;
-        console.log(this.filteredOrders);
-      },
-      error: (error) => {
-        console.error(error);
-      }
-    });
+    this.currentFilter = filter;
+
+    this.loadOrdersByPage(this.currentPage, this.currentFilter);
   }
 
   createNewOrder(): void {
@@ -100,7 +84,7 @@ export class OrdersComponent implements OnInit {
       this.orderService.addNewOrder(createdOrder).subscribe({
         next: (response) => {
           this.newOrder.reset();
-          this.loadOrders();
+          this.loadOrdersByPage(this.currentPage);
         },
         error: (error) => {
           console.log(error);
@@ -114,7 +98,7 @@ export class OrdersComponent implements OnInit {
       next: (response) => {
         this.selectedOrdersIds = [];
         this.selectAllCheckbox = false;
-        this.loadOrders();
+        this.loadOrdersByPage(this.currentPage);
       },
       error: (error) => {
         console.error(error);
@@ -126,12 +110,11 @@ export class OrdersComponent implements OnInit {
     return this.selectedOrdersIds.includes(orderId);
   }
 
-  toogleSelection(orderId: string, checked: boolean): void {
-    if (checked) {
-      this.selectedOrdersIds.push(orderId);
-    } else {
-      this.selectedOrdersIds = this.selectedOrdersIds.filter(id => id !== orderId);
-    }
+  toggleSelection(orderId: string, checked: boolean): void {
+    checked
+      ? this.selectedOrdersIds.push(orderId)
+      : this.selectedOrdersIds = this.selectedOrdersIds.filter(id => id !== orderId);
+
     this.updateSelectAllCheckboxState();
   }
 
@@ -157,6 +140,23 @@ export class OrdersComponent implements OnInit {
   }
 
 
+  loadOrdersByPage(page: number, filter?: OrderFilter): void {
+    this.orderService.loadOrdersByParams(filter ?? this.currentFilter, page).subscribe({
+      next: (response) => {
+        this.filteredOrders = response.items; 
+        this.totalPages = response.totalPages;
+        this.currentPage = response.currentPage; 
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    });
+  }
+
+  onPageChange(pageNumber: number) {
+    this.currentPage = pageNumber;
+    this.loadOrdersByPage(pageNumber);
+  }
 
 
 }
