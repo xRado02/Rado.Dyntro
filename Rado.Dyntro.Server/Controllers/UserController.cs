@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Rado.Dyntro.Server.Models;
+using System.Linq;
 
 
 namespace Rado.Dyntro.Server.Controllers
@@ -8,6 +10,7 @@ namespace Rado.Dyntro.Server.Controllers
 
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize(Roles = "Admin")]
     public class UserController: ControllerBase
     {
         private readonly AppDbContext _appDbContext;
@@ -50,19 +53,22 @@ namespace Rado.Dyntro.Server.Controllers
             return Ok(result);
         }
 
+        
         [HttpPost]
 
         public ActionResult Post([FromBody] UserViewModel model)
         {
-            var user = _mapper.Map<Data.Entities.User>(model);
+            var user = _mapper.Map<Data.Entities.User>(model);       
+            
             _userService.CreateUser(user);
+            var result = _mapper.Map<UserViewModel>(user);
             var key = user.Id;
-
-            return Created("api/user/" + key, null);
+            
+            return Created("api/user/" + key, result);
         }
 
         [HttpDelete("delete-multiple")]
-        public ActionResult DeleteMultiple([FromBody] List<int> ids)
+        public ActionResult DeleteMultiple([FromBody] List<Guid> ids)
         {       
             var usersToDelete = _appDbContext.Users.Where(u => ids.Contains(u.Id)).ToList();
             if (usersToDelete.Count == 0)

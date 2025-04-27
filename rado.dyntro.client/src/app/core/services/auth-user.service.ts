@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { User } from '../../dashboard/models/user/user-model';
 import { UserAuth } from '../interfaces/UserAuth';
 import { TokenResponse } from '../interfaces/TokenResponse';
 import { HttpClient } from '@angular/common/http';
@@ -27,7 +26,8 @@ export class AuthUserService {
       return null;
     }
     const payload = JSON.parse(atob(token.split('.')[1]));
-    return payload['role'] || null;
+    console.log(payload);
+    return payload['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] || null;
   }
 
   getUserId(): string | null {

@@ -14,23 +14,24 @@ namespace Rado.Dyntro.Server.Controllers
     [Route("api/[controller]")] 
     [ApiController]
     public class AuthController(IAuthService authService) : ControllerBase
-    {   
-            
-        [HttpPost("register")]
-        public async Task<ActionResult<UserAuth>> Register(UserAuthViewModel request)
+    {
+
+        [HttpPut("activate")]
+        public async Task<ActionResult<User>> Activate(UserActivateViewModel request)
         {
-           var user = await authService.RegisterAsync(request);
-           if (user is null)
-           {
-                return BadRequest("User already exists.");
-           }
+            var user = await authService.RegisterActivationAsync(request);
+
+            if (user == null)
+            {
+                return NotFound("Użytkownik nie istnieje.");
+            }
 
             return Ok(user);
-        }
+        }        
 
         [HttpPost("login")]
 
-        public async Task<ActionResult<TokenResponseViewModel>> Login(UserAuthViewModel request)
+        public async Task<ActionResult<TokenResponseViewModel>> Login(UserLoginViewModel request)
         {
             var result = await authService.LoginAsync(request);
             if (result is null)

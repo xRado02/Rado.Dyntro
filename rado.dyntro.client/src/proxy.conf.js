@@ -12,8 +12,12 @@ const PROXY_CONFIG = [
       "/api/user",
       "/api/user/delete-multiple",
       "/api/Auth/login",
-      "/api/Auth/register",
-      "/api/Auth/refresh-token"
+      "/api/Auth/activate",
+      "/api/Auth/refresh-token",
+      "/api/emailsender/invite",
+      "/api/accountdetails",
+
+      
     ],
     target: target, 
     secure: false,

@@ -11,12 +11,12 @@ import { AuthUserService } from '../../../../core/services/auth-user.service';
 })
 export class NavigationComponent implements OnInit {
 
-  /*isAdmin: boolean = false;*/
+  isAdmin: boolean = false;
   constructor(private authService: AuthUserService, private router: Router) { }
 
   ngOnInit(): void {
     const currentRole = this.authService.getUserRole();
-   /* this.isAdmin = currentRole == 'Admin';*/
+    this.isAdmin = currentRole == 'Admin';
   }
 
   logout(): void {

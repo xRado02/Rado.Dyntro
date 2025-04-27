@@ -1,13 +1,17 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Rado.Dyntro.Server.Data;
+using Rado.Dyntro.Server.Data.Entities;
 using Rado.Dyntro.Server.Enums;
 using Rado.Dyntro.Server.Models;
+using System.Security.Claims;
 
 namespace Rado.Dyntro.Server.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    //[Authorize]
     public class OrderController : ControllerBase
     {
         private readonly AppDbContext _appDbContext;
@@ -25,7 +29,9 @@ namespace Rado.Dyntro.Server.Controllers
         {
             try
             {
-                var orders = _appDbContext.Orders.OrderByDescending(o => o.Id).ToList();
+                var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+                var userId = Guid.Parse(userIdClaim.Value);
+                var orders = _appDbContext.Orders.Where(o => o.UserId == userId).OrderByDescending(o => o.Id).ToList();
                 var result = _mapper.Map<List<OrderViewModel>>(orders);
                 return Ok(result);
             }
@@ -35,6 +41,36 @@ namespace Rado.Dyntro.Server.Controllers
                 return StatusCode(500, "Wystąpił błąd serwera");
             }
         }
+
+        [HttpGet("page")]
+        public ActionResult<PagedResult<OrderViewModel>> GetOrdersFromPage([FromQuery] int pageNumber = 1)
+        {
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+            var userId = Guid.Parse(userIdClaim.Value);
+            var pageSize = 11;
+            var query = _appDbContext.Orders.Where(o => o.UserId == userId);
+            var totalCount = query.Count(); 
+            var totalPages = (int)Math.Ceiling(totalCount / (double)pageSize);
+
+            var orders = query
+                .OrderByDescending(o => o.Id)
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            var result = new PagedResult<OrderViewModel>
+            {
+                Items = _mapper.Map<List<OrderViewModel>>(orders),
+                TotalCount = totalCount,
+                PageSize = pageSize,
+                CurrentPage = pageNumber,
+                TotalPages = totalPages
+            };
+
+            return Ok(result);
+        }
+
+
 
         [HttpGet("orderFilteredBy")]
         public ActionResult<List<OrderViewModel>> GetFilteredBy([FromQuery] OrderQueryParams queryParams)
@@ -73,8 +109,6 @@ namespace Rado.Dyntro.Server.Controllers
                     : queryParams.sortByDirection == SortByDirection.Ascending ? query.OrderBy(o => o.Id) : query.OrderByDescending(o => o.Id);
             }
 
-
-
             var orders = query.ToList();
             var result = _mapper.Map<List<OrderViewModel>>(orders);
             return Ok(result);
@@ -84,8 +118,11 @@ namespace Rado.Dyntro.Server.Controllers
         [HttpPost]
         public ActionResult Post([FromBody] OrderViewModel model)
         {
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+            var userId = Guid.Parse(userIdClaim.Value);           
             var order = _mapper.Map<Data.Entities.Order>(model);
             order.Date = DateTime.Now;
+            order.UserId = userId;
             _appDbContext.Orders.Add(order);
             _appDbContext.SaveChanges();
             var key = order.Id;
@@ -93,19 +130,20 @@ namespace Rado.Dyntro.Server.Controllers
         }
 
 
+   
         [HttpDelete("delete")]
-
-        public ActionResult Delete([FromBody] List<int> ids)
+        public ActionResult Delete([FromBody] List<Guid> ids)
         {
-            var ordersToDelete = _appDbContext.Orders.Where(u => ids.Contains(u.Id)).ToList();
-            if (ordersToDelete.Count == 0)
-            {
-                return NotFound();
-            }
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);       
+            var userId = Guid.Parse(userIdClaim.Value);
+            var ordersToDelete = _appDbContext.Orders.Where(o => ids.Contains(o.Id) && o.UserId == userId).ToList();        
+
             _appDbContext.Orders.RemoveRange(ordersToDelete);
             _appDbContext.SaveChanges();
+
             return NoContent();
         }
+
 
     }
 }

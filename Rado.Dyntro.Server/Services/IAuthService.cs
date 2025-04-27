@@ -5,8 +5,8 @@ namespace Rado.Dyntro.Server.Services
 {
     public interface IAuthService
     {
-        Task<UserAuth?> RegisterAsync(UserAuthViewModel request);
-        Task<TokenResponseViewModel?> LoginAsync(UserAuthViewModel request);
+        Task<User?> RegisterActivationAsync(UserActivateViewModel request);
+        Task<TokenResponseViewModel?> LoginAsync(UserLoginViewModel request);
         Task<TokenResponseViewModel?> RefreshTokenAsync(RefreshTokenRequestViewModel request);
     }
 }

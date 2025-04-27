@@ -5,7 +5,7 @@ namespace Rado.Dyntro.Server.Models
 {
     public class OrderViewModel
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public OrderStatus Status { get; set; }
         public string? Topic { get; set; }
         public string? FirstName { get; set; }
@@ -14,7 +14,7 @@ namespace Rado.Dyntro.Server.Models
         public OrderPriority Priority { get; set; }
         public DateTime Date { get; set; }
 
-        //public UserViewModel User { get; set; }
+        public Guid UserId { get; set; }
 
 
     }

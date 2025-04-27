@@ -1,12 +1,13 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Rado.Dyntro.Server.Data;
-using Rado.Dyntro.Server.Data.Seeder.UserSeeder;
-using Rado.Dyntro.Server.Data.Seeder.OrderSeeder;
+//using Rado.Dyntro.Server.Data.Seeder.UserSeeder;
+//using Rado.Dyntro.Server.Data.Seeder.OrderSeeder;
 using Rado.Dyntro.Server.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using System.Security.Claims;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,9 +16,10 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
 
-builder.Services.AddScoped<OrderSeeder>();
-builder.Services.AddScoped<UserSeeder>();
+//builder.Services.AddScoped<OrderSeeder>();
+//builder.Services.AddScoped<UserSeeder>();
 builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<EmailService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -32,7 +34,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateLifetime = true,
             IssuerSigningKey = new SymmetricSecurityKey(
                 Encoding.UTF8.GetBytes(builder.Configuration["AppSettings:Token"]!)),
-            ValidateIssuerSigningKey = true
+            ValidateIssuerSigningKey = true,
+            RoleClaimType = ClaimTypes.Role
         };
     });
 
@@ -63,10 +66,10 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
-    var orderSeeder = scope.ServiceProvider.GetRequiredService<OrderSeeder>();
-    orderSeeder.Seed();
-    var userSeeder = scope.ServiceProvider.GetRequiredService<UserSeeder>();
-    userSeeder.Seed();
+    //var orderSeeder = scope.ServiceProvider.GetRequiredService<OrderSeeder>();
+    //orderSeeder.Seed();
+    //var userSeeder = scope.ServiceProvider.GetRequiredService<UserSeeder>();
+    //userSeeder.Seed();
 
 }
 
@@ -89,6 +92,7 @@ if (app.Environment.IsDevelopment())
 
 
 app.UseHttpsRedirection();
+app.UseAuthentication(); // nowe
 app.UseAuthorization();
 app.MapControllers();
 

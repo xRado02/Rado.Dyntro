@@ -23,7 +23,7 @@ export class OrdersComponent implements OnInit {
   selectedCategory = '';
   selectedPriority = '';
   searchedByUser = '';
-  selectedOrdersIds: number[] = [];
+  selectedOrdersIds: string[] = [];
   selectAllCheckbox: boolean = false;
 
   public Status = OrderStatus;
@@ -122,11 +122,11 @@ export class OrdersComponent implements OnInit {
     })
   }
 
-  isSelected(orderId: number): boolean {
+  isSelected(orderId: string): boolean {
     return this.selectedOrdersIds.includes(orderId);
   }
 
-  toogleSelection(orderId: number, checked: boolean): void {
+  toogleSelection(orderId: string, checked: boolean): void {
     if (checked) {
       this.selectedOrdersIds.push(orderId);
     } else {
@@ -140,7 +140,7 @@ export class OrdersComponent implements OnInit {
     if (this.selectAllCheckbox) {
       this.selectedOrdersIds = this.filteredOrders
         .map(order => order.id)
-        .filter(id => id !== undefined) as number[];
+        .filter(id => id !== undefined) as string[];
     } else {
       this.selectedOrdersIds = [];
     }

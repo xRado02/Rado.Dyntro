@@ -9,7 +9,7 @@ import { NavigationComponent } from '../../components/header/navigation/navigati
 import { OrdersFilterComponent } from '../../components/main/orders-filter/orders-filter.component';
 import { OrdersComponent } from '../../components/main/orders/orders.component';
 import { FormsModule } from '@angular/forms'; 
-
+import { ProfileDetailsComponent } from '../../components/main/profile-details/profile-details.component';
 import { OrderService } from '../../Services/order.service';
 import { AdminPanelComponent } from '../../components/main/admin-panel/admin-panel.component';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -23,7 +23,8 @@ import { UserService } from '../../Services/user.service';
     NavigationComponent,
     OrdersFilterComponent,
     OrdersComponent,   
-    AdminPanelComponent
+    AdminPanelComponent,
+    ProfileDetailsComponent
   ],
   imports: [
     CommonModule,
@@ -40,7 +41,8 @@ import { UserService } from '../../Services/user.service';
     NavigationComponent,
     OrdersFilterComponent,
     OrdersComponent,
-    AdminPanelComponent
+    AdminPanelComponent,
+    ProfileDetailsComponent
    
 
   ]

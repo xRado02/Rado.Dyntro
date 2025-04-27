@@ -42,6 +42,11 @@
               },
               {
                 "glob": "**/*",
+                "input": "src/app/activation/content",
+                "output": "content"
+              },
+              {
+                "glob": "**/*",
                 "input": "src/app/commercial/components/main/content",
                 "output": "content"
               },
@@ -59,7 +64,7 @@
                 "glob": "**/*",
                 "input": "src/app/dashboard/components/main/content",
                 "output": "assets/svg"
-            
+
               }
             ],
             "styles": [

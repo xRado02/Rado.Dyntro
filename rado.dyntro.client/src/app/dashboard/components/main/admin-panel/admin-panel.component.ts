@@ -18,14 +18,14 @@ export class AdminPanelComponent implements OnInit {
     firstName: new FormControl('', Validators.required),
     lastName: new FormControl('', Validators.required),
     email: new FormControl('', Validators.required),
-    role: new FormControl(Role.Client, Validators.required)
+    role: new FormControl('', Validators.required)
   });
 
   public Role = Role;
   public RoleNames = UserRoleNames;
   public users: User[] = [];
   public filteredUsers: User[] = [];
-  selectedUserIds: number[] = [];
+  selectedUserIds: string[] = [];
   selectAllCheckbox: boolean = false;
   searchedUser = '';
 
@@ -37,19 +37,21 @@ export class AdminPanelComponent implements OnInit {
 
   loadUsers(): void {
     this.userService.getUsers().subscribe({
-      next: (users) => {       
+      next: (users) => {
         this.filteredUsers = users;
-        
+
       },
       error: (error) => {
-        console.error(error);      }
+        console.error(error);
+      }
     });
   }
 
   loadUsersByParams(name: string): void {
     this.userService.getUserByParams(name).subscribe({
       next: (users) => {
-        this.filteredUsers = users;    
+        this.filteredUsers = users;
+        
       },
       error: (error) => {
         console.log(error);
@@ -59,7 +61,7 @@ export class AdminPanelComponent implements OnInit {
 
   onSearchedUser(): void {
     this.searchedUser = this.searchByUser.nativeElement.value;
-    this.loadUsersByParams(this.searchedUser);   
+    this.loadUsersByParams(this.searchedUser);
   }
 
   createNewUser(): void {
@@ -68,21 +70,36 @@ export class AdminPanelComponent implements OnInit {
         firstName: this.newUser.value.firstName,
         lastName: this.newUser.value.lastName,
         email: this.newUser.value.email,
-        role: Number(this.newUser.value.role)
+        role: this.newUser.value.role
       };
       this.userService.addNewUser(createdUser).subscribe({
-        next: (response) => {
+        next: (response) => {          
           this.loadUsers();
-          console.log("Załadowano użytkowników:", this.users);
+          this.sendInviteEmail(response);
+          console.log("Rola:", createdUser.role);
         },
         error: (error) => {
-          console.error("Błąd dodawania użytkownika", error);
+          console.error("Błąd dodawania użytkownika", error);          
+          console.error("Rola:", createdUser.role);
         }
       });
     } else {
       console.log("Formularz jest niepoprawny!");
     }
   }
+
+  sendInviteEmail(user: Partial<User>): void {
+    this.userService.sendInviteEmail(user).subscribe({
+      next: (response) => {
+        console.log("Wysłano maila")
+      },
+      error: (error) => {
+        console.error("Błąd przy wysłaniu zaproszenia")
+        console.log("Szczegóły błędu:", error.error.errors);
+      }
+    })
+  }
+
 
   deleteUsers(): void {
     this.userService.deleteUsers(this.selectedUserIds).subscribe({
@@ -98,7 +115,7 @@ export class AdminPanelComponent implements OnInit {
     });
   }
 
-  toogleSelection(userId: number, checked: boolean): void {
+  toogleSelection(userId: string, checked: boolean): void {
     if (checked) {
       this.selectedUserIds.push(userId);
     } else {
@@ -110,13 +127,13 @@ export class AdminPanelComponent implements OnInit {
   toogleSelectionAll(): void {
     this.selectAllCheckbox = !this.selectAllCheckbox;
     if (this.selectAllCheckbox) {
-      this.selectedUserIds = this.users.map(user => user.id!).filter(id => id !== undefined) as number[];
+      this.selectedUserIds = this.users.map(user => user.id!).filter(id => id !== undefined) as string[];
     } else {
       this.selectedUserIds = [];
     }
   }
 
-  isSelected(userId: number): boolean {
+  isSelected(userId: string): boolean {
     return this.selectedUserIds.includes(userId);
   }
 
@@ -127,4 +144,14 @@ export class AdminPanelComponent implements OnInit {
   updateSelectAllCheckboxState(): void {
     this.selectAllCheckbox = this.users.length > 0 && this.users.every(user => user.id !== undefined && this.selectedUserIds.includes(user.id));
   }
+
+
+
+
+
+
+
+
+
+
 }

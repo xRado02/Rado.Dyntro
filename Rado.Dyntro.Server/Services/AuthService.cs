@@ -12,15 +12,15 @@ namespace Rado.Dyntro.Server.Services
 {
     public class AuthService(AppDbContext context, IConfiguration configuration) : IAuthService
     {
-        public async Task<TokenResponseViewModel> LoginAsync(UserAuthViewModel request)
+        public async Task<TokenResponseViewModel> LoginAsync(UserLoginViewModel request)
         {
-            var user = await context.UsersAuth.FirstOrDefaultAsync(user => user.Email == request.Email);
+            var user = await context.Users.FirstOrDefaultAsync(user => user.Email == request.Email);
             if (user is null)
             {
                 return null; 
             }
            
-            if (new PasswordHasher<UserAuth>().VerifyHashedPassword(user, user.PasswordHash, request.Password) == PasswordVerificationResult.Failed)
+            if (new PasswordHasher<User>().VerifyHashedPassword(user, user.PasswordHash, request.Password) == PasswordVerificationResult.Failed)
             {
                 return null;
             }
@@ -31,7 +31,7 @@ namespace Rado.Dyntro.Server.Services
             }
         }
 
-        private async Task<TokenResponseViewModel> CreateTokenResponse(UserAuth? user)
+        private async Task<TokenResponseViewModel> CreateTokenResponse(User? user)
         {
             return new TokenResponseViewModel
             {
@@ -40,27 +40,28 @@ namespace Rado.Dyntro.Server.Services
             };
         }
 
-        public async Task<UserAuth> RegisterAsync(UserAuthViewModel request)
+        public async Task<User> RegisterActivationAsync(UserActivateViewModel request)
         {
-            if (await context.UsersAuth.AnyAsync(u => u.Email == request.Email))
+
+            var user = await context.Users.FirstOrDefaultAsync(u => u.Id == request.Id);
+
+            if (user == null)
             {
                 return null;
             }
 
-            var user = new UserAuth();
-            var hashedPassword = new PasswordHasher<UserAuth>()
-             .HashPassword(user, request.Password);
+            var hashedPassword = new PasswordHasher<User>()
+                .HashPassword(user, request.Password);
 
-            user.Email = request.Email;
             user.PasswordHash = hashedPassword;
 
-            context.UsersAuth.Add(user);
+            context.Users.Update(user);
             await context.SaveChangesAsync();
 
-            return user;
+            return user;       
         }
 
-        private string CreateToken(UserAuth user)
+        private string CreateToken(User user)
         {
             var claims = new List<Claim>
             {
@@ -92,7 +93,7 @@ namespace Rado.Dyntro.Server.Services
             return Convert.ToBase64String(randomNumber);
         }
 
-        private async Task<string> GenerateAndSaveRefreshTokenAsync(UserAuth user)
+        private async Task<string> GenerateAndSaveRefreshTokenAsync(User user)
         {
             var refreshToken = GenerateRefreshToken();
             user.RefreshToken = refreshToken;
@@ -101,9 +102,9 @@ namespace Rado.Dyntro.Server.Services
             return refreshToken;
         }
 
-        private async Task<UserAuth?> ValidateRefreshTokenAsync(Guid userId, string refreshToken)
+        private async Task<User?> ValidateRefreshTokenAsync(Guid userId, string refreshToken)
         {
-            var user = await context.UsersAuth.FindAsync(userId);
+            var user = await context.Users.FindAsync(userId);
             if (user is null || user.RefreshToken != refreshToken || user.RefreshTokenExpiryTime <= DateTime.UtcNow)
             {
                 return null;

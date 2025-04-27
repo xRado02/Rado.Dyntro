@@ -9,18 +9,22 @@ namespace Rado.Dyntro.Server.Data.Entities
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-
-        [Required]        
-        public string? FirstName { get; set; }
+        public Guid Id { get; set; }
 
         [Required]
-        public string? LastName { get; set; }
+        public string FirstName { get; set; } = string.Empty;
 
         [Required]
-        public string? Email { get; set; }
+        public string LastName { get; set; } = string.Empty;
 
         [Required]
-        public UserRole Role { get; set; }
+        public string? Email { get; set; } = string.Empty;        
+        public string? PasswordHash { get; set; } = string.Empty;
+
+        [Required]
+        public string Role { get; set; } = string.Empty;
+        public string? RefreshToken { get; set; }
+        public DateTime RefreshTokenExpiryTime { get; set; }
+        public ICollection<Order> Orders { get; set; } = new List<Order>();
     }
 }

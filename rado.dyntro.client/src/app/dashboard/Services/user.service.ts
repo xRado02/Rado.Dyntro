@@ -25,6 +25,9 @@ export class UserService {
     return this.http.get<User[]>('/api/user/userFilterBy', {params});
   }
 
+  getAccountDetails(): Observable<User> {
+    return this.http.get<User>('/api/accountdetails');
+  }
   
   // POST 
 
@@ -32,9 +35,14 @@ export class UserService {
     return this.http.post<User>('/api/user', newUser)
   }
 
+  sendInviteEmail(newUser: Partial<User>): Observable<User> {
+    return this.http.post<User>('/api/emailsender/invite', newUser);
+  }
+
+
   // DELETE
 
-  deleteUsers(deleteUserIds: number[]): Observable<any> {
+  deleteUsers(deleteUserIds: string[]): Observable<any> {
     return this.http.delete(`/api/user/delete-multiple`, { body: deleteUserIds });
   }
 

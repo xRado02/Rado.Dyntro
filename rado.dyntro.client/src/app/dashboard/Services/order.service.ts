@@ -31,7 +31,7 @@ export class OrderService {
 
   //DELETE
 
-  deleteOrders(delereOrdersIds: number[]): Observable<any> {
+  deleteOrders(delereOrdersIds: string[]): Observable<any> {
     return this.http.delete(`/api/order/delete`, { body: delereOrdersIds })
   }
 

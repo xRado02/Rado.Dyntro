@@ -23,11 +23,9 @@ namespace Rado.Dyntro.Server.Migrations
 
             modelBuilder.Entity("Rado.Dyntro.Server.Data.Entities.Order", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Category")
                         .IsRequired()
@@ -56,18 +54,21 @@ namespace Rado.Dyntro.Server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("Rado.Dyntro.Server.Data.Entities.User", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -79,24 +80,6 @@ namespace Rado.Dyntro.Server.Migrations
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Role")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("Rado.Dyntro.Server.Data.Entities.UserAuth", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PasswordHash")
@@ -114,7 +97,19 @@ namespace Rado.Dyntro.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("UsersAuth");
+                    b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("Rado.Dyntro.Server.Data.Entities.Order", b =>
+                {
+                    b.HasOne("Rado.Dyntro.Server.Data.Entities.User", null)
+                        .WithMany("Orders")
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("Rado.Dyntro.Server.Data.Entities.User", b =>
+                {
+                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }

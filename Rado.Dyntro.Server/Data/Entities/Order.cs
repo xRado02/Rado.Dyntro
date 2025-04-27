@@ -6,7 +6,7 @@ namespace Rado.Dyntro.Server.Data.Entities
     public class Order
     {
         [Key]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [Required]
         public OrderStatus Status { get; set; }
@@ -28,5 +28,10 @@ namespace Rado.Dyntro.Server.Data.Entities
 
         [Required]
         public DateTime Date { get; set; }
+
+        [Required]
+        public Guid UserId { get; set; } 
+
+        public User User { get; set; } = null!;
     }
 }

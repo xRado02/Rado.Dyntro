@@ -1,7 +1,7 @@
 import { OrderStatus, OrderPriority, OrderCategory } from '../../Enums/OrderEnums';
 
 export interface Order {
-  id?: number | null; 
+  id?: string | null; 
   topic: string | null;
   firstName: string | null;
   lastName: string | null;
