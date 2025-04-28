@@ -28,12 +28,13 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let order of filteredOrders; ">
+        <tr *ngFor="let order of filteredOrders;" (click)="order.id && goToOrderDetails(order.id)">
           <td>
             <input type="checkbox"
                    class="form-check-input bg-secondary border-dark shadow-none"
                    [checked]="order.id != null && isSelected(order.id)"
-                   (change)="toggleSelection(order.id!, getCheckboxChecked($event))" />
+                   (change)="toggleSelection(order.id!, getCheckboxChecked($event))"
+                   (click)="$event.stopPropagation()"/>
           </td>
           <td>{{ order.status != null ? OrderStatusNames[order.status] : 'Nieznany' }}</td>
           <td class="text-start px-5">{{order.topic}}</td>

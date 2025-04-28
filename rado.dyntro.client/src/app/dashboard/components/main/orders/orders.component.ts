@@ -5,6 +5,7 @@ import { OrderFilter } from '../../../models/order/order-filter-model'
 import { Order } from '../../../models/order/order-model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { OrderStatus, OrderPriority, OrderCategory } from '../../../Enums/OrderEnums';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-orders',
@@ -13,7 +14,7 @@ import { OrderStatus, OrderPriority, OrderCategory } from '../../../Enums/OrderE
   styleUrl: './orders.component.css'
 })
 export class OrdersComponent implements OnInit {
-
+   
   public orders: Order[] = [];
   public filteredOrders: Order[] = [];
   currentFilter: OrderFilter = {};
@@ -45,9 +46,9 @@ export class OrdersComponent implements OnInit {
 
   totalPages: number = 0;
   currentPage: number = 1;
-  constructor(private orderService: OrderService) { }
+  constructor(private orderService: OrderService, private router: Router) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
    
     this.loadOrdersByPage(1);
   }
@@ -158,6 +159,9 @@ export class OrdersComponent implements OnInit {
     this.loadOrdersByPage(pageNumber);
   }
 
+  goToOrderDetails(orderId: string): void {
+    this.router.navigate(['/dashboard/order', orderId]);
+  }
 
 }
 

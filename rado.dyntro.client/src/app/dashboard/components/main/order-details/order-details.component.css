@@ -1,0 +1,19 @@
+.chat-area {
+  height: 500px;
+  overflow-y: auto;
+  padding-right: 15px;
+}
+
+.information {
+  height: 500px;
+  overflow-y: auto;
+}
+
+.attachments{
+    max-width: 110px;
+}
+
+.form-select:focus, .form-control:focus {
+  border-color: #000f;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}

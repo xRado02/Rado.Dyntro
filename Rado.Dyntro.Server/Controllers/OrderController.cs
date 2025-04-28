@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using MailKit.Search;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Rado.Dyntro.Server.Data;
@@ -42,6 +43,20 @@ namespace Rado.Dyntro.Server.Controllers
             }
         }
 
+        [HttpGet("{id}")]
+        public ActionResult<OrderViewModel> GetOrderDetails(Guid id)
+        {
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+            var userId = Guid.Parse(userIdClaim.Value);
+            var order = _appDbContext.Orders.Where(o => o.Id == id && o.UserId == userId).FirstOrDefault();
+            if (order == null)
+            {
+                return NotFound("Nie znaleziono orderu.");
+            }
+            var result = _mapper.Map<OrderViewModel>(order);
+            return Ok(result);
+        }
+
         [HttpGet("page")]
         public ActionResult<PagedResult<OrderViewModel>> GetOrdersFromPage([FromQuery] int pageNumber = 1)
         {
@@ -78,7 +93,7 @@ namespace Rado.Dyntro.Server.Controllers
             var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
             var userId = Guid.Parse(userIdClaim.Value);
 
-            var pageSize = 5;
+            var pageSize = 11;
             var query = _appDbContext.Orders.Where(o => o.UserId == userId);
 
           

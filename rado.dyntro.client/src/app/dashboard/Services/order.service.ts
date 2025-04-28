@@ -30,6 +30,10 @@ export class OrderService {
     return this.http.get<Order[]>('/api/order');
   }
 
+  getOrderDetails(id: string): Observable<Order> {
+    return this.http.get<Order>(`/api/order/${id}`);
+  }
+
     getOrdersByPage(pageNumber: number = 1): Observable<PagedResult<Order>> {
       return this.http.get<PagedResult<Order>>(`/api/order/page?pageNumber=${pageNumber}`);
   }
