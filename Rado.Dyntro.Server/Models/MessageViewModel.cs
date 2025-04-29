@@ -4,12 +4,11 @@ namespace Rado.Dyntro.Server.Models
 {
     public class MessageViewModel
     {
-        public int Id { get; set; }
-        public string? Content { get; set; }
-        public DateTime? CreatedAt { get; set; }
-        public List<AttachmentViewModel>? Attachments { get; set; }
-        public UserViewModel? Sender { get; set; }
-        public UserViewModel? Recipient { get; set; }
-        public int OrderId { get; set; }
+        public Guid Id { get; set; }
+        public Guid SenderId { get; set; }
+        public Guid ReceiverId { get; set; }
+        public string Content { get; set; } = null!;
+        public DateTime SentAt { get; set; }
+        public List<AttachmentViewModel> Attachments { get; set; } = new();
     }
 }

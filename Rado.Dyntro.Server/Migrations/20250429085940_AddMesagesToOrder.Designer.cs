@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Rado.Dyntro.Server.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250429085940_AddMesagesToOrder")]
+    partial class AddMesagesToOrder
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,7 +47,7 @@ namespace Rado.Dyntro.Server.Migrations
 
                     b.HasIndex("MessageId");
 
-                    b.ToTable("Attachments");
+                    b.ToTable("Attachment");
                 });
 
             modelBuilder.Entity("Rado.Dyntro.Server.Data.Entities.Message", b =>
@@ -77,7 +80,7 @@ namespace Rado.Dyntro.Server.Migrations
 
                     b.HasIndex("SenderId");
 
-                    b.ToTable("Messages");
+                    b.ToTable("Message");
                 });
 
             modelBuilder.Entity("Rado.Dyntro.Server.Data.Entities.Order", b =>
@@ -105,9 +108,6 @@ namespace Rado.Dyntro.Server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("ReceiverId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -120,8 +120,6 @@ namespace Rado.Dyntro.Server.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ReceiverId");
 
                     b.HasIndex("UserId");
 
@@ -204,18 +202,11 @@ namespace Rado.Dyntro.Server.Migrations
 
             modelBuilder.Entity("Rado.Dyntro.Server.Data.Entities.Order", b =>
                 {
-                    b.HasOne("Rado.Dyntro.Server.Data.Entities.User", "Receiver")
-                        .WithMany()
-                        .HasForeignKey("ReceiverId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
                     b.HasOne("Rado.Dyntro.Server.Data.Entities.User", "User")
                         .WithMany("Orders")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Receiver");
 
                     b.Navigation("User");
                 });

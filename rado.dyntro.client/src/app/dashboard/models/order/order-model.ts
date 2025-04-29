@@ -9,4 +9,6 @@ export interface Order {
   category: OrderCategory | null;
   priority: OrderPriority | null;
   date?: Date;
+  receiverId?: string | null;
+  receiverEmail: string | null;
 }

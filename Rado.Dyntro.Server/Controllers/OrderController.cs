@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using MailKit.Search;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Rado.Dyntro.Server.Data;
 using Rado.Dyntro.Server.Data.Entities;
 using Rado.Dyntro.Server.Enums;
@@ -24,16 +24,20 @@ namespace Rado.Dyntro.Server.Controllers
             _mapper = mapper;
         }
 
-
         [HttpGet]
         public ActionResult<List<OrderViewModel>> Get()
         {
             try
             {
-                var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
-                var userId = Guid.Parse(userIdClaim.Value);
-                var orders = _appDbContext.Orders.Where(o => o.UserId == userId).OrderByDescending(o => o.Id).ToList();
-                var result = _mapper.Map<List<OrderViewModel>>(orders);
+                var userId = GetCurrentUserId();
+                var orders = _appDbContext.Orders
+                    .Include(o => o.User)
+                    .Include(o => o.Receiver)
+                    .Where(o => o.UserId == userId || o.ReceiverId == userId)
+                    .OrderByDescending(o => o.Id)
+                    .ToList();
+
+                var result = _mapper.Map<List<OrderViewModel>>(orders, opt => opt.Items["CurrentUserId"] = userId);
                 return Ok(result);
             }
             catch (Exception ex)
@@ -44,27 +48,34 @@ namespace Rado.Dyntro.Server.Controllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult<OrderViewModel> GetOrderDetails(Guid id)
+        public ActionResult<OrderDetailsViewModel> GetOrderDetails(Guid id)
         {
-            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
-            var userId = Guid.Parse(userIdClaim.Value);
-            var order = _appDbContext.Orders.Where(o => o.Id == id && o.UserId == userId).FirstOrDefault();
+            var userId = GetCurrentUserId();
+
+            var order = _appDbContext.Orders
+                .Include(o => o.User)
+                .Include(o => o.Receiver)
+                .FirstOrDefault(o => o.Id == id && (o.UserId == userId || o.ReceiverId == userId));
+
             if (order == null)
-            {
                 return NotFound("Nie znaleziono orderu.");
-            }
-            var result = _mapper.Map<OrderViewModel>(order);
+
+            var result = _mapper.Map<OrderDetailsViewModel>(order, opt => opt.Items["CurrentUserId"] = userId);
             return Ok(result);
         }
 
         [HttpGet("page")]
         public ActionResult<PagedResult<OrderViewModel>> GetOrdersFromPage([FromQuery] int pageNumber = 1)
         {
-            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
-            var userId = Guid.Parse(userIdClaim.Value);
+            var userId = GetCurrentUserId();
             var pageSize = 11;
-            var query = _appDbContext.Orders.Where(o => o.UserId == userId);
-            var totalCount = query.Count(); 
+
+            var query = _appDbContext.Orders
+                .Include(o => o.User)
+                .Include(o => o.Receiver)
+                .Where(o => o.UserId == userId || o.ReceiverId == userId);
+
+            var totalCount = query.Count();
             var totalPages = (int)Math.Ceiling(totalCount / (double)pageSize);
 
             var orders = query
@@ -75,7 +86,7 @@ namespace Rado.Dyntro.Server.Controllers
 
             var result = new PagedResult<OrderViewModel>
             {
-                Items = _mapper.Map<List<OrderViewModel>>(orders),
+                Items = _mapper.Map<List<OrderViewModel>>(orders, opt => opt.Items["CurrentUserId"] = userId),
                 TotalCount = totalCount,
                 PageSize = pageSize,
                 CurrentPage = pageNumber,
@@ -85,18 +96,17 @@ namespace Rado.Dyntro.Server.Controllers
             return Ok(result);
         }
 
-
-
         [HttpGet("orderFilteredBy")]
         public ActionResult<PagedResult<OrderViewModel>> GetFilteredBy([FromQuery] OrderQueryParams queryParams, [FromQuery] int pageNumber = 1)
         {
-            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
-            var userId = Guid.Parse(userIdClaim.Value);
-
+            var userId = GetCurrentUserId();
             var pageSize = 11;
-            var query = _appDbContext.Orders.Where(o => o.UserId == userId);
 
-          
+            var query = _appDbContext.Orders
+                .Include(o => o.User)
+                .Include(o => o.Receiver)
+                .Where(o => o.UserId == userId || o.ReceiverId == userId);
+
             if (queryParams.searchByStatus.HasValue)
                 query = query.Where(o => o.Status == queryParams.searchByStatus);
 
@@ -109,7 +119,6 @@ namespace Rado.Dyntro.Server.Controllers
             if (!string.IsNullOrEmpty(queryParams.searchByUser))
                 query = query.Where(o => o.FirstName.StartsWith(queryParams.searchByUser) || o.LastName.StartsWith(queryParams.searchByUser));
 
-            
             if (queryParams.sortByElement.HasValue && queryParams.sortByDirection.HasValue)
             {
                 query = queryParams.sortByElement == SortByElement.Data
@@ -127,7 +136,7 @@ namespace Rado.Dyntro.Server.Controllers
 
             var result = new PagedResult<OrderViewModel>
             {
-                Items = _mapper.Map<List<OrderViewModel>>(orders),
+                Items = _mapper.Map<List<OrderViewModel>>(orders, opt => opt.Items["CurrentUserId"] = userId),
                 TotalCount = totalCount,
                 PageSize = pageSize,
                 CurrentPage = pageNumber,
@@ -137,29 +146,35 @@ namespace Rado.Dyntro.Server.Controllers
             return Ok(result);
         }
 
-
         [HttpPost]
         public ActionResult Post([FromBody] OrderViewModel model)
         {
-            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
-            var userId = Guid.Parse(userIdClaim.Value);           
-            var order = _mapper.Map<Data.Entities.Order>(model);
+            var userId = GetCurrentUserId();
+
+            var order = _mapper.Map<Order>(model);
             order.Date = DateTime.Now;
             order.UserId = userId;
+
+            if (model.ReceiverId != Guid.Empty)
+            {
+                var receiver = _appDbContext.Users.FirstOrDefault(u => u.Id == model.ReceiverId);
+                if (receiver == null)
+                    return BadRequest("Nie znaleziono użytkownika o podanym ID.");
+
+                order.ReceiverId = receiver.Id;
+            }
+
             _appDbContext.Orders.Add(order);
             _appDbContext.SaveChanges();
-            var key = order.Id;
-            return Created("api/order/" + key, null);
+
+            return Created("api/order/" + order.Id, null);
         }
 
-
-   
         [HttpDelete("delete")]
         public ActionResult Delete([FromBody] List<Guid> ids)
         {
-            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);       
-            var userId = Guid.Parse(userIdClaim.Value);
-            var ordersToDelete = _appDbContext.Orders.Where(o => ids.Contains(o.Id) && o.UserId == userId).ToList();        
+            var userId = GetCurrentUserId();
+            var ordersToDelete = _appDbContext.Orders.Where(o => ids.Contains(o.Id) && o.UserId == userId).ToList();
 
             _appDbContext.Orders.RemoveRange(ordersToDelete);
             _appDbContext.SaveChanges();
@@ -168,5 +183,20 @@ namespace Rado.Dyntro.Server.Controllers
         }
 
 
+        [HttpGet("by-email")]
+        public ActionResult<Guid> GetUserIdByEmail([FromQuery] string email)
+        {
+            var user = _appDbContext.Users.FirstOrDefault(u => u.Email == email);
+            if (user == null)
+                return NotFound("Użytkownik o podanym emailu nie istnieje.");
+
+            return Ok(user.Id); 
+        }
+
+        private Guid GetCurrentUserId()
+        {
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+            return Guid.Parse(userIdClaim!.Value);
+        }
     }
 }

@@ -6,6 +6,8 @@ import { Order } from '../../../models/order/order-model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { OrderStatus, OrderPriority, OrderCategory } from '../../../Enums/OrderEnums';
 import { Router } from '@angular/router';
+import { User } from '../../../models/user/user-model';
+import { UserService } from '../../../Services/user.service';
 
 @Component({
   selector: 'app-orders',
@@ -14,7 +16,8 @@ import { Router } from '@angular/router';
   styleUrl: './orders.component.css'
 })
 export class OrdersComponent implements OnInit {
-   
+
+ 
   public orders: Order[] = [];
   public filteredOrders: Order[] = [];
   currentFilter: OrderFilter = {};
@@ -37,7 +40,8 @@ export class OrdersComponent implements OnInit {
     topic: new FormControl('', Validators.required),
     status: new FormControl(OrderStatus.Canceled, Validators.required),
     category: new FormControl(OrderCategory.EmailCampaing, Validators.required),
-    priority: new FormControl(OrderPriority.Medium, Validators.required)
+    priority: new FormControl(OrderPriority.Medium, Validators.required),
+    receiverId: new FormControl(null, Validators.required),
   });
 
   orderStatuses = Object.values(OrderStatusNames);
@@ -46,11 +50,11 @@ export class OrdersComponent implements OnInit {
 
   totalPages: number = 0;
   currentPage: number = 1;
-  constructor(private orderService: OrderService, private router: Router) { }
+  constructor(private orderService: OrderService, private router: Router, private userService: UserService) { }
 
-  ngOnInit(): void {
-   
+  ngOnInit(): void {   
     this.loadOrdersByPage(1);
+    
   }
 
 
@@ -72,6 +76,8 @@ export class OrdersComponent implements OnInit {
     this.loadOrdersByPage(this.currentPage, this.currentFilter);
   }
 
+
+
   createNewOrder(): void {
     if (this.newOrder.valid) {
       const createdOrder: Partial<Order> = {
@@ -81,6 +87,7 @@ export class OrdersComponent implements OnInit {
         status: Number(this.newOrder.value.status),
         category: Number(this.newOrder.value.category),
         priority: Number(this.newOrder.value.priority),
+        receiverId: this.newOrder.value.receiverId,
       };
       this.orderService.addNewOrder(createdOrder).subscribe({
         next: (response) => {

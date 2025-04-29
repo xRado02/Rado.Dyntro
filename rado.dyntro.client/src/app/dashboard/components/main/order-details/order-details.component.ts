@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { OrderService } from '../../../Services/order.service';
-import { Order } from '../../../models/order/order-model'; 
+import { Order } from '../../../models/order/order-model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OrderStatusNames, OrderCategoryNames, OrderPriorityNames } from '../../../Enums/OrderEnums';
+import { OrderDetails } from '../../../models/order/order-details-model';
 
 @Component({
   selector: 'app-order-details',
@@ -15,7 +16,7 @@ import { OrderStatusNames, OrderCategoryNames, OrderPriorityNames } from '../../
 export class OrderDetailsComponent implements OnInit {
 
   orderId: string | null = null;
-  orderDetails?: Order;
+  orderDetails?: OrderDetails;
   isLoading?: boolean;
   public OrderStatusNames = OrderStatusNames;
   public OrderCategoryNames = OrderCategoryNames;
@@ -25,7 +26,7 @@ export class OrderDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.orderId = this.route.snapshot.paramMap.get('id');
-    console.log('Pobrane ID zamówienia:', this.orderId);
+    
 
     if (this.orderId) {
       this.loadOrderDetails(this.orderId);
@@ -39,7 +40,8 @@ export class OrderDetailsComponent implements OnInit {
     this.orderService.getOrderDetails(id).subscribe({
       next: (response) => {
         this.orderDetails = response;
-        this.isLoading = false; 
+        console.log(this.orderDetails)
+        this.isLoading = false;    
       },
       error: (error) => {
         console.error(error);

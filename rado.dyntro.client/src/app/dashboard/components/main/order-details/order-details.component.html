@@ -31,7 +31,11 @@
           <h5>Informacje</h5>
           <ul class="list-group">
             <li class="list-group-item">
-              <strong>Rozmówca: </strong><span>{{ orderDetails.firstName }} {{ orderDetails.lastName }}</span>
+              <strong>Rozmówca: </strong><span>{{ orderDetails.contactFirstName }} {{ orderDetails.contactLastName }}</span>
+            </li>
+            <li class="list-group-item">
+              <strong>E-mail:</strong>
+              {{ orderDetails.contactEmail}}
             </li>
             <li class="list-group-item">
               <strong>Status:</strong>

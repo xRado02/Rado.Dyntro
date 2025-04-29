@@ -5,6 +5,7 @@ import { OrderFilter } from '../models/order/order-filter-model'
 import { Order } from '../models/order/order-model';
 import { PagedResult } from '../models/page/page-result-model';
 import { HttpClient } from '@angular/common/http';
+import { OrderDetails } from '../models/order/order-details-model';
 
 @Injectable({
   providedIn: 'root'
@@ -30,8 +31,8 @@ export class OrderService {
     return this.http.get<Order[]>('/api/order');
   }
 
-  getOrderDetails(id: string): Observable<Order> {
-    return this.http.get<Order>(`/api/order/${id}`);
+  getOrderDetails(id: string): Observable<OrderDetails> {
+    return this.http.get<OrderDetails>(`/api/order/${id}`);
   }
 
     getOrdersByPage(pageNumber: number = 1): Observable<PagedResult<Order>> {
