@@ -183,15 +183,7 @@ namespace Rado.Dyntro.Server.Controllers
         }
 
 
-        [HttpGet("by-email")]
-        public ActionResult<Guid> GetUserIdByEmail([FromQuery] string email)
-        {
-            var user = _appDbContext.Users.FirstOrDefault(u => u.Email == email);
-            if (user == null)
-                return NotFound("Użytkownik o podanym emailu nie istnieje.");
-
-            return Ok(user.Id); 
-        }
+    
 
         private Guid GetCurrentUserId()
         {
