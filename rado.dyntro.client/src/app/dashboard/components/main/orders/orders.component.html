@@ -27,8 +27,8 @@
           <th class="text-start ps-5">Data aktualizacji</th>
         </tr>
       </thead>
-      <tbody>
-        <tr *ngFor="let order of filteredOrders;" (click)="order.id && goToOrderDetails(order.id)">
+      <tbody *ngIf="!isLoading">
+        <tr *ngFor="let order of filteredOrders;" (click)="order.id && goToOrderDetails(order.id)" >
           <td>
             <input type="checkbox"
                    class="form-check-input bg-secondary border-dark shadow-none"
@@ -69,7 +69,13 @@
   </div>
 </section>
 
-
+<div class="container mt-5" *ngIf="isLoading">
+  <div class="text-center">
+    <div class="spinner-border text-dark" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+</div>
 
 
 

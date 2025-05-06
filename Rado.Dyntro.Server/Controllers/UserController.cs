@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Rado.Dyntro.Server.Models;
 using System.Linq;
+using System.Security.Claims;
 
 
 namespace Rado.Dyntro.Server.Controllers
@@ -29,8 +30,10 @@ namespace Rado.Dyntro.Server.Controllers
         {
             try
             {
-                var users = _appDbContext.Users.OrderByDescending(o => o.Id).ToList();
-                var result = _mapper.Map<List<UserViewModel>>(users);
+                var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+                var loggedUserId = Guid.Parse(userIdClaim!.Value);
+                var users = _appDbContext.Users.Where(u => u.Id != loggedUserId).OrderByDescending(o => o.Id).ToList();
+                var result = _mapper.Map<List<UserViewModel>>(users);                
                 return Ok(result);
             }
             catch (Exception ex)

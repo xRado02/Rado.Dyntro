@@ -26,6 +26,7 @@ export class OrdersComponent implements OnInit {
   public OrderCategoryNames = OrderCategoryNames;
   public OrderPriorityNames = OrderPriorityNames;
 
+  isLoading?: boolean;
 
   selectedOrdersIds: string[] = [];
   selectAllCheckbox: boolean = false;
@@ -52,7 +53,8 @@ export class OrdersComponent implements OnInit {
   currentPage: number = 1;
   constructor(private orderService: OrderService, private router: Router, private userService: UserService) { }
 
-  ngOnInit(): void {   
+  ngOnInit(): void {
+    this.isLoading = true;
     this.loadOrdersByPage(1);
     
   }
@@ -93,6 +95,7 @@ export class OrdersComponent implements OnInit {
         next: (response) => {
           this.newOrder.reset();
           this.loadOrdersByPage(this.currentPage);
+          this.isLoading = false; 
         },
         error: (error) => {
           console.log(error);
@@ -107,9 +110,11 @@ export class OrdersComponent implements OnInit {
         this.selectedOrdersIds = [];
         this.selectAllCheckbox = false;
         this.loadOrdersByPage(this.currentPage);
+        this.isLoading = false; 
       },
       error: (error) => {
         console.error(error);
+        this.isLoading = false; 
       }
     })
   }
@@ -153,10 +158,12 @@ export class OrdersComponent implements OnInit {
       next: (response) => {
         this.filteredOrders = response.items; 
         this.totalPages = response.totalPages;
-        this.currentPage = response.currentPage; 
+        this.currentPage = response.currentPage;
+        this.isLoading = false; 
       },
       error: (error) => {
         console.error(error);
+        this.isLoading = false; 
       }
     });
   }
