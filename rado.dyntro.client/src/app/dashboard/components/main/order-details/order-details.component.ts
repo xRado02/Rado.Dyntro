@@ -5,6 +5,8 @@ import { Order } from '../../../models/order/order-model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OrderStatusNames, OrderCategoryNames, OrderPriorityNames } from '../../../Enums/OrderEnums';
 import { OrderDetails } from '../../../models/order/order-details-model';
+import { MessageService } from '../../../Services/message.service';
+import { Message } from '../../../models/message/message-model';
 
 @Component({
   selector: 'app-order-details',
@@ -17,19 +19,20 @@ export class OrderDetailsComponent implements OnInit {
 
   orderId: string | null = null;
   orderDetails?: OrderDetails;
+  public messages?: Message[] = [];
   isLoading?: boolean;
   public OrderStatusNames = OrderStatusNames;
   public OrderCategoryNames = OrderCategoryNames;
   public OrderPriorityNames = OrderPriorityNames;
-  constructor(private orderService: OrderService, private http: HttpClient, private route: ActivatedRoute) {
+  constructor(private orderService: OrderService, private http: HttpClient, private route: ActivatedRoute, private messService: MessageService) {
   }
 
   ngOnInit(): void {
-    this.orderId = this.route.snapshot.paramMap.get('id');
-    
+    this.orderId = this.route.snapshot.paramMap.get('id');   
 
     if (this.orderId) {
       this.loadOrderDetails(this.orderId);
+      this.loadMessages(this.orderId);
     } else {
       console.error('Brak ID zamówienia w URL!');
     }
@@ -46,6 +49,18 @@ export class OrderDetailsComponent implements OnInit {
       error: (error) => {
         console.error(error);
         this.isLoading = false; 
+      }
+    });
+  }
+
+  loadMessages(id: string): void {
+    this.messService.getMessages(id).subscribe({
+      next: (response) => {
+        this.messages = response;
+        console.log(this.messages);
+      },
+      error: (error) => {
+        console.error(error);
       }
     });
   }

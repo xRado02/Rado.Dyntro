@@ -17,9 +17,7 @@ const PROXY_CONFIG = [
       "/api/Auth/refresh-token",
       "/api/emailsender/invite",
       "/api/accountdetails",
-      
-
-      
+      "/api/message",
     ],
     target: target, 
     secure: false,

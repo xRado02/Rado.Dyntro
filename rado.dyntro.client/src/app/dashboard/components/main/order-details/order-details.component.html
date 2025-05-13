@@ -14,9 +14,8 @@
     <div class="card-body">
       <div class="row">
         <div class="col-8 d-flex flex-column border-end">
-          <div class="flex-grow-1 overflow-auto p-2">
-            <p>Testowa wiadomość 1</p>
-            <p>Testowa wiadomość 2</p>
+          <div class="flex-grow-1 overflow-auto p-2" *ngFor="let message of messages;">
+            <p>{{message.content}}</p>          
           </div>
           <div class="p-2">
             <div class="input-group">
