@@ -30,11 +30,16 @@ namespace Rado.Dyntro.Server.Data.Entities
         public DateTime Date { get; set; }
 
         [Required]
-        public Guid UserId { get; set; } 
+        public Guid UserId { get; set; }
         public User User { get; set; } = null!;
-      
-        public Guid? ReceiverId { get; set; } 
+
+        public Guid? ReceiverId { get; set; }
         public User? Receiver { get; set; }
-        public ICollection<Message> Messages { get; set; } = new List<Message>();
+
+        public List<Message> Messages { get; set; } = new();
+
+
+
+
     }
 }

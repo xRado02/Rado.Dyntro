@@ -31,9 +31,8 @@ namespace Rado.Dyntro.Server.Controllers
             {
                 var userId = GetCurrentUserId();
                 var orders = _appDbContext.Orders
-                    .Include(o => o.User)
-                    .Include(o => o.Receiver)
-                    .Where(o => o.UserId == userId || o.ReceiverId == userId)
+                    .Include(o => o.User)                    
+                    .Where(o => o.UserId == userId)
                     .OrderByDescending(o => o.Id)
                     .ToList();
 
@@ -53,9 +52,8 @@ namespace Rado.Dyntro.Server.Controllers
             var userId = GetCurrentUserId();
 
             var order = _appDbContext.Orders
-                .Include(o => o.User)
-                .Include(o => o.Receiver)
-                .FirstOrDefault(o => o.Id == id && (o.UserId == userId || o.ReceiverId == userId));
+                .Include(o => o.User)                
+                .FirstOrDefault(o => o.Id == id && (o.UserId == userId ));
 
             if (order == null)
                 return NotFound("Nie znaleziono orderu.");
@@ -72,8 +70,8 @@ namespace Rado.Dyntro.Server.Controllers
 
             var query = _appDbContext.Orders
                 .Include(o => o.User)
-                .Include(o => o.Receiver)
-                .Where(o => o.UserId == userId || o.ReceiverId == userId);
+               
+                .Where(o => o.UserId == userId );
 
             var totalCount = query.Count();
             var totalPages = (int)Math.Ceiling(totalCount / (double)pageSize);
@@ -103,9 +101,8 @@ namespace Rado.Dyntro.Server.Controllers
             var pageSize = 11;
 
             var query = _appDbContext.Orders
-                .Include(o => o.User)
-                .Include(o => o.Receiver)
-                .Where(o => o.UserId == userId || o.ReceiverId == userId);
+                .Include(o => o.User)              
+                .Where(o => o.UserId == userId );
 
             if (queryParams.searchByStatus.HasValue)
                 query = query.Where(o => o.Status == queryParams.searchByStatus);
@@ -161,7 +158,7 @@ namespace Rado.Dyntro.Server.Controllers
                 if (receiver == null)
                     return BadRequest("Nie znaleziono użytkownika o podanym ID.");
 
-                order.ReceiverId = receiver.Id;
+                
             }
 
             _appDbContext.Orders.Add(order);

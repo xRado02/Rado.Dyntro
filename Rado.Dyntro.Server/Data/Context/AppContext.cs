@@ -12,46 +12,47 @@ public class AppDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-    
+       
         modelBuilder.Entity<Order>().Property(o => o.Status).HasConversion<string>();
         modelBuilder.Entity<Order>().Property(o => o.Priority).HasConversion<string>();
         modelBuilder.Entity<Order>().Property(o => o.Category).HasConversion<string>();
         modelBuilder.Entity<User>().Property(u => u.Role).HasConversion<string>();
 
-       
+   
         modelBuilder.Entity<User>()
             .HasMany(u => u.Orders)
             .WithOne(o => o.User)
-            .HasForeignKey(o => o.UserId)
+            .HasForeignKey(o => o.UserId) 
             .OnDelete(DeleteBehavior.Cascade);
 
+  
         modelBuilder.Entity<Order>()
-           .HasOne(o => o.Receiver)
-           .WithMany()
-           .HasForeignKey(o => o.ReceiverId)
-           .OnDelete(DeleteBehavior.Restrict);
+            .HasOne(o => o.Receiver)
+            .WithMany()
+            .HasForeignKey(o => o.ReceiverId)
+            .OnDelete(DeleteBehavior.Restrict);
 
-
+       
         modelBuilder.Entity<Order>()
             .HasMany(o => o.Messages)
             .WithOne(m => m.Order)
             .HasForeignKey(m => m.OrderId)
             .OnDelete(DeleteBehavior.Cascade);
 
-   
+       
         modelBuilder.Entity<Message>()
             .HasOne(m => m.Sender)
             .WithMany()
             .HasForeignKey(m => m.SenderId)
             .OnDelete(DeleteBehavior.Restrict);
 
+       
         modelBuilder.Entity<Message>()
             .HasOne(m => m.Receiver)
             .WithMany()
             .HasForeignKey(m => m.ReceiverId)
             .OnDelete(DeleteBehavior.Restrict);
 
-   
         modelBuilder.Entity<Attachment>()
             .HasOne(a => a.Message)
             .WithMany(m => m.Attachments)
