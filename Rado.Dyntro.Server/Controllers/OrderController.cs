@@ -31,8 +31,8 @@ namespace Rado.Dyntro.Server.Controllers
             {
                 var userId = GetCurrentUserId();
                 var orders = _appDbContext.Orders
-                    .Include(o => o.User)                    
-                    .Where(o => o.UserId == userId)
+                    .Include(o => o.User)
+                    .Where(o => o.UserId == userId || o.ReceiverId == userId)
                     .OrderByDescending(o => o.Id)
                     .ToList();
 
@@ -49,18 +49,20 @@ namespace Rado.Dyntro.Server.Controllers
         [HttpGet("{id}")]
         public ActionResult<OrderDetailsViewModel> GetOrderDetails(Guid id)
         {
-            var userId = GetCurrentUserId();
-
+            var userId = GetCurrentUserId();        
             var order = _appDbContext.Orders
-                .Include(o => o.User)                
-                .FirstOrDefault(o => o.Id == id && (o.UserId == userId ));
+                .Include(o => o.User)
+                .Include(o => o.Receiver) 
+                .FirstOrDefault(o => o.Id == id && (o.UserId == userId || o.ReceiverId == userId)); 
 
             if (order == null)
-                return NotFound("Nie znaleziono orderu.");
+                return NotFound("Nie znaleziono zlecenia.");
 
+            
             var result = _mapper.Map<OrderDetailsViewModel>(order, opt => opt.Items["CurrentUserId"] = userId);
             return Ok(result);
         }
+
 
         [HttpGet("page")]
         public ActionResult<PagedResult<OrderViewModel>> GetOrdersFromPage([FromQuery] int pageNumber = 1)
@@ -70,8 +72,8 @@ namespace Rado.Dyntro.Server.Controllers
 
             var query = _appDbContext.Orders
                 .Include(o => o.User)
-               
-                .Where(o => o.UserId == userId );
+                .Where(o => o.UserId == userId || o.ReceiverId == userId);
+
 
             var totalCount = query.Count();
             var totalPages = (int)Math.Ceiling(totalCount / (double)pageSize);
@@ -101,8 +103,9 @@ namespace Rado.Dyntro.Server.Controllers
             var pageSize = 11;
 
             var query = _appDbContext.Orders
-                .Include(o => o.User)              
-                .Where(o => o.UserId == userId );
+                .Include(o => o.User)
+                .Where(o => o.UserId == userId || o.ReceiverId == userId);
+
 
             if (queryParams.searchByStatus.HasValue)
                 query = query.Where(o => o.Status == queryParams.searchByStatus);
