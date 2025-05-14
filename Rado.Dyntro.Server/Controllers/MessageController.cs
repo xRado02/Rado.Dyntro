@@ -78,8 +78,6 @@ namespace Rado.Dyntro.Server.Controllers
 
             return Created($"api/messages/{message.Id}", result);
 
-
-
         }
 
         private Guid GetCurrentUserId()

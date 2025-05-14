@@ -9,19 +9,22 @@
 <div class="container mt-5" *ngIf="!isLoading && orderDetails">
   <div class="card">
     <div class="card-header bg-dark text-white shadow-sm">
-      <h3>Temat: [{{ orderDetails.topic }}]</h3> 
+      <h3>Temat: [{{ orderDetails.topic }}]</h3>
     </div>
     <div class="card-body">
       <div class="row">
-        <div class="col-8 d-flex flex-column border-end">
-          <div class="flex-grow-1 overflow-auto p-2" *ngFor="let message of messages;">
-            <p>{{message.content}}</p>          
+        <div class="col-8 d-flex flex-column border-end chat-container">
+          <div class="chat-area flex-grow-1 d-flex flex-column gap-1">
+            <div *ngFor="let message of messages;">
+              <p class="mb-1">{{ message.sentAt | date: 'HH:mm dd.MM.yyyy' }}</p>
+              <p class="mb-1">{{ message.content }}</p>
+            </div>
           </div>
-          <div class="p-2">
+          <div class="p-2 border-top">
             <div class="input-group">
-              <input type="text" class="form-control rounded-start" placeholder="Napisz wiadomość...">
+              <input type="text" class="form-control rounded-start" placeholder="Napisz wiadomość..." [(ngModel)]="message">
               <input type="file" class="form-control attachments">
-              <button type="button" class="btn btn-dark rounded-end">Wyślij</button>
+              <button type="button" class="btn btn-dark rounded-end" (click)="sendMessage()">Wyślij</button>
             </div>
           </div>
         </div>

@@ -7,6 +7,7 @@ import { OrderStatusNames, OrderCategoryNames, OrderPriorityNames } from '../../
 import { OrderDetails } from '../../../models/order/order-details-model';
 import { MessageService } from '../../../Services/message.service';
 import { Message } from '../../../models/message/message-model';
+import { CreateMessage } from '../../../models/message/createMessage';
 
 @Component({
   selector: 'app-order-details',
@@ -17,9 +18,10 @@ import { Message } from '../../../models/message/message-model';
 })
 export class OrderDetailsComponent implements OnInit {
 
-  orderId: string | null = null;
+  orderId: string | null = null; 
   orderDetails?: OrderDetails;
   public messages?: Message[] = [];
+  message = '';
   isLoading?: boolean;
   public OrderStatusNames = OrderStatusNames;
   public OrderCategoryNames = OrderCategoryNames;
@@ -63,6 +65,19 @@ export class OrderDetailsComponent implements OnInit {
         console.error(error);
       }
     });
+  }
+
+  sendMessage(): void {
+    const newMessage: CreateMessage = {
+      orderId: this.orderId!,
+      content: this.message
+    };
+    this.messService.addMessage(newMessage).subscribe({
+      next: (message: Message) => {
+        console.log('Wysłano wiadomość:', message);
+        this.messages?.push(message);  
+      },
+    })
   }
 
 }

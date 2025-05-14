@@ -15,6 +15,7 @@ import { AdminPanelComponent } from '../../components/main/admin-panel/admin-pan
 import { ReactiveFormsModule } from '@angular/forms';
 import { UserService } from '../../Services/user.service';
 import { OrderDetailsComponent } from '../../components/main/order-details/order-details.component';
+import { MessageService } from '../../Services/message.service';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,7 @@ import { OrderDetailsComponent } from '../../components/main/order-details/order
     ReactiveFormsModule,
     FormsModule
   ],
-  providers: [OrderService, UserService],
+  providers: [OrderService, UserService, MessageService],
   exports: [
     DashboardComponent,
     MainComponent,
