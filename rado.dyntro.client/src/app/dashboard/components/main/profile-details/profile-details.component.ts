@@ -15,13 +15,17 @@ export class ProfileDetailsComponent implements OnInit{
       firstName: null,
       lastName: null,
       email: null,
-      role: null
+      role: null,
+      isActivated: null
   };
+
+  isLoading?: boolean;
 ;
   constructor(private userService: UserService) { }
 
 
   ngOnInit() {
+    this.isLoading = true;
     this.loadUserDetails();
   }
 
@@ -29,7 +33,8 @@ export class ProfileDetailsComponent implements OnInit{
     this.userService.getAccountDetails().subscribe({
       next: (user) => {
         this.user = user;
-      
+        this.isLoading = false;
+        
       },
       error: (error) => {
         console.error('Błąd przy ładowaniu danych użytkownika:', error);

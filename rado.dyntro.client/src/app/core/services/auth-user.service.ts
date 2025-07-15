@@ -3,6 +3,8 @@ import { Observable } from 'rxjs';
 import { UserAuth } from '../interfaces/UserAuth';
 import { TokenResponse } from '../interfaces/TokenResponse';
 import { HttpClient } from '@angular/common/http';
+import { User } from '../../dashboard/models/user/user-model';
+import { UserResetPassword } from '../interfaces/UserResetPassword';
 
 @Injectable({
   providedIn: 'root'
@@ -36,8 +38,14 @@ export class AuthUserService {
       return null
     }
     const payload = JSON.parse(atob(token.split('.')[1]));
-    return payload['id'] || null;
+    return payload['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'] || null;
 
   }
+
+  sendResetEmail(newUser: Partial<UserResetPassword>): Observable<UserResetPassword> {
+    return this.http.post<UserResetPassword>('/api/emailsender/reset', newUser);
+  }
+
+  
 
 }

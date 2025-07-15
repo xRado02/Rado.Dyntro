@@ -14,5 +14,9 @@
     <Folder Include="src\app\core\services\" />
     <Folder Include="src\app\dashboard\components\header\content\images\" />
     <Folder Include="src\app\dashboard\components\main\content\NewFolder\" />
+    <Folder Include="src\app\reset-password\content\images\avif\" />
+    <Folder Include="src\app\reset-password\models\" />
+    <Folder Include="src\app\reset-password\modules\" />
+    <Folder Include="src\app\reset-password\services\" />
   </ItemGroup>
 </Project>

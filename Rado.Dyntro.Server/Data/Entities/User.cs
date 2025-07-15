@@ -16,6 +16,8 @@ namespace Rado.Dyntro.Server.Data.Entities
 
         [Required]
         public string LastName { get; set; } = string.Empty;
+        [Required]
+        public bool? IsActivated { get; set; } = false;
 
         [Required]
         public string? Email { get; set; } = string.Empty;        

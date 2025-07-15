@@ -65,7 +65,7 @@ namespace Rado.Dyntro.Server.Controllers
             
             _userService.CreateUser(user);
             var result = _mapper.Map<UserViewModel>(user);
-            var key = user.Id;
+            var key = user.Id;            
             
             return Created("api/user/" + key, result);
         }

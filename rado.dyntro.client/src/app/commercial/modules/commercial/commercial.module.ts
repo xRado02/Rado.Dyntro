@@ -27,6 +27,8 @@ import { ClientEwlComponent } from '../../components/main/section-specific-clien
 import { ClientInnBenefitsComponent } from '../../components/main/section-specific-client/client-inn-benefits/client-inn-benefits.component';
 import { FormsModule } from '@angular/forms'; 
 import { ReactiveFormsModule } from '@angular/forms';
+import { SectionSendResetLinkComponent } from '../../components/main/section-send-reset-link/section-send-reset-link.component';
+import { SectionWwwTrackingComponent } from '../../components/main/section-www-tracking/section-www-tracking.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +56,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     ClientMojoHrComponent,
     ClientEwlComponent,
     ClientInnBenefitsComponent,
- 
+    SectionSendResetLinkComponent,
+    SectionWwwTrackingComponent
 
   ],
   imports: [
@@ -89,6 +92,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ClientMojoHrComponent,
     ClientEwlComponent,
     ClientInnBenefitsComponent,
+    SectionWwwTrackingComponent
   
   ]
 

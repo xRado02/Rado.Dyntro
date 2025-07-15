@@ -30,12 +30,12 @@ namespace Rado.Dyntro.Server.Controllers
 
             var order = _appDbContext.Orders.FirstOrDefault(o => o.Id == orderId && (o.UserId == userId || o.ReceiverId == userId));
             if (order == null) return NotFound("Order not found or access denied.");
-
+            
             var messages = _appDbContext.Messages
                 .Where(m => m.OrderId == orderId)
                 .OrderBy(m => m.SentAt)
                 .ToList();
-
+           
             return Ok(_mapper.Map<List<MessageViewModel>>(messages));
         }
 
@@ -66,7 +66,7 @@ namespace Rado.Dyntro.Server.Controllers
                 SenderId = userId,
                 ReceiverId = receiverId.Value,
                 Content = model.Content,
-                SentAt = DateTime.UtcNow
+                SentAt = DateTime.Now
             };
 
 

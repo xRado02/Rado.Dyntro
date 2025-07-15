@@ -1,4 +1,4 @@
-<div class="container-fluid mt-4 px-5">
+<div class="container-fluid mt-4 px-5" >
   <div class="d-flex flex-wrap justify-content-between pb-5 gap-2">
     <div class="input-group  w-sm-auto">
       <span class="input-group-text bg-white" id="search-icon">
@@ -27,25 +27,29 @@
                    [ngModel]="selectAllCheckbox"
                    (ngModelChange)="toogleSelectionAll()"
                    [checked]="selectAllCheckbox">
-          </th>      
+          </th>
           <th class="text-start">Imię</th>
           <th class="text-start">Nazwisko</th>
           <th class="text-start">Email</th>
           <th class="text-start">Uprawnienia</th>
+          <th class="text-start">Status</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody *ngIf="!isLoading">
         <tr *ngFor="let user of filteredUsers; let i = index">
           <td>
             <input type="checkbox"
                    class="form-check-input bg-secondary border-dark shadow-none"
                    [checked]="user.id !== undefined && isSelected(user.id)"
                    (change)="toogleSelection(user.id!, getCheckboxChecked($event))" />
-          </td>         
+          </td>
           <td class="text-start">{{user.firstName}}</td>
           <td class="text-start">{{user.lastName}}</td>
           <td class="text-start">{{user.email}}</td>
           <td class="text-start">  {{ user.role}}</td>
+          <td [ngClass]="user.isActivated ? 'text-success' : 'text-danger'">
+            <strong>{{ user.isActivated ? 'Aktywny' : 'Nieaktywny' }}</strong>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -88,6 +92,14 @@
           <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Zamknij</button>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-5" *ngIf="isLoading">
+  <div class="text-center">
+    <div class="spinner-border text-dark" role="status">
+      <span class="visually-hidden">Loading...</span>
     </div>
   </div>
 </div>

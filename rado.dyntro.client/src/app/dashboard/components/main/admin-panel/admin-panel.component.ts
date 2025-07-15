@@ -18,31 +18,38 @@ export class AdminPanelComponent implements OnInit {
     firstName: new FormControl('', Validators.required),
     lastName: new FormControl('', Validators.required),
     email: new FormControl('', Validators.required),
-    role: new FormControl('', Validators.required)
+    role: new FormControl('', Validators.required)    
   });
 
   public Role = Role;
   public RoleNames = UserRoleNames;
   public users: User[] = [];
+  public isActivated: boolean = true;
   public filteredUsers: User[] = [];
   selectedUserIds: string[] = [];
   selectAllCheckbox: boolean = false;
   searchedUser = '';
+  isLoading?: boolean;
 
   constructor(private userService: UserService) { }
 
   ngOnInit() {
+    this.isLoading = true;
     this.loadUsers();
+    
+   
+  
   }
 
   loadUsers(): void {
     this.userService.getUsers().subscribe({
       next: (users) => {
         this.filteredUsers = users;
-
+        this.isLoading = false;
       },
       error: (error) => {
         console.error(error);
+        
       }
     });
   }
@@ -51,7 +58,7 @@ export class AdminPanelComponent implements OnInit {
     this.userService.getUserByParams(name).subscribe({
       next: (users) => {
         this.filteredUsers = users;
-        
+        this.isLoading = false;
       },
       error: (error) => {
         console.log(error);
@@ -70,7 +77,7 @@ export class AdminPanelComponent implements OnInit {
         firstName: this.newUser.value.firstName,
         lastName: this.newUser.value.lastName,
         email: this.newUser.value.email,
-        role: this.newUser.value.role
+        role: this.newUser.value.role,        
       };
       this.userService.addNewUser(createdUser).subscribe({
         next: (response) => {          

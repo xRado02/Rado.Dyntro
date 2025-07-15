@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Rado.Dyntro.Server.Data.Entities;
@@ -40,7 +41,7 @@ namespace Rado.Dyntro.Server.Services
             };
         }
 
-        public async Task<User> RegisterActivationAsync(UserActivateViewModel request)
+        public async Task<User> UserActivatePasswordAsync(UserActivateViewModel request)
         {
 
             var user = await context.Users.FirstOrDefaultAsync(u => u.Id == request.Id);
@@ -54,13 +55,40 @@ namespace Rado.Dyntro.Server.Services
                 .HashPassword(user, request.Password);
 
             user.PasswordHash = hashedPassword;
-
+            user.IsActivated = true;
             context.Users.Update(user);
             await context.SaveChangesAsync();
 
             return user;       
         }
+        //to do poprawy bojest powtrzenie
+        public async Task<User> UserResetPasswordAsync(UserResetPasswordViewModel request)
+        {
 
+            var tokenEntry = await context.PasswordResetTokens
+            .Include(t => t.User)
+            .FirstOrDefaultAsync(t => t.Token == request.Token && t.ExpirationDate > DateTime.UtcNow);
+
+            if (tokenEntry == null)
+            {
+                return null;
+            }
+
+            var user = tokenEntry.User;
+
+            var hashedPassword = new PasswordHasher<User>()
+                .HashPassword(user, request.NewPassword);
+
+            user.PasswordHash = hashedPassword;
+
+            context.Users.Update(user);
+            context.PasswordResetTokens.Remove(tokenEntry);
+            await context.SaveChangesAsync();
+
+            return user;
+        }
+
+      
         private string CreateToken(User user)
         {
             var claims = new List<Claim>
@@ -121,5 +149,7 @@ namespace Rado.Dyntro.Server.Services
             }
             return await CreateTokenResponse(user);
         }
+
+        
     }
 }

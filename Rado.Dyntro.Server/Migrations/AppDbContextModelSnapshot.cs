@@ -21,7 +21,7 @@ namespace Rado.Dyntro.Server.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Rado.Dyntro.Server.Data.Entities.Attachment", b =>
+            modelBuilder.Entity("Attachment", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -29,16 +29,23 @@ namespace Rado.Dyntro.Server.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("FileName")
+                    b.Property<string>("ContentType")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("FileUrl")
+                    b.Property<byte[]>("FileContent")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("FileName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("MessageId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("UploadedAt")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -128,6 +135,31 @@ namespace Rado.Dyntro.Server.Migrations
                     b.ToTable("Orders");
                 });
 
+            modelBuilder.Entity("Rado.Dyntro.Server.Data.Entities.PasswordResetToken", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("ExpirationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Token")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("PasswordResetTokens");
+                });
+
             modelBuilder.Entity("Rado.Dyntro.Server.Data.Entities.User", b =>
                 {
                     b.Property<Guid>("Id")
@@ -141,6 +173,9 @@ namespace Rado.Dyntro.Server.Migrations
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActivated")
+                        .HasColumnType("bit");
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -164,7 +199,7 @@ namespace Rado.Dyntro.Server.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Rado.Dyntro.Server.Data.Entities.Attachment", b =>
+            modelBuilder.Entity("Attachment", b =>
                 {
                     b.HasOne("Rado.Dyntro.Server.Data.Entities.Message", "Message")
                         .WithMany("Attachments")
@@ -216,6 +251,17 @@ namespace Rado.Dyntro.Server.Migrations
                         .IsRequired();
 
                     b.Navigation("Receiver");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Rado.Dyntro.Server.Data.Entities.PasswordResetToken", b =>
+                {
+                    b.HasOne("Rado.Dyntro.Server.Data.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("User");
                 });

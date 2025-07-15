@@ -41,5 +41,38 @@ namespace Rado.Dyntro.Server.Controllers
 
             return Ok();
         }
+        
+        [HttpPost("reset")]
+        public async Task<IActionResult> ResetPasswordUser([FromBody] SendResetLinkRequestViewModel model)
+        {           
+            
+            var existingUser = await _appDbContext.Users.Where(u => u.Email == model.Email).FirstOrDefaultAsync();
+            if (existingUser == null)
+            {
+                return BadRequest("Nie znaleziono podanego adresu email.");
+            }
+            var token = Guid.NewGuid().ToString();
+            var expiration = DateTime.Now.AddHours(1);
+
+            var resetToken = new PasswordResetToken
+            {
+                Token = token,
+                ExpirationDate = expiration,
+                UserId = existingUser.Id
+            };
+
+
+            var existingTokens = _appDbContext.PasswordResetTokens.Where(t => t.UserId == existingUser.Id);
+            _appDbContext.PasswordResetTokens.RemoveRange(existingTokens);
+            _appDbContext.PasswordResetTokens.Add(resetToken);          
+
+            await _appDbContext.SaveChangesAsync();
+
+            var resetLink = $"https://dyntro.com.pl/reset-password?token={token}";
+            var body = $"Kliknij w link, aby zresetować hasło: {resetLink}";
+            await _emailService.SendEmail(model.Email, body);
+
+            return Ok();
+        }
     }
 }

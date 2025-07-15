@@ -27,7 +27,7 @@ import { MessageService } from '../../Services/message.service';
     OrdersComponent,   
     AdminPanelComponent,
     ProfileDetailsComponent,
-    OrderDetailsComponent
+    OrderDetailsComponent     
   ],
   imports: [
     CommonModule,

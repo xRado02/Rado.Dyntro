@@ -18,6 +18,9 @@ import { PolityComponent } from '../../components/main/section-privacy-cookies/p
 import { ClientMojoHrComponent } from '../../components/main/section-specific-client/client-mojo-hr/client-mojo-hr.component';
 import { ClientEwlComponent } from '../../components/main/section-specific-client/client-ewl/client-ewl.component';
 import { ClientInnBenefitsComponent } from '../../components/main/section-specific-client/client-inn-benefits/client-inn-benefits.component';
+import { SectionSendResetLinkComponent } from '../../components/main/section-send-reset-link/section-send-reset-link.component';
+import { SectionWwwTrackingComponent } from '../../components/main/section-www-tracking/section-www-tracking.component';
+
 
 const routes: Routes = [
 
@@ -42,7 +45,9 @@ const routes: Routes = [
       { path: 'polity', component: PolityComponent },
       { path: 'client-ewl', component: ClientEwlComponent },
       { path: 'client-inn-benefits', component: ClientInnBenefitsComponent },
-      { path: 'client-mojo-hr', component: ClientMojoHrComponent }
+      { path: 'client-mojo-hr', component: ClientMojoHrComponent },
+      { path: 'send-reset-email', component: SectionSendResetLinkComponent },
+      { path: 'www-tracking', component: SectionWwwTrackingComponent }
     
     ]
   }

@@ -8,6 +8,9 @@ import { OrderDetails } from '../../../models/order/order-details-model';
 import { MessageService } from '../../../Services/message.service';
 import { Message } from '../../../models/message/message-model';
 import { CreateMessage } from '../../../models/message/createMessage';
+import { AuthUserService } from '../../../../core/services/auth-user.service';
+import { UserService } from '../../../Services/user.service';
+import { User } from '../../../models/user/user-model';
 
 @Component({
   selector: 'app-order-details',
@@ -21,20 +24,31 @@ export class OrderDetailsComponent implements OnInit {
   orderId: string | null = null; 
   orderDetails?: OrderDetails;
   public messages?: Message[] = [];
+  loggedUserId?: string | null;
   message = '';
   isLoading?: boolean;
   public OrderStatusNames = OrderStatusNames;
   public OrderCategoryNames = OrderCategoryNames;
   public OrderPriorityNames = OrderPriorityNames;
-  constructor(private orderService: OrderService, private http: HttpClient, private route: ActivatedRoute, private messService: MessageService) {
+
+  public user: User = {
+    firstName: null,
+    lastName: null,
+    email: null,
+    role: null,
+    isActivated: null
+  };
+ 
+  constructor(private orderService: OrderService, private http: HttpClient, private route: ActivatedRoute, private messService: MessageService, private authUserService: AuthUserService, private userService: UserService) {
   }
 
   ngOnInit(): void {
     this.orderId = this.route.snapshot.paramMap.get('id');   
-
+    this.loggedUserId = this.authUserService.getUserId();
     if (this.orderId) {
       this.loadOrderDetails(this.orderId);
       this.loadMessages(this.orderId);
+      this.loadUserDetails();
     } else {
       console.error('Brak ID zamówienia w URL!');
     }
@@ -75,8 +89,21 @@ export class OrderDetailsComponent implements OnInit {
     this.messService.addMessage(newMessage).subscribe({
       next: (message: Message) => {
         console.log('Wysłano wiadomość:', message);
-        this.messages?.push(message);  
+        this.messages?.push(message);
+        this.message = '';
       },
+    })
+  }
+
+  loadUserDetails(): void {
+    this.userService.getAccountDetails().subscribe({
+      next: (user) => {
+        this.user = user;
+
+      },
+      error: (error) => {
+        console.error('Błąd przy ładowaniu danych użytkownika:', error);
+      }
     })
   }
 

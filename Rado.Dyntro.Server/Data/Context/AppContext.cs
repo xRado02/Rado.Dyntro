@@ -7,6 +7,8 @@ public class AppDbContext : DbContext
     public DbSet<User> Users { get; set; } = null!;
     public DbSet<Message> Messages { get; set; } = null!;
     public DbSet<Attachment> Attachments { get; set; } = null!;
+    public DbSet<PasswordResetToken> PasswordResetTokens { get; set; } = null!;
+
 
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
@@ -57,6 +59,12 @@ public class AppDbContext : DbContext
             .HasOne(a => a.Message)
             .WithMany(m => m.Attachments)
             .HasForeignKey(a => a.MessageId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<PasswordResetToken>()
+            .HasOne(a => a.User)
+            .WithMany()
+            .HasForeignKey(p => p.UserId)
             .OnDelete(DeleteBehavior.Cascade);
     }
 }

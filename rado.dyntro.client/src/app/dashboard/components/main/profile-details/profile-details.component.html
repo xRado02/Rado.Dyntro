@@ -1,4 +1,4 @@
-<section class="container my-5">
+<section class="container my-5" *ngIf="!isLoading">
   <div class="card shadow-sm">
     <div class="card-header bg-dark shadow-sm text-white">
       <h3>Mój profil</h3>
@@ -12,3 +12,11 @@
     </div>
   </div>
 </section>
+
+<div class="container mt-5" *ngIf="isLoading">
+  <div class="text-center">
+    <div class="spinner-border text-dark" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+</div>

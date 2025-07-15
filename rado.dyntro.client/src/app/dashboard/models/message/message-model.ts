@@ -7,5 +7,6 @@ export interface Message {
   senderId: string;
   receiverId: string;
   senderName: string;
+  receiverName: string;
   attachments: Attachment[];
 }

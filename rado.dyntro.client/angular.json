@@ -47,6 +47,11 @@
               },
               {
                 "glob": "**/*",
+                "input": "src/app/reset-password/content",
+                "output": "content"
+              },
+              {
+                "glob": "**/*",
                 "input": "src/app/commercial/components/main/content",
                 "output": "content"
               },

@@ -17,7 +17,8 @@ export class ActivateAccountFormComponent implements OnInit {
   user: Partial<UserActivate> = {
     id: '',
     email: '',
-    password: ''
+    password: '',
+    isActivated: false
   };
 
   fb = inject(FormBuilder);
@@ -39,8 +40,9 @@ export class ActivateAccountFormComponent implements OnInit {
 
     if (this.registerForm.value.password == this.registerForm.value.confirmPassword) {
       this.user.password = this.registerForm.value.password;
+      this.user.isActivated = true;
       this.activateAccount();
-      
+      this.goToPage();
     }
     else {
       alert("hasla nie sa takie same")
@@ -52,15 +54,14 @@ export class ActivateAccountFormComponent implements OnInit {
   activateAccount(): void {
     this.activationService.putActivateAccount(this.user).subscribe({
       next: response => {
-        alert("User zarejestrowany");
-        console.log(this.user);
+        alert("User zarejestrowany");        
       }
     })
 
   }
 
-  goToPanel(): void {
-    this.router.navigate(['/dashboard/orders']);
+  goToPage(): void {
+    this.router.navigate(['/commercial/main']);
     window.scrollTo({ top: 0, behavior: 'instant' });  
   }
 
