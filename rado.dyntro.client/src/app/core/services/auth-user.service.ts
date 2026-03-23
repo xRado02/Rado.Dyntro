@@ -3,7 +3,6 @@ import { Observable } from 'rxjs';
 import { UserAuth } from '../interfaces/UserAuth';
 import { TokenResponse } from '../interfaces/TokenResponse';
 import { HttpClient } from '@angular/common/http';
-import { User } from '../../dashboard/models/user/user-model';
 import { UserResetPassword } from '../interfaces/UserResetPassword';
 
 @Injectable({
